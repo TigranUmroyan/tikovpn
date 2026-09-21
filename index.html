@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikoVPN — VPN подписка</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0f17;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0 30px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .status {
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: #14251b;
+            color: #62e58a;
+            font-size: 13px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 45px 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #6c9cff;
+        }
+
+        .hero p {
+            color: #9aa4b2;
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .plan {
+            background: #111722;
+            border: 1px solid #252d3a;
+            border-radius: 18px;
+            padding: 25px 18px;
+            text-align: center;
+        }
+
+        .plan h2 {
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 30px;
+            font-weight: 800;
+            margin: 15px 0;
+        }
+
+        .price small {
+            font-size: 14px;
+            color: #8e98a8;
+            font-weight: normal;
+        }
+
+        .plan ul {
+            list-style: none;
+            color: #aab3c0;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 13px;
+            background: #5d8cff;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        .info {
+            margin-top: 35px;
+            padding: 25px;
+            border-radius: 18px;
+            background: #111722;
+            border: 1px solid #252d3a;
+        }
+
+        .info h2 {
+            margin-bottom: 15px;
+        }
+
+        .info p {
+            color: #9aa4b2;
+            line-height: 1.7;
+        }
+
+        .key-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 16px;
+            background: #101923;
+            border: 1px solid #315a8a;
+        }
+
+        .key-box h3 {
+            margin-bottom: 12px;
+        }
+
+        .key {
+            background: #080c12;
+            padding: 15px;
+            border-radius: 10px;
+            word-break: break-all;
+            color: #8db5ff;
+            font-family: monospace;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        footer {
+            text-align: center;
+            color: #687384;
+            padding: 40px 0 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .plans {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="logo">TikoVPN</div>
+        <div class="status">● Сервис работает</div>
+    </header>
+
+    <section class="hero">
+        <h1>Быстрый <span>VPN</span> для ваших устройств</h1>
+        <p>
+            Приобретите подписку и получите конфигурацию
+            для подключения через совместимый VPN-клиент.
+        </p>
+    </section>
+
+    <section class="plans">
+
+        <div class="plan">
+            <h2>1 месяц</h2>
+            <div class="price">199 ₽</div>
+
+            <ul>
+                <li>✓ 1 устройство</li>
+                <li>✓ Высокая скорость</li>
+                <li>✓ Поддержка</li>
+            </ul>
+
+            <button class="button" onclick="buyPlan('1 месяц', 199)">
+                Купить
+            </button>
+        </div>
+
+        <div class="plan">
+            <h2>3 месяца</h2>
+            <div class="price">499 ₽</div>
+
+            <ul>
+                <li>✓ 1 устройство</li>
+                <li>✓ Высокая скорость</li>
+                <li>✓ Поддержка</li>
+            </ul>
+
+            <button class="button" onclick="buyPlan('3 месяца', 499)">
+                Купить
+            </button>
+        </div>
+
+        <div class="plan">
+            <h2>12 месяцев</h2>
+            <div class="price">1499 ₽</div>
+
+            <ul>
+                <li>✓ 1 устройство</li>
+                <li>✓ Высокая скорость</li>
+                <li>✓ Поддержка</li>
+            </ul>
+
+            <button class="button" onclick="buyPlan('12 месяцев', 1499)">
+                Купить
+            </button>
+        </div>
+
+    </section>
+
+    <section class="info">
+        <h2>Как это работает?</h2>
+
+        <p>
+            1. Выберите подходящий тариф.<br>
+            2. Оплатите подписку.<br>
+            3. После оплаты получите свою конфигурацию.<br>
+            4. Скопируйте конфигурацию и добавьте её в совместимый VPN-клиент.
+        </p>
+    </section>
+
+    <div class="key-box" id="keyBox">
+        <h3>Ваша конфигурация</h3>
+
+        <div class="key" id="key">
+            Конфигурация будет выдана после оплаты.
+        </div>
+
+        <button class="button" onclick="copyKey()">
+            Скопировать
+        </button>
+    </div>
+
+    <footer>
+        © 2026 TikoVPN
+    </footer>
+
+</div>
+
+<script>
+
+function buyPlan(plan, price) {
+
+    alert(
+        "Вы выбрали тариф: " +
+        plan +
+        "\nСтоимость: " +
+        price +
+        " ₽\n\n" +
+        "На следующем этапе подключим настоящую оплату."
+    );
+
+}
+
+function copyKey() {
+
+    const key = document.getElementById("key").innerText;
+
+    navigator.clipboard.writeText(key);
+
+    alert("Конфигурация скопирована");
+
+}
+
+</script>
+
+</body>
+</html>
