@@ -17,11 +17,14 @@
     --pink: #ff3cac;
     --orange: #ff8a00;
     --purple: #7c3aed;
-    --blue: #38bdf8;
     --dark: #080812;
     --card: rgba(18, 18, 35, 0.72);
     --text: #ffffff;
     --muted: #a7a7bb;
+
+    /* Цвета страницы оплаты */
+    --bank-yellow: #ffdd2d;
+    --bank-black: #111111;
 }
 
 html {
@@ -31,16 +34,29 @@ html {
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     background:
-        radial-gradient(circle at 15% 15%, rgba(255, 60, 172, 0.22), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(124, 58, 237, 0.22), transparent 30%),
-        radial-gradient(circle at 50% 90%, rgba(255, 138, 0, 0.16), transparent 35%),
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 60, 172, 0.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(124, 58, 237, 0.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(255, 138, 0, 0.16),
+            transparent 35%
+        ),
         #080812;
+
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-/* Фоновое неоновое свечение */
+/* Фоновое свечение */
 
 body::before,
 body::after {
@@ -82,15 +98,18 @@ body::after {
 
 header {
     width: 100%;
-    padding: 24px 7%;
+    padding: 20px 7%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     position: sticky;
     top: 0;
     z-index: 100;
+
     background: rgba(8, 8, 18, 0.55);
     backdrop-filter: blur(18px);
+
     border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
@@ -101,7 +120,12 @@ header {
 }
 
 .logo span {
-    background: linear-gradient(90deg, #ff3cac, #ff8a00);
+    background: linear-gradient(
+        90deg,
+        #ff3cac,
+        #ff8a00
+    );
+
     -webkit-background-clip: text;
     color: transparent;
 }
@@ -110,10 +134,14 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
+
     padding: 10px 17px;
+
     border-radius: 999px;
+
     background: rgba(40, 200, 100, 0.1);
     border: 1px solid rgba(80, 255, 150, 0.18);
+
     color: #7cff9d;
     font-size: 14px;
 }
@@ -121,9 +149,13 @@ header {
 .status-dot {
     width: 8px;
     height: 8px;
+
     border-radius: 50%;
+
     background: #55ff88;
+
     box-shadow: 0 0 12px #55ff88;
+
     animation: pulse 1.7s infinite;
 }
 
@@ -134,20 +166,25 @@ header {
     }
 }
 
-/* Hero */
+/* HERO */
 
 .hero {
-    min-height: 720px;
-    padding: 100px 7% 80px;
+    min-height: 650px;
+
+    padding: 90px 7% 70px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     text-align: center;
+
     position: relative;
 }
 
 .hero-content {
     max-width: 950px;
+
     animation: heroIn 1s ease forwards;
 }
 
@@ -165,34 +202,50 @@ header {
 
 .badge {
     display: inline-block;
+
     padding: 10px 18px;
+
     border-radius: 999px;
+
     background: rgba(255,255,255,0.05);
+
     border: 1px solid rgba(255,255,255,0.1);
+
     color: #ddd;
+
     margin-bottom: 25px;
+
     backdrop-filter: blur(10px);
 }
 
 h1 {
     font-size: clamp(48px, 8vw, 100px);
+
     line-height: 0.95;
+
     font-weight: 950;
+
     letter-spacing: -5px;
+
     margin-bottom: 30px;
 }
 
 .gradient-text {
-    background: linear-gradient(
-        90deg,
-        #ff3cac,
-        #ff7b00,
-        #ffd166,
-        #ff3cac
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #ff3cac,
+            #ff7b00,
+            #ffd166,
+            #ff3cac
+        );
+
     background-size: 300% 100%;
+
     -webkit-background-clip: text;
+
     color: transparent;
+
     animation: gradientMove 5s linear infinite;
 }
 
@@ -208,76 +261,123 @@ h1 {
 
 .hero p {
     color: var(--muted);
+
     font-size: clamp(17px, 2vw, 22px);
+
     line-height: 1.7;
+
     max-width: 700px;
+
     margin: auto;
 }
-
-/* Декоративная линия */
 
 .neon-line {
     width: 180px;
     height: 3px;
+
     margin: 35px auto;
+
     border-radius: 10px;
-    background: linear-gradient(90deg, transparent, #ff3cac, #ff8a00, transparent);
-    box-shadow: 0 0 25px rgba(255, 60, 172, 0.8);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3cac,
+            #ff8a00,
+            transparent
+        );
+
+    box-shadow:
+        0 0 25px rgba(255, 60, 172, 0.8);
 }
 
-/* Тарифы */
+/* ТАРИФЫ */
 
 .pricing {
     max-width: 1200px;
+
     margin: auto;
+
     padding: 60px 6% 110px;
 }
 
 .section-title {
     text-align: center;
+
     font-size: 42px;
+
     margin-bottom: 15px;
 }
 
 .section-subtitle {
     text-align: center;
+
     color: var(--muted);
+
     margin-bottom: 50px;
 }
 
 .plans {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 24px;
 }
 
 .plan {
     position: relative;
+
     padding: 34px 28px;
+
     border-radius: 28px;
+
     background: var(--card);
-    border: 1px solid rgba(255,255,255,0.09);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.09);
+
     backdrop-filter: blur(20px);
+
     overflow: hidden;
+
     transition: 0.35s ease;
 }
 
 .plan::before {
     content: "";
+
     position: absolute;
+
     width: 180px;
     height: 180px;
-    background: linear-gradient(135deg, #ff3cac, #ff8a00);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3cac,
+            #ff8a00
+        );
+
     filter: blur(80px);
+
     opacity: 0;
+
     top: -100px;
     right: -100px;
+
     transition: 0.4s;
 }
 
 .plan:hover {
     transform: translateY(-12px);
-    border-color: rgba(255,60,172,0.5);
+
+    border-color:
+        rgba(255,60,172,0.5);
+
     box-shadow:
         0 25px 70px rgba(0,0,0,0.45),
         0 0 35px rgba(255,60,172,0.12);
@@ -288,83 +388,138 @@ h1 {
 }
 
 .plan.featured {
-    border: 1px solid rgba(255,60,172,0.5);
-    box-shadow: 0 0 45px rgba(255,60,172,0.12);
+    border:
+        1px solid
+        rgba(255,60,172,0.5);
+
+    box-shadow:
+        0 0 45px
+        rgba(255,60,172,0.12);
 }
 
 .popular {
     position: absolute;
+
     top: 18px;
     right: 18px;
+
     padding: 7px 12px;
+
     font-size: 11px;
+
     font-weight: 800;
+
     border-radius: 999px;
-    background: linear-gradient(90deg, #ff3cac, #ff8a00);
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3cac,
+            #ff8a00
+        );
 }
 
 .plan h3 {
     font-size: 25px;
+
     margin-bottom: 16px;
 }
 
 .price {
     font-size: 48px;
+
     font-weight: 900;
+
     margin-bottom: 24px;
 }
 
 .price small {
     font-size: 15px;
+
     color: var(--muted);
+
     font-weight: 400;
 }
 
 .features {
     list-style: none;
+
     color: #c2c2d2;
+
     line-height: 2.1;
+
     margin-bottom: 28px;
 }
 
 .features li::before {
     content: "✦";
+
     color: #ff5caf;
+
     margin-right: 9px;
 }
 
 .buy {
     width: 100%;
+
     border: 0;
+
     padding: 16px;
+
     border-radius: 15px;
+
     color: white;
+
     font-size: 17px;
+
     font-weight: 800;
+
     cursor: pointer;
-    background: linear-gradient(90deg, #ff3cac, #ff7b00);
-    box-shadow: 0 8px 30px rgba(255,60,172,0.2);
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3cac,
+            #ff7b00
+        );
+
+    box-shadow:
+        0 8px 30px
+        rgba(255,60,172,0.2);
+
     transition: 0.25s;
 }
 
 .buy:hover {
     transform: scale(1.025);
-    box-shadow: 0 10px 40px rgba(255,60,172,0.4);
+
+    box-shadow:
+        0 10px 40px
+        rgba(255,60,172,0.4);
 }
 
 .buy:active {
     transform: scale(0.97);
 }
 
-/* Конфигурация */
+/* КОНФИГУРАЦИЯ */
 
 .config {
     max-width: 850px;
+
     margin: 20px auto 100px;
+
     padding: 30px;
+
     border-radius: 25px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.09);
+
+    background:
+        rgba(255,255,255,0.04);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.09);
+
     backdrop-filter: blur(18px);
 }
 
@@ -374,34 +529,53 @@ h1 {
 
 .config p {
     color: var(--muted);
+
     margin-bottom: 20px;
 }
 
 .key-box {
     display: flex;
+
     gap: 10px;
+
     background: #07070f;
-    border: 1px solid rgba(255,255,255,0.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
     padding: 8px;
+
     border-radius: 14px;
 }
 
 .key {
     flex: 1;
+
     overflow: hidden;
+
     white-space: nowrap;
+
     text-overflow: ellipsis;
+
     padding: 13px;
+
     color: #aaa;
+
     font-family: monospace;
 }
 
 .copy {
     border: 0;
+
     border-radius: 10px;
+
     padding: 0 18px;
+
     background: #24243a;
+
     color: white;
+
     cursor: pointer;
 }
 
@@ -409,40 +583,312 @@ h1 {
     background: #353550;
 }
 
-/* Footer */
+/* FOOTER */
 
 footer {
     text-align: center;
+
     padding: 35px 20px;
+
     color: #66667a;
-    border-top: 1px solid rgba(255,255,255,0.05);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.05);
 }
 
-/* Плавающие частицы */
+/* ЧАСТИЦЫ */
 
 .particle {
     position: fixed;
+
     width: 4px;
     height: 4px;
+
     border-radius: 50%;
+
     background: white;
+
     opacity: 0.25;
+
     pointer-events: none;
-    animation: particleFloat linear infinite;
+
+    animation:
+        particleFloat
+        linear
+        infinite;
+
     z-index: -1;
 }
 
 @keyframes particleFloat {
     from {
-        transform: translateY(110vh);
+        transform:
+            translateY(110vh);
     }
 
     to {
-        transform: translateY(-10vh);
+        transform:
+            translateY(-10vh);
     }
 }
 
-/* Мобильная версия */
+/* ========================= */
+/* ОПЛАТА */
+/* ========================= */
+
+.payment-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    overflow-y: auto;
+
+    background:
+        rgba(5,5,10,0.82);
+
+    backdrop-filter: blur(14px);
+
+    padding: 25px 15px;
+}
+
+.payment-overlay.active {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+.payment-card {
+    width: min(620px, 100%);
+
+    margin: 20px auto 40px;
+
+    background: #f4f4f5;
+
+    color: #111;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.6);
+}
+
+/* Шапка */
+
+.payment-head {
+    background: #111;
+
+    padding: 22px 24px;
+
+    color: #fff;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.payment-brand {
+    font-size: 24px;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+.payment-brand span {
+    color: var(--bank-yellow);
+}
+
+.close {
+    border: 0;
+
+    background:
+        rgba(255,255,255,0.1);
+
+    color: #fff;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.payment-body {
+    padding: 24px;
+}
+
+.payment-title {
+    font-size: 29px;
+
+    font-weight: 900;
+
+    margin-bottom: 7px;
+}
+
+.payment-subtitle {
+    color: #666;
+
+    line-height: 1.5;
+
+    margin-bottom: 22px;
+}
+
+/* Блок реквизитов */
+
+.bank-note {
+    background: #fff;
+
+    border-radius: 20px;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        #e3e3e5;
+
+    margin-bottom: 16px;
+}
+
+.bank-label {
+    font-size: 13px;
+
+    color: #777;
+
+    margin-bottom: 5px;
+}
+
+.bank-value {
+    font-size: 21px;
+
+    font-weight: 800;
+
+    word-break: break-word;
+}
+
+.copy-row {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 9px;
+}
+
+.copy-bank {
+    border: 0;
+
+    background: #e9e9ec;
+
+    border-radius: 10px;
+
+    padding: 9px 12px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+}
+
+.copy-bank:hover {
+    background: #dddddf;
+}
+
+/* Сумма */
+
+.amount {
+    background: #111;
+
+    color: #fff;
+
+    border-radius: 20px;
+
+    padding: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 16px 0;
+}
+
+.amount strong {
+    font-size: 27px;
+}
+
+.amount span {
+    color: #bbb;
+}
+
+/* Инструкция */
+
+.steps {
+    margin: 20px 0;
+
+    padding-left: 21px;
+
+    color: #444;
+
+    line-height: 1.65;
+}
+
+/* Telegram */
+
+.telegram {
+    display: block;
+
+    text-decoration: none;
+
+    text-align: center;
+
+    background: #111;
+
+    color: #fff;
+
+    padding: 16px;
+
+    border-radius: 15px;
+
+    font-weight: 800;
+
+    font-size: 16px;
+
+    margin-top: 20px;
+}
+
+.telegram:hover {
+    background: #292929;
+}
+
+/* Информация */
+
+.disclaimer {
+    font-size: 12px;
+
+    color: #777;
+
+    line-height: 1.5;
+
+    margin-top: 15px;
+
+    text-align: center;
+}
+
+/* MOBILE */
 
 @media (max-width: 850px) {
 
@@ -451,8 +897,9 @@ footer {
     }
 
     .hero {
-        min-height: 620px;
-        padding-top: 80px;
+        min-height: 580px;
+
+        padding-top: 70px;
     }
 
     h1 {
@@ -461,6 +908,7 @@ footer {
 
     .status {
         font-size: 12px;
+
         padding: 8px 12px;
     }
 
@@ -468,12 +916,36 @@ footer {
         padding: 18px 5%;
     }
 }
+
+@media (max-width: 520px) {
+
+    .payment-body {
+        padding: 18px;
+    }
+
+    .payment-title {
+        font-size: 25px;
+    }
+
+    .bank-value {
+        font-size: 18px;
+    }
+
+    .amount strong {
+        font-size: 24px;
+    }
+}
 </style>
 </head>
 
 <body>
 
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
 <header>
+
     <div class="logo">
         TIKO<span>VPN</span>
     </div>
@@ -482,7 +954,13 @@ footer {
         <span class="status-dot"></span>
         Сервис работает
     </div>
+
 </header>
+
+
+<!-- ========================= -->
+<!-- HERO -->
+<!-- ========================= -->
 
 <section class="hero">
 
@@ -494,7 +972,10 @@ footer {
 
         <h1>
             Твой интернет.<br>
-            <span class="gradient-text">Твои правила.</span>
+
+            <span class="gradient-text">
+                Твои правила.
+            </span>
         </h1>
 
         <div class="neon-line"></div>
@@ -509,6 +990,11 @@ footer {
 
 </section>
 
+
+<!-- ========================= -->
+<!-- ТАРИФЫ -->
+<!-- ========================= -->
+
 <section class="pricing">
 
     <h2 class="section-title">
@@ -519,29 +1005,57 @@ footer {
         Простые тарифы без лишних условий
     </p>
 
+
     <div class="plans">
+
+
+        <!-- 1 МЕСЯЦ -->
 
         <div class="plan">
 
-            <h3>1 месяц</h3>
+            <h3>
+                1 месяц
+            </h3>
 
             <div class="price">
                 100 ₽
-                <small>/ месяц</small>
+
+                <small>
+                    / месяц
+                </small>
             </div>
 
             <ul class="features">
-                <li>1 устройство</li>
-                <li>Высокая скорость</li>
-                <li>Поддержка</li>
-                <li>Быстрое подключение</li>
+
+                <li>
+                    1 устройство
+                </li>
+
+                <li>
+                    Высокая скорость
+                </li>
+
+                <li>
+                    Поддержка
+                </li>
+
+                <li>
+                    Быстрое подключение
+                </li>
+
             </ul>
 
-            <button class="buy" onclick="buyPlan('1 месяц', 199)">
+            <button
+                class="buy"
+                onclick="buyPlan('1 месяц', 100)"
+            >
                 Купить
             </button>
 
         </div>
+
+
+        <!-- 3 МЕСЯЦА -->
 
         <div class="plan featured">
 
@@ -549,43 +1063,88 @@ footer {
                 ПОПУЛЯРНЫЙ
             </div>
 
-            <h3>3 месяца</h3>
+            <h3>
+                3 месяца
+            </h3>
 
             <div class="price">
                 299 ₽
-                <small>/ 3 месяца</small>
+
+                <small>
+                    / 3 месяца
+                </small>
             </div>
 
             <ul class="features">
-                <li>1 устройство</li>
-                <li>Высокая скорость</li>
-                <li>Поддержка</li>
-                <li>Выгоднее помесячного</li>
+
+                <li>
+                    1 устройство
+                </li>
+
+                <li>
+                    Высокая скорость
+                </li>
+
+                <li>
+                    Поддержка
+                </li>
+
+                <li>
+                    Выгоднее помесячного
+                </li>
+
             </ul>
 
-            <button class="buy" onclick="buyPlan('3 месяца', 499)">
+            <button
+                class="buy"
+                onclick="buyPlan('3 месяца', 299)"
+            >
                 Купить
             </button>
 
         </div>
 
+
+        <!-- 12 МЕСЯЦЕВ -->
+
         <div class="plan">
 
-            <h3>12 месяцев</h3>
+            <h3>
+                12 месяцев
+            </h3>
 
             <div class="price">
                 1000 ₽
-                <small>/ год</small>
+
+                <small>
+                    / год
+                </small>
             </div>
 
             <ul class="features">
-                <li>1 устройство</li>
-                <li>Высокая скорость</li>
-                <li>Поддержка</li>
-                <li>Максимальная выгода</li>
+
+                <li>
+                    1 устройство
+                </li>
+
+                <li>
+                    Высокая скорость
+                </li>
+
+                <li>
+                    Поддержка
+                </li>
+
+                <li>
+                    Максимальная выгода
+                </li>
+
             </ul>
 
-            <button class="buy" onclick="buyPlan('12 месяцев', 1499)">
+            <button
+                class="buy"
+                onclick="buyPlan('12 месяцев', 1000)"
+            >
                 Купить
             </button>
 
@@ -595,9 +1154,16 @@ footer {
 
 </section>
 
+
+<!-- ========================= -->
+<!-- КОНФИГУРАЦИЯ -->
+<!-- ========================= -->
+
 <section class="config">
 
-    <h2>🔐 Ваша конфигурация</h2>
+    <h2>
+        🔐 Ваша конфигурация
+    </h2>
 
     <p>
         После покупки здесь появится ваша персональная
@@ -606,11 +1172,17 @@ footer {
 
     <div class="key-box">
 
-        <div class="key" id="key">
+        <div
+            class="key"
+            id="key"
+        >
             Конфигурация появится после оплаты
         </div>
 
-        <button class="copy" onclick="copyKey()">
+        <button
+            class="copy"
+            onclick="copyKey()"
+        >
             Копировать
         </button>
 
@@ -618,63 +1190,518 @@ footer {
 
 </section>
 
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
 <footer>
+
     © 2026 TikoVPN — быстрый VPN
+
 </footer>
+
+
+<!-- ========================= -->
+<!-- ОКНО ОПЛАТЫ -->
+<!-- ========================= -->
+
+<div
+    class="payment-overlay"
+    id="paymentOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="paymentTitle"
+>
+
+    <div class="payment-card">
+
+
+        <!-- ШАПКА ОПЛАТЫ -->
+
+        <div class="payment-head">
+
+            <div class="payment-brand">
+
+                TIKO<span>VPN</span>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closePayment()"
+                aria-label="Закрыть"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- ТЕЛО -->
+
+        <div class="payment-body">
+
+
+            <div
+                class="payment-title"
+                id="paymentTitle"
+            >
+                Оплата переводом
+            </div>
+
+
+            <div class="payment-subtitle">
+
+                Вы выбрали тариф
+                <strong id="selectedPlan">
+                    —
+                </strong>.
+
+                Перевод выполняется вручную
+                на банковские реквизиты ниже.
+
+            </div>
+
+
+            <!-- БАНК -->
+
+            <div class="bank-note">
+
+                <div class="bank-label">
+                    Банк
+                </div>
+
+                <div class="bank-value">
+                    Т-Банк
+                </div>
+
+            </div>
+
+
+            <!-- ПОЛУЧАТЕЛЬ -->
+
+            <div class="bank-note">
+
+                <div class="bank-label">
+                    Получатель
+                </div>
+
+                <div
+                    class="bank-value"
+                    id="recipient"
+                >
+                    ВАШЕ ИМЯ / ФИО
+                </div>
+
+                <div class="copy-row">
+
+                    <button
+                        class="copy-bank"
+                        onclick="copyText('recipient')"
+                    >
+                        Копировать
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- НОМЕР КАРТЫ -->
+
+            <div class="bank-note">
+
+                <div class="bank-label">
+                    Номер карты
+                </div>
+
+                <div
+                    class="bank-value"
+                    id="cardNumber"
+                >
+                    0000 0000 0000 0000
+                </div>
+
+                <div class="copy-row">
+
+                    <button
+                        class="copy-bank"
+                        onclick="copyText('cardNumber')"
+                    >
+                        Копировать
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- СУММА -->
+
+            <div class="amount">
+
+                <span>
+                    К оплате
+                </span>
+
+                <strong id="selectedPrice">
+                    0 ₽
+                </strong>
+
+            </div>
+
+
+            <!-- ИНСТРУКЦИЯ -->
+
+            <ol class="steps">
+
+                <li>
+                    Открой приложение своего банка.
+                </li>
+
+                <li>
+                    Выполни перевод на указанные
+                    реквизиты на сумму из блока
+                    «К оплате».
+                </li>
+
+                <li>
+                    После оплаты нажми кнопку
+                    ниже и отправь подтверждение
+                    в Telegram.
+                </li>
+
+                <li>
+                    Ключ выдаётся после проверки
+                    поступления платежа.
+                </li>
+
+            </ol>
+
+
+            <!-- TELEGRAM -->
+
+            <a
+                class="telegram"
+                id="telegramLink"
+                href="https://t.me/USERNAME"
+                target="_blank"
+                rel="noopener"
+            >
+
+                ✈️ Отправить подтверждение
+                в Telegram
+
+            </a>
+
+
+            <!-- ПРЕДУПРЕЖДЕНИЕ -->
+
+            <div class="disclaimer">
+
+                TikoVPN — независимый сервис.
+                Эта страница не является официальным
+                сайтом или приложением Т-Банка.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 <script>
 
-/* Покупка */
+/* ================================= */
+/* ТВОИ РЕКВИЗИТЫ */
+/* ================================= */
+
+const PAYMENT = {
+
+    /* Впиши сюда ФИО получателя */
+
+    recipient:
+        "ВАШЕ ИМЯ / ФИО",
+
+
+    /* Впиши сюда номер карты */
+
+    cardNumber:
+        "0000 0000 0000 0000",
+
+
+    /* Впиши сюда Telegram username
+       БЕЗ @ */
+
+    telegram:
+        "USERNAME"
+
+};
+
+
+/* ================================= */
+/* ПОКУПКА */
+/* ================================= */
 
 function buyPlan(plan, price) {
 
-    alert(
-        "Тариф: " + plan +
-        "\nСтоимость: " + price + " ₽" +
-        "\n\nОплата будет подключена следующим этапом."
+    document
+        .getElementById("selectedPlan")
+        .textContent = plan;
+
+
+    document
+        .getElementById("selectedPrice")
+        .textContent = price + " ₽";
+
+
+    document
+        .getElementById("paymentOverlay")
+        .classList
+        .add("active");
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* ================================= */
+/* ЗАКРЫТИЕ ОПЛАТЫ */
+/* ================================= */
+
+function closePayment() {
+
+    document
+        .getElementById("paymentOverlay")
+        .classList
+        .remove("active");
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* Закрытие при клике
+   за пределами окна */
+
+document
+    .getElementById("paymentOverlay")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closePayment();
+
+            }
+
+        }
     );
 
-}
+
+/* Закрытие по Escape */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closePayment();
+
+        }
+
+    }
+);
 
 
-/* Копирование */
+/* ================================= */
+/* КОПИРОВАНИЕ РЕКВИЗИТОВ */
+/* ================================= */
 
-function copyKey() {
+async function copyText(id) {
 
-    const key = document.getElementById("key").innerText;
+    const text =
+        document
+        .getElementById(id)
+        .textContent
+        .trim();
 
-    if (
-        key === "Конфигурация появится после оплаты"
-    ) {
-        alert("Сначала необходимо приобрести подписку.");
-        return;
+
+    try {
+
+        await navigator
+            .clipboard
+            .writeText(text);
+
+
+        const button =
+            document
+            .querySelector(
+                "#" +
+                id +
+                " + .copy-row .copy-bank"
+            );
+
+
+        if (button) {
+
+            const oldText =
+                button.textContent;
+
+
+            button.textContent =
+                "Скопировано ✓";
+
+
+            setTimeout(
+                function() {
+
+                    button.textContent =
+                        oldText;
+
+                },
+                1400
+            );
+
+        }
+
+    } catch {
+
+        alert(
+            "Не удалось скопировать автоматически. " +
+            "Скопируйте реквизит вручную."
+        );
+
     }
 
-    navigator.clipboard.writeText(key);
+}
 
-    alert("Конфигурация скопирована!");
+
+/* ================================= */
+/* КОПИРОВАНИЕ VPN-КЛЮЧА */
+/* ================================= */
+
+async function copyKey() {
+
+    const key =
+        document
+        .getElementById("key")
+        .innerText
+        .trim();
+
+
+    if (
+        key ===
+        "Конфигурация появится после оплаты"
+    ) {
+
+        alert(
+            "Сначала необходимо приобрести подписку."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        await navigator
+            .clipboard
+            .writeText(key);
+
+
+        alert(
+            "Конфигурация скопирована!"
+        );
+
+    } catch {
+
+        alert(
+            "Не удалось скопировать конфигурацию."
+        );
+
+    }
 
 }
 
 
-/* Неоновые частицы */
+/* ================================= */
+/* ПОДСТАНОВКА РЕКВИЗИТОВ */
+/* ================================= */
 
-for (let i = 0; i < 25; i++) {
+document
+    .getElementById("recipient")
+    .textContent =
+    PAYMENT.recipient;
 
-    const particle = document.createElement("div");
 
-    particle.className = "particle";
+document
+    .getElementById("cardNumber")
+    .textContent =
+    PAYMENT.cardNumber;
+
+
+document
+    .getElementById("telegramLink")
+    .href =
+    "https://t.me/" +
+    PAYMENT.telegram;
+
+
+/* ================================= */
+/* НЕОНОВЫЕ ЧАСТИЦЫ */
+/* ================================= */
+
+for (
+    let i = 0;
+    i < 25;
+    i++
+) {
+
+    const particle =
+        document.createElement("div");
+
+
+    particle.className =
+        "particle";
+
 
     particle.style.left =
-        Math.random() * 100 + "vw";
+        Math.random() * 100 +
+        "vw";
+
 
     particle.style.animationDuration =
-        (8 + Math.random() * 15) + "s";
+        (
+            8 +
+            Math.random() * 15
+        ) +
+        "s";
+
 
     particle.style.animationDelay =
-        (-Math.random() * 15) + "s";
+        (
+            -Math.random() * 15
+        ) +
+        "s";
 
-    document.body.appendChild(particle);
+
+    document.body
+        .appendChild(particle);
 
 }
 
