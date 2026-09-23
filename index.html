@@ -21,10 +21,7 @@
     --card: rgba(18, 18, 35, 0.72);
     --text: #ffffff;
     --muted: #a7a7bb;
-
-    /* Цвета страницы оплаты */
-    --bank-yellow: #ffdd2d;
-    --bank-black: #111111;
+    --success: #55ff88;
 }
 
 html {
@@ -33,6 +30,7 @@ html {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
     background:
         radial-gradient(
             circle at 15% 15%,
@@ -56,18 +54,22 @@ body {
     overflow-x: hidden;
 }
 
-/* Фоновое свечение */
-
 body::before,
 body::after {
     content: "";
     position: fixed;
+
     width: 350px;
     height: 350px;
+
     border-radius: 50%;
+
     filter: blur(100px);
+
     opacity: 0.18;
+
     z-index: -1;
+
     animation: floatGlow 8s ease-in-out infinite alternate;
 }
 
@@ -81,6 +83,7 @@ body::after {
     background: #7c3aed;
     bottom: 5%;
     right: -180px;
+
     animation-delay: 2s;
 }
 
@@ -94,11 +97,13 @@ body::after {
     }
 }
 
-/* Верхняя панель */
+/* HEADER */
 
 header {
     width: 100%;
+
     padding: 20px 7%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -108,9 +113,12 @@ header {
     z-index: 100;
 
     background: rgba(8, 8, 18, 0.55);
+
     backdrop-filter: blur(18px);
 
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.06);
 }
 
 .logo {
@@ -120,29 +128,37 @@ header {
 }
 
 .logo span {
-    background: linear-gradient(
-        90deg,
-        #ff3cac,
-        #ff8a00
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #ff3cac,
+            #ff8a00
+        );
 
     -webkit-background-clip: text;
+
     color: transparent;
 }
 
 .status {
     display: flex;
     align-items: center;
+
     gap: 8px;
 
     padding: 10px 17px;
 
     border-radius: 999px;
 
-    background: rgba(40, 200, 100, 0.1);
-    border: 1px solid rgba(80, 255, 150, 0.18);
+    background:
+        rgba(40, 200, 100, 0.1);
+
+    border:
+        1px solid
+        rgba(80, 255, 150, 0.18);
 
     color: #7cff9d;
+
     font-size: 14px;
 }
 
@@ -154,7 +170,9 @@ header {
 
     background: #55ff88;
 
-    box-shadow: 0 0 12px #55ff88;
+    box-shadow:
+        0 0 12px
+        #55ff88;
 
     animation: pulse 1.7s infinite;
 }
@@ -185,7 +203,11 @@ header {
 .hero-content {
     max-width: 950px;
 
-    animation: heroIn 1s ease forwards;
+    animation:
+        heroIn
+        1s
+        ease
+        forwards;
 }
 
 @keyframes heroIn {
@@ -207,9 +229,12 @@ header {
 
     border-radius: 999px;
 
-    background: rgba(255,255,255,0.05);
+    background:
+        rgba(255,255,255,0.05);
 
-    border: 1px solid rgba(255,255,255,0.1);
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
 
     color: #ddd;
 
@@ -246,7 +271,11 @@ h1 {
 
     color: transparent;
 
-    animation: gradientMove 5s linear infinite;
+    animation:
+        gradientMove
+        5s
+        linear
+        infinite;
 }
 
 @keyframes gradientMove {
@@ -262,7 +291,12 @@ h1 {
 .hero p {
     color: var(--muted);
 
-    font-size: clamp(17px, 2vw, 22px);
+    font-size:
+        clamp(
+            17px,
+            2vw,
+            22px
+        );
 
     line-height: 1.7;
 
@@ -289,10 +323,11 @@ h1 {
         );
 
     box-shadow:
-        0 0 25px rgba(255, 60, 172, 0.8);
+        0 0 25px
+        rgba(255, 60, 172, 0.8);
 }
 
-/* ТАРИФЫ */
+/* PRICING */
 
 .pricing {
     max-width: 1200px;
@@ -344,7 +379,9 @@ h1 {
 
     overflow: hidden;
 
-    transition: 0.35s ease;
+    transition:
+        0.35s
+        ease;
 }
 
 .plan::before {
@@ -379,8 +416,10 @@ h1 {
         rgba(255,60,172,0.5);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,0.45),
-        0 0 35px rgba(255,60,172,0.12);
+        0 25px 70px
+        rgba(0,0,0,0.45),
+        0 0 35px
+        rgba(255,60,172,0.12);
 }
 
 .plan:hover::before {
@@ -502,7 +541,12 @@ h1 {
     transform: scale(0.97);
 }
 
-/* КОНФИГУРАЦИЯ */
+.buy:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* CONFIG */
 
 .config {
     max-width: 850px;
@@ -583,6 +627,324 @@ h1 {
     background: #353550;
 }
 
+/* PAYMENT MODAL */
+
+.payment-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    background:
+        rgba(5,5,10,0.82);
+
+    backdrop-filter: blur(14px);
+
+    padding: 25px 15px;
+
+    overflow-y: auto;
+}
+
+.payment-overlay.active {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.payment-card {
+    width: min(520px, 100%);
+
+    background:
+        rgba(20,20,35,0.96);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.7);
+}
+
+.payment-head {
+    padding: 22px 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background:
+        rgba(255,255,255,0.04);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.07);
+}
+
+.payment-brand {
+    font-size: 24px;
+
+    font-weight: 900;
+}
+
+.payment-brand span {
+    background:
+        linear-gradient(
+            90deg,
+            #ff3cac,
+            #ff8a00
+        );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+}
+
+.close {
+    border: 0;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: #fff;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.payment-body {
+    padding: 28px;
+}
+
+.payment-title {
+    font-size: 29px;
+
+    font-weight: 900;
+
+    margin-bottom: 8px;
+}
+
+.payment-subtitle {
+    color: var(--muted);
+
+    line-height: 1.5;
+
+    margin-bottom: 24px;
+}
+
+.selected-plan {
+    padding: 18px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    margin-bottom: 18px;
+}
+
+.selected-plan-label {
+    color: #888;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.selected-plan-value {
+    font-size: 24px;
+
+    font-weight: 900;
+}
+
+.payment-button {
+    width: 100%;
+
+    border: 0;
+
+    padding: 17px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3cac,
+            #ff7b00
+        );
+
+    color: #fff;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.payment-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 35px
+        rgba(255,60,172,0.3);
+}
+
+.payment-info {
+    margin-top: 17px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.03);
+
+    color: #888;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+/* SUCCESS */
+
+.success-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 600;
+
+    background:
+        rgba(5,5,10,0.9);
+
+    backdrop-filter: blur(15px);
+
+    padding: 20px;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.success-overlay.active {
+    display: flex;
+}
+
+.success-card {
+    width: min(600px, 100%);
+
+    background:
+        rgba(20,20,35,0.97);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius: 28px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.7);
+}
+
+.success-icon {
+    font-size: 60px;
+
+    margin-bottom: 15px;
+}
+
+.success-card h2 {
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+.success-card p {
+    color: var(--muted);
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+.success-key {
+    text-align: left;
+
+    background: #07070f;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 15px;
+
+    padding: 15px;
+
+    margin-bottom: 15px;
+
+    font-family: monospace;
+
+    word-break: break-all;
+
+    color: #ddd;
+}
+
+.success-copy {
+    width: 100%;
+
+    border: 0;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3cac,
+            #ff8a00
+        );
+
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
 /* FOOTER */
 
 footer {
@@ -597,7 +959,7 @@ footer {
         rgba(255,255,255,0.05);
 }
 
-/* ЧАСТИЦЫ */
+/* PARTICLES */
 
 .particle {
     position: fixed;
@@ -633,261 +995,6 @@ footer {
     }
 }
 
-/* ========================= */
-/* ОПЛАТА */
-/* ========================= */
-
-.payment-overlay {
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 500;
-
-    overflow-y: auto;
-
-    background:
-        rgba(5,5,10,0.82);
-
-    backdrop-filter: blur(14px);
-
-    padding: 25px 15px;
-}
-
-.payment-overlay.active {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: flex-start;
-}
-
-.payment-card {
-    width: min(620px, 100%);
-
-    margin: 20px auto 40px;
-
-    background: #f4f4f5;
-
-    color: #111;
-
-    border-radius: 28px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,0.6);
-}
-
-/* Шапка */
-
-.payment-head {
-    background: #111;
-
-    padding: 22px 24px;
-
-    color: #fff;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-}
-
-.payment-brand {
-    font-size: 24px;
-
-    font-weight: 900;
-
-    letter-spacing: -1px;
-}
-
-.payment-brand span {
-    color: var(--bank-yellow);
-}
-
-.close {
-    border: 0;
-
-    background:
-        rgba(255,255,255,0.1);
-
-    color: #fff;
-
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
-
-    font-size: 22px;
-
-    cursor: pointer;
-}
-
-.payment-body {
-    padding: 24px;
-}
-
-.payment-title {
-    font-size: 29px;
-
-    font-weight: 900;
-
-    margin-bottom: 7px;
-}
-
-.payment-subtitle {
-    color: #666;
-
-    line-height: 1.5;
-
-    margin-bottom: 22px;
-}
-
-/* Блок реквизитов */
-
-.bank-note {
-    background: #fff;
-
-    border-radius: 20px;
-
-    padding: 18px;
-
-    border:
-        1px solid
-        #e3e3e5;
-
-    margin-bottom: 16px;
-}
-
-.bank-label {
-    font-size: 13px;
-
-    color: #777;
-
-    margin-bottom: 5px;
-}
-
-.bank-value {
-    font-size: 21px;
-
-    font-weight: 800;
-
-    word-break: break-word;
-}
-
-.copy-row {
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 9px;
-}
-
-.copy-bank {
-    border: 0;
-
-    background: #e9e9ec;
-
-    border-radius: 10px;
-
-    padding: 9px 12px;
-
-    cursor: pointer;
-
-    font-weight: 700;
-}
-
-.copy-bank:hover {
-    background: #dddddf;
-}
-
-/* Сумма */
-
-.amount {
-    background: #111;
-
-    color: #fff;
-
-    border-radius: 20px;
-
-    padding: 18px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin: 16px 0;
-}
-
-.amount strong {
-    font-size: 27px;
-}
-
-.amount span {
-    color: #bbb;
-}
-
-/* Инструкция */
-
-.steps {
-    margin: 20px 0;
-
-    padding-left: 21px;
-
-    color: #444;
-
-    line-height: 1.65;
-}
-
-/* Telegram */
-
-.telegram {
-    display: block;
-
-    text-decoration: none;
-
-    text-align: center;
-
-    background: #111;
-
-    color: #fff;
-
-    padding: 16px;
-
-    border-radius: 15px;
-
-    font-weight: 800;
-
-    font-size: 16px;
-
-    margin-top: 20px;
-}
-
-.telegram:hover {
-    background: #292929;
-}
-
-/* Информация */
-
-.disclaimer {
-    font-size: 12px;
-
-    color: #777;
-
-    line-height: 1.5;
-
-    margin-top: 15px;
-
-    text-align: center;
-}
-
 /* MOBILE */
 
 @media (max-width: 850px) {
@@ -920,29 +1027,21 @@ footer {
 @media (max-width: 520px) {
 
     .payment-body {
-        padding: 18px;
+        padding: 20px;
     }
 
     .payment-title {
         font-size: 25px;
     }
 
-    .bank-value {
-        font-size: 18px;
-    }
-
-    .amount strong {
-        font-size: 24px;
+    .success-card {
+        padding: 25px 18px;
     }
 }
 </style>
 </head>
 
 <body>
-
-<!-- ========================= -->
-<!-- HEADER -->
-<!-- ========================= -->
 
 <header>
 
@@ -957,10 +1056,6 @@ footer {
 
 </header>
 
-
-<!-- ========================= -->
-<!-- HERO -->
-<!-- ========================= -->
 
 <section class="hero">
 
@@ -991,10 +1086,6 @@ footer {
 </section>
 
 
-<!-- ========================= -->
-<!-- ТАРИФЫ -->
-<!-- ========================= -->
-
 <section class="pricing">
 
     <h2 class="section-title">
@@ -1008,9 +1099,6 @@ footer {
 
     <div class="plans">
 
-
-        <!-- 1 МЕСЯЦ -->
-
         <div class="plan">
 
             <h3>
@@ -1019,43 +1107,27 @@ footer {
 
             <div class="price">
                 100 ₽
-
-                <small>
-                    / месяц
-                </small>
+                <small>/ месяц</small>
             </div>
 
             <ul class="features">
 
-                <li>
-                    1 устройство
-                </li>
-
-                <li>
-                    Высокая скорость
-                </li>
-
-                <li>
-                    Поддержка
-                </li>
-
-                <li>
-                    Быстрое подключение
-                </li>
+                <li>1 устройство</li>
+                <li>Высокая скорость</li>
+                <li>Поддержка</li>
+                <li>Быстрое подключение</li>
 
             </ul>
 
             <button
                 class="buy"
-                onclick="buyPlan('1 месяц', 100)"
+                onclick="openPayment('1 месяц', 100, this)"
             >
                 Купить
             </button>
 
         </div>
 
-
-        <!-- 3 МЕСЯЦА -->
 
         <div class="plan featured">
 
@@ -1069,43 +1141,27 @@ footer {
 
             <div class="price">
                 299 ₽
-
-                <small>
-                    / 3 месяца
-                </small>
+                <small>/ 3 месяца</small>
             </div>
 
             <ul class="features">
 
-                <li>
-                    1 устройство
-                </li>
-
-                <li>
-                    Высокая скорость
-                </li>
-
-                <li>
-                    Поддержка
-                </li>
-
-                <li>
-                    Выгоднее помесячного
-                </li>
+                <li>1 устройство</li>
+                <li>Высокая скорость</li>
+                <li>Поддержка</li>
+                <li>Выгоднее помесячного</li>
 
             </ul>
 
             <button
                 class="buy"
-                onclick="buyPlan('3 месяца', 299)"
+                onclick="openPayment('3 месяца', 299, this)"
             >
                 Купить
             </button>
 
         </div>
 
-
-        <!-- 12 МЕСЯЦЕВ -->
 
         <div class="plan">
 
@@ -1115,35 +1171,21 @@ footer {
 
             <div class="price">
                 1000 ₽
-
-                <small>
-                    / год
-                </small>
+                <small>/ год</small>
             </div>
 
             <ul class="features">
 
-                <li>
-                    1 устройство
-                </li>
-
-                <li>
-                    Высокая скорость
-                </li>
-
-                <li>
-                    Поддержка
-                </li>
-
-                <li>
-                    Максимальная выгода
-                </li>
+                <li>1 устройство</li>
+                <li>Высокая скорость</li>
+                <li>Поддержка</li>
+                <li>Максимальная выгода</li>
 
             </ul>
 
             <button
                 class="buy"
-                onclick="buyPlan('12 месяцев', 1000)"
+                onclick="openPayment('12 месяцев', 1000, this)"
             >
                 Купить
             </button>
@@ -1155,10 +1197,6 @@ footer {
 </section>
 
 
-<!-- ========================= -->
-<!-- КОНФИГУРАЦИЯ -->
-<!-- ========================= -->
-
 <section class="config">
 
     <h2>
@@ -1166,8 +1204,8 @@ footer {
     </h2>
 
     <p>
-        После покупки здесь появится ваша персональная
-        конфигурация для VPN-клиента.
+        После успешной оплаты персональная
+        конфигурация появится здесь.
     </p>
 
     <div class="key-box">
@@ -1191,10 +1229,6 @@ footer {
 </section>
 
 
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
-
 <footer>
 
     © 2026 TikoVPN — быстрый VPN
@@ -1202,35 +1236,24 @@ footer {
 </footer>
 
 
-<!-- ========================= -->
-<!-- ОКНО ОПЛАТЫ -->
-<!-- ========================= -->
+<!-- PAYMENT -->
 
 <div
     class="payment-overlay"
     id="paymentOverlay"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="paymentTitle"
 >
 
     <div class="payment-card">
 
-
-        <!-- ШАПКА ОПЛАТЫ -->
-
         <div class="payment-head">
 
             <div class="payment-brand">
-
                 TIKO<span>VPN</span>
-
             </div>
 
             <button
                 class="close"
                 onclick="closePayment()"
-                aria-label="Закрыть"
             >
                 ×
             </button>
@@ -1238,172 +1261,63 @@ footer {
         </div>
 
 
-        <!-- ТЕЛО -->
-
         <div class="payment-body">
 
-
-            <div
-                class="payment-title"
-                id="paymentTitle"
-            >
-                Оплата переводом
+            <div class="payment-title">
+                Оплата
             </div>
-
 
             <div class="payment-subtitle">
+                Ты выбрал тариф. После нажатия
+                на кнопку ниже откроется защищённая
+                страница оплаты ЮMoney.
+            </div>
 
-                Вы выбрали тариф
-                <strong id="selectedPlan">
+
+            <div class="selected-plan">
+
+                <div class="selected-plan-label">
+                    Выбранный тариф
+                </div>
+
+                <div
+                    class="selected-plan-value"
+                    id="selectedPlan"
+                >
                     —
-                </strong>.
-
-                Перевод выполняется вручную
-                на банковские реквизиты ниже.
-
-            </div>
-
-
-            <!-- БАНК -->
-
-            <div class="bank-note">
-
-                <div class="bank-label">
-                    Банк
-                </div>
-
-                <div class="bank-value">
-                    Т-Банк
                 </div>
 
             </div>
 
 
-            <!-- ПОЛУЧАТЕЛЬ -->
+            <div class="selected-plan">
 
-            <div class="bank-note">
-
-                <div class="bank-label">
-                    Получатель
-                </div>
-
-                <div
-                    class="bank-value"
-                    id="recipient"
-                >
-                    ВАШЕ ИМЯ / ФИО
-                </div>
-
-                <div class="copy-row">
-
-                    <button
-                        class="copy-bank"
-                        onclick="copyText('recipient')"
-                    >
-                        Копировать
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- НОМЕР КАРТЫ -->
-
-            <div class="bank-note">
-
-                <div class="bank-label">
-                    Номер карты
-                </div>
-
-                <div
-                    class="bank-value"
-                    id="cardNumber"
-                >
-                    0000 0000 0000 0000
-                </div>
-
-                <div class="copy-row">
-
-                    <button
-                        class="copy-bank"
-                        onclick="copyText('cardNumber')"
-                    >
-                        Копировать
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- СУММА -->
-
-            <div class="amount">
-
-                <span>
+                <div class="selected-plan-label">
                     К оплате
-                </span>
+                </div>
 
-                <strong id="selectedPrice">
+                <div
+                    class="selected-plan-value"
+                    id="selectedPrice"
+                >
                     0 ₽
-                </strong>
+                </div>
 
             </div>
 
 
-            <!-- ИНСТРУКЦИЯ -->
-
-            <ol class="steps">
-
-                <li>
-                    Открой приложение своего банка.
-                </li>
-
-                <li>
-                    Выполни перевод на указанные
-                    реквизиты на сумму из блока
-                    «К оплате».
-                </li>
-
-                <li>
-                    После оплаты нажми кнопку
-                    ниже и отправь подтверждение
-                    в Telegram.
-                </li>
-
-                <li>
-                    Ключ выдаётся после проверки
-                    поступления платежа.
-                </li>
-
-            </ol>
-
-
-            <!-- TELEGRAM -->
-
-            <a
-                class="telegram"
-                id="telegramLink"
-                href="https://t.me/tikovpnn_bot"
-                target="_blank"
-                rel="noopener"
+            <button
+                class="payment-button"
+                id="paymentButton"
+                onclick="startPayment()"
             >
-
-                ✈️ Отправить подтверждение
-                в Telegram
-
-            </a>
+                💳 Перейти к оплате
+            </button>
 
 
-            <!-- ПРЕДУПРЕЖДЕНИЕ -->
-
-            <div class="disclaimer">
-
-                TikoVPN — независимый сервис.
-                Эта страница не является официальным
-                сайтом или приложением Т-Банка.
-
+            <div class="payment-info">
+                После успешной оплаты заказ будет
+                автоматически обработан сервером.
             </div>
 
         </div>
@@ -1413,66 +1327,92 @@ footer {
 </div>
 
 
+<!-- SUCCESS -->
+
+<div
+    class="success-overlay"
+    id="successOverlay"
+>
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+        <h2>
+            Оплата получена
+        </h2>
+
+        <p>
+            Твоя VPN-конфигурация готова.
+        </p>
+
+        <div
+            class="success-key"
+            id="successKey"
+        >
+            Загрузка...
+        </div>
+
+        <button
+            class="success-copy"
+            onclick="copySuccessKey()"
+        >
+            Копировать конфигурацию
+        </button>
+
+    </div>
+
+</div>
+
+
 <script>
 
-/* ================================= */
-/* ТВОИ РЕКВИЗИТЫ */
-/* ================================= */
+/*
+|--------------------------------------------------------------------------
+| СОСТОЯНИЕ
+|--------------------------------------------------------------------------
+*/
 
-const PAYMENT = {
-
-    /* Впиши сюда ФИО получателя */
-
-    recipient:
-        "ВАШЕ ИМЯ / ФИО",
-
-
-    /* Впиши сюда номер карты */
-
-    cardNumber:
-        "0000 0000 0000 0000",
+let selectedPlan = null;
+let selectedPrice = null;
+let currentOrderId = null;
 
 
-    /* Впиши сюда Telegram username
-       БЕЗ @ */
+/*
+|--------------------------------------------------------------------------
+| ВЫБОР ТАРИФА
+|--------------------------------------------------------------------------
+*/
 
-    telegram:
-        "USERNAME"
+function openPayment(plan, price) {
 
-};
-
-
-/* ================================= */
-/* ПОКУПКА */
-/* ================================= */
-
-function buyPlan(plan, price) {
+    selectedPlan = plan;
+    selectedPrice = price;
 
     document
         .getElementById("selectedPlan")
         .textContent = plan;
 
-
     document
         .getElementById("selectedPrice")
         .textContent = price + " ₽";
-
 
     document
         .getElementById("paymentOverlay")
         .classList
         .add("active");
 
-
-    document.body.style.overflow =
-        "hidden";
-
+    document.body.style.overflow = "hidden";
 }
 
 
-/* ================================= */
-/* ЗАКРЫТИЕ ОПЛАТЫ */
-/* ================================= */
+/*
+|--------------------------------------------------------------------------
+| ЗАКРЫТИЕ
+|--------------------------------------------------------------------------
+*/
 
 function closePayment() {
 
@@ -1481,15 +1421,350 @@ function closePayment() {
         .classList
         .remove("active");
 
-
-    document.body.style.overflow =
-        "";
-
+    document.body.style.overflow = "";
 }
 
 
-/* Закрытие при клике
-   за пределами окна */
+/*
+|--------------------------------------------------------------------------
+| СОЗДАНИЕ ЗАКАЗА
+|--------------------------------------------------------------------------
+*/
+
+async function startPayment() {
+
+    if (!selectedPlan || !selectedPrice) {
+        return;
+    }
+
+    const button =
+        document.getElementById("paymentButton");
+
+    button.disabled = true;
+
+    button.textContent =
+        "Создаём заказ...";
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/create-order",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            plan:
+                                selectedPlan,
+
+                            price:
+                                selectedPrice
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Не удалось создать заказ"
+            );
+
+        }
+
+
+        currentOrderId =
+            data.orderId;
+
+
+        if (!data.paymentUrl) {
+
+            throw new Error(
+                "Сервер не вернул ссылку на оплату"
+            );
+
+        }
+
+
+        window.location.href =
+            data.paymentUrl;
+
+
+    } catch (error) {
+
+        alert(
+            error.message ||
+            "Произошла ошибка"
+        );
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "💳 Перейти к оплате";
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ПРОВЕРКА ЗАКАЗА
+|--------------------------------------------------------------------------
+*/
+
+async function checkOrder(orderId) {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/order/" +
+                encodeURIComponent(orderId)
+            );
+
+
+        if (!response.ok) {
+            return;
+        }
+
+
+        const order =
+            await response.json();
+
+
+        if (order.paid) {
+
+            await loadVpnConfig(orderId);
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Ошибка проверки заказа:",
+            error
+        );
+
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ПОЛУЧЕНИЕ VPN-КОНФИГУРАЦИИ
+|--------------------------------------------------------------------------
+*/
+
+async function loadVpnConfig(orderId) {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/order/" +
+                encodeURIComponent(orderId) +
+                "/config"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Конфигурация ещё не готова"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.config) {
+
+            throw new Error(
+                "Конфигурация отсутствует"
+            );
+
+        }
+
+
+        document
+            .getElementById("key")
+            .textContent =
+            data.config;
+
+
+        document
+            .getElementById("successKey")
+            .textContent =
+            data.config;
+
+
+        document
+            .getElementById("successOverlay")
+            .classList
+            .add("active");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Оплата подтверждена, " +
+            "но конфигурация ещё готовится."
+        );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| КОПИРОВАНИЕ
+|--------------------------------------------------------------------------
+*/
+
+async function copyKey() {
+
+    const key =
+        document
+            .getElementById("key")
+            .textContent
+            .trim();
+
+
+    if (
+        key ===
+        "Конфигурация появится после оплаты"
+    ) {
+
+        alert(
+            "Сначала необходимо оплатить тариф."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        await navigator
+            .clipboard
+            .writeText(key);
+
+        alert(
+            "Конфигурация скопирована!"
+        );
+
+    } catch {
+
+        alert(
+            "Не удалось скопировать конфигурацию."
+        );
+    }
+}
+
+
+async function copySuccessKey() {
+
+    const key =
+        document
+            .getElementById("successKey")
+            .textContent
+            .trim();
+
+
+    try {
+
+        await navigator
+            .clipboard
+            .writeText(key);
+
+        alert(
+            "Конфигурация скопирована!"
+        );
+
+    } catch {
+
+        alert(
+            "Не удалось скопировать конфигурацию."
+        );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SUCCESS URL
+|--------------------------------------------------------------------------
+|
+| После оплаты backend ЮMoney должен вернуть
+| пользователя на:
+|
+| /payment-success?order=ID
+|
+*/
+
+async function handlePaymentSuccess() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const orderId =
+        params.get("order");
+
+
+    if (!orderId) {
+        return;
+    }
+
+
+    currentOrderId =
+        orderId;
+
+
+    /*
+     * ЮMoney может сначала вернуть пользователя,
+     * а уведомление серверу прийти чуть позже.
+     *
+     * Поэтому проверяем несколько раз.
+     */
+
+    for (
+        let i = 0;
+        i < 10;
+        i++
+    ) {
+
+        await checkOrder(orderId);
+
+        await new Promise(
+            resolve =>
+                setTimeout(resolve, 2000)
+        );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| КЛИК ПО ФОНУ
+|--------------------------------------------------------------------------
+*/
 
 document
     .getElementById("paymentOverlay")
@@ -1502,14 +1777,16 @@ document
             ) {
 
                 closePayment();
-
             }
-
         }
     );
 
 
-/* Закрытие по Escape */
+/*
+|--------------------------------------------------------------------------
+| ESC
+|--------------------------------------------------------------------------
+*/
 
 document.addEventListener(
     "keydown",
@@ -1520,151 +1797,16 @@ document.addEventListener(
         ) {
 
             closePayment();
-
         }
-
     }
 );
 
 
-/* ================================= */
-/* КОПИРОВАНИЕ РЕКВИЗИТОВ */
-/* ================================= */
-
-async function copyText(id) {
-
-    const text =
-        document
-        .getElementById(id)
-        .textContent
-        .trim();
-
-
-    try {
-
-        await navigator
-            .clipboard
-            .writeText(text);
-
-
-        const button =
-            document
-            .querySelector(
-                "#" +
-                id +
-                " + .copy-row .copy-bank"
-            );
-
-
-        if (button) {
-
-            const oldText =
-                button.textContent;
-
-
-            button.textContent =
-                "Скопировано ✓";
-
-
-            setTimeout(
-                function() {
-
-                    button.textContent =
-                        oldText;
-
-                },
-                1400
-            );
-
-        }
-
-    } catch {
-
-        alert(
-            "Не удалось скопировать автоматически. " +
-            "Скопируйте реквизит вручную."
-        );
-
-    }
-
-}
-
-
-/* ================================= */
-/* КОПИРОВАНИЕ VPN-КЛЮЧА */
-/* ================================= */
-
-async function copyKey() {
-
-    const key =
-        document
-        .getElementById("key")
-        .innerText
-        .trim();
-
-
-    if (
-        key ===
-        "Конфигурация появится после оплаты"
-    ) {
-
-        alert(
-            "Сначала необходимо приобрести подписку."
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-        await navigator
-            .clipboard
-            .writeText(key);
-
-
-        alert(
-            "Конфигурация скопирована!"
-        );
-
-    } catch {
-
-        alert(
-            "Не удалось скопировать конфигурацию."
-        );
-
-    }
-
-}
-
-
-/* ================================= */
-/* ПОДСТАНОВКА РЕКВИЗИТОВ */
-/* ================================= */
-
-document
-    .getElementById("recipient")
-    .textContent =
-    PAYMENT.recipient;
-
-
-document
-    .getElementById("cardNumber")
-    .textContent =
-    PAYMENT.cardNumber;
-
-
-document
-    .getElementById("telegramLink")
-    .href =
-    "https://t.me/" +
-    PAYMENT.telegram;
-
-
-/* ================================= */
-/* НЕОНОВЫЕ ЧАСТИЦЫ */
-/* ================================= */
+/*
+|--------------------------------------------------------------------------
+| ЧАСТИЦЫ
+|--------------------------------------------------------------------------
+*/
 
 for (
     let i = 0;
@@ -1702,8 +1844,16 @@ for (
 
     document.body
         .appendChild(particle);
-
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| ЗАПУСК
+|--------------------------------------------------------------------------
+*/
+
+handlePaymentSuccess();
 
 </script>
 
