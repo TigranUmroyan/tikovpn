@@ -2,1040 +2,629 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TikoVPN — быстрый VPN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#100515">
+<title>TIKO VPN</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+html{scroll-behavior:smooth}
+
+body{
+    margin:0;
+    background:#09030e;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;
 }
 
-:root {
-    --pink: #ff3cac;
-    --orange: #ff8a00;
-    --purple: #7c3aed;
-    --dark: #080812;
-    --card: rgba(18, 18, 35, 0.72);
-    --text: #ffffff;
-    --muted: #a7a7bb;
-    --success: #55ff88;
+button{font-family:inherit}
+
+.page{
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+/* ================= HERO ================= */
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-
+.hero{
+    position:relative;
+    min-height:760px;
     background:
-        radial-gradient(
-            circle at 15% 15%,
-            rgba(255, 60, 172, 0.22),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(124, 58, 237, 0.22),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 50% 90%,
-            rgba(255, 138, 0, 0.16),
-            transparent 35%
-        ),
-        #080812;
-
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
+        linear-gradient(180deg,rgba(10,2,17,.05) 0%,rgba(9,2,15,.05) 45%,#09030e 100%),
+        url("tiko-bg.png") center top/cover no-repeat;
 }
 
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-
-    width: 350px;
-    height: 350px;
-
-    border-radius: 50%;
-
-    filter: blur(100px);
-
-    opacity: 0.18;
-
-    z-index: -1;
-
-    animation: floatGlow 8s ease-in-out infinite alternate;
+.hero-content{
+    width:min(1180px,92%);
+    margin:auto;
+    padding:28px 0 90px;
+    position:relative;
+    z-index:2;
 }
 
-body::before {
-    background: #ff1493;
-    top: 10%;
-    left: -180px;
+.nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
-body::after {
-    background: #7c3aed;
-    bottom: 5%;
-    right: -180px;
-
-    animation-delay: 2s;
+.logo{
+    font-weight:950;
+    font-size:29px;
+    letter-spacing:-1.8px;
+    text-decoration:none;
+    color:#fff;
+    text-shadow:0 0 25px rgba(255,80,220,.45);
 }
 
-@keyframes floatGlow {
-    from {
-        transform: translateY(-30px) scale(0.9);
-    }
-
-    to {
-        transform: translateY(40px) scale(1.1);
-    }
+.logo span{
+    color:#ff69d8;
 }
 
-/* HEADER */
-
-header {
-    width: 100%;
-
-    padding: 20px 7%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    position: sticky;
-    top: 0;
-    z-index: 100;
-
-    background: rgba(8, 8, 18, 0.55);
-
-    backdrop-filter: blur(18px);
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.06);
-}
-
-.logo {
-    font-size: 27px;
-    font-weight: 900;
-    letter-spacing: -1px;
-}
-
-.logo span {
-    background:
-        linear-gradient(
-            90deg,
-            #ff3cac,
-            #ff8a00
-        );
-
-    -webkit-background-clip: text;
-
-    color: transparent;
-}
-
-.status {
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 10px 17px;
-
-    border-radius: 999px;
-
-    background:
-        rgba(40, 200, 100, 0.1);
-
-    border:
-        1px solid
-        rgba(80, 255, 150, 0.18);
-
-    color: #7cff9d;
-
-    font-size: 14px;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #55ff88;
-
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 15px;
+    border-radius:999px;
+    background:rgba(12,8,20,.48);
+    border:1px solid rgba(255,255,255,.15);
     box-shadow:
-        0 0 12px
-        #55ff88;
-
-    animation: pulse 1.7s infinite;
+        inset 0 1px rgba(255,255,255,.16),
+        0 10px 35px rgba(0,0,0,.22);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    color:rgba(255,255,255,.86);
+    font-size:13px;
+    font-weight:650;
 }
 
-@keyframes pulse {
-    50% {
-        transform: scale(1.5);
-        opacity: 0.5;
-    }
+.status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#54e89b;
+    box-shadow:0 0 13px #54e89b;
 }
 
-/* HERO */
-
-.hero {
-    min-height: 650px;
-
-    padding: 90px 7% 70px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    position: relative;
+.hero-copy{
+    max-width:680px;
+    padding-top:180px;
 }
 
-.hero-content {
-    max-width: 950px;
-
-    animation:
-        heroIn
-        1s
-        ease
-        forwards;
+.badge{
+    display:inline-flex;
+    padding:9px 15px;
+    border-radius:999px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    color:#eee;
+    font-size:13px;
+    font-weight:700;
 }
 
-@keyframes heroIn {
-    from {
-        opacity: 0;
-        transform: translateY(35px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+h1{
+    margin:22px 0 18px;
+    font-size:clamp(48px,7vw,86px);
+    line-height:.94;
+    letter-spacing:-5px;
+    max-width:760px;
 }
 
-.badge {
-    display: inline-block;
+.gradient{
+    background:linear-gradient(90deg,#fff,#ffb7f1 38%,#bf65ff 75%,#7e42ff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
 
-    padding: 10px 18px;
+.hero-text{
+    max-width:590px;
+    color:rgba(255,255,255,.72);
+    font-size:18px;
+    line-height:1.6;
+}
 
-    border-radius: 999px;
+.hero-actions{
+    display:flex;
+    gap:12px;
+    margin-top:28px;
+    flex-wrap:wrap;
+}
 
+.glass-btn{
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:22px;
+    min-height:58px;
+    padding:0 24px;
+    color:#fff;
     background:
-        rgba(255,255,255,0.05);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.1);
-
-    color: #ddd;
-
-    margin-bottom: 25px;
-
-    backdrop-filter: blur(10px);
-}
-
-h1 {
-    font-size: clamp(48px, 8vw, 100px);
-
-    line-height: 0.95;
-
-    font-weight: 950;
-
-    letter-spacing: -5px;
-
-    margin-bottom: 30px;
-}
-
-.gradient-text {
-    background:
-        linear-gradient(
-            90deg,
-            #ff3cac,
-            #ff7b00,
-            #ffd166,
-            #ff3cac
-        );
-
-    background-size: 300% 100%;
-
-    -webkit-background-clip: text;
-
-    color: transparent;
-
-    animation:
-        gradientMove
-        5s
-        linear
-        infinite;
-}
-
-@keyframes gradientMove {
-    0% {
-        background-position: 0%;
-    }
-
-    100% {
-        background-position: 300%;
-    }
-}
-
-.hero p {
-    color: var(--muted);
-
-    font-size:
-        clamp(
-            17px,
-            2vw,
-            22px
-        );
-
-    line-height: 1.7;
-
-    max-width: 700px;
-
-    margin: auto;
-}
-
-.neon-line {
-    width: 180px;
-    height: 3px;
-
-    margin: 35px auto;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #ff3cac,
-            #ff8a00,
-            transparent
-        );
-
+        linear-gradient(135deg,
+        rgba(255,255,255,.20),
+        rgba(184,57,255,.17));
     box-shadow:
-        0 0 25px
-        rgba(255, 60, 172, 0.8);
+        inset 0 1px rgba(255,255,255,.25),
+        0 12px 40px rgba(133,24,192,.22);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    cursor:pointer;
+    font-size:15px;
+    font-weight:800;
+    transition:.2s ease;
 }
 
-/* PRICING */
-
-.pricing {
-    max-width: 1200px;
-
-    margin: auto;
-
-    padding: 60px 6% 110px;
-}
-
-.section-title {
-    text-align: center;
-
-    font-size: 42px;
-
-    margin-bottom: 15px;
-}
-
-.section-subtitle {
-    text-align: center;
-
-    color: var(--muted);
-
-    margin-bottom: 50px;
-}
-
-.plans {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 24px;
-}
-
-.plan {
-    position: relative;
-
-    padding: 34px 28px;
-
-    border-radius: 28px;
-
-    background: var(--card);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.09);
-
-    backdrop-filter: blur(20px);
-
-    overflow: hidden;
-
-    transition:
-        0.35s
-        ease;
-}
-
-.plan::before {
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-    height: 180px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff3cac,
-            #ff8a00
-        );
-
-    filter: blur(80px);
-
-    opacity: 0;
-
-    top: -100px;
-    right: -100px;
-
-    transition: 0.4s;
-}
-
-.plan:hover {
-    transform: translateY(-12px);
-
-    border-color:
-        rgba(255,60,172,0.5);
-
+.glass-btn:hover{
+    transform:translateY(-2px);
     box-shadow:
-        0 25px 70px
-        rgba(0,0,0,0.45),
-        0 0 35px
-        rgba(255,60,172,0.12);
+        inset 0 1px rgba(255,255,255,.3),
+        0 16px 45px rgba(178,43,255,.3);
 }
 
-.plan:hover::before {
-    opacity: 0.35;
+.glass-btn:active{transform:scale(.96)}
+
+.secondary{
+    background:rgba(255,255,255,.07);
 }
 
-.plan.featured {
-    border:
-        1px solid
-        rgba(255,60,172,0.5);
+/* ================= GENERAL ================= */
 
+.section{
+    width:min(1100px,92%);
+    margin:auto;
+    padding:95px 0;
+}
+
+.section-label{
+    color:#d66cff;
+    font-size:13px;
+    font-weight:850;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.section-title{
+    margin:0 0 16px;
+    font-size:clamp(34px,5vw,58px);
+    line-height:1;
+    letter-spacing:-3px;
+}
+
+.section-text{
+    max-width:680px;
+    color:rgba(255,255,255,.62);
+    line-height:1.65;
+    font-size:16px;
+}
+
+/* ================= CARDS ================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:38px;
+}
+
+.card{
+    min-height:190px;
+    padding:24px;
+    border-radius:28px;
+    background:
+        linear-gradient(145deg,
+        rgba(255,255,255,.10),
+        rgba(255,255,255,.035));
+    border:1px solid rgba(255,255,255,.12);
     box-shadow:
-        0 0 45px
-        rgba(255,60,172,0.12);
+        inset 0 1px rgba(255,255,255,.12),
+        0 20px 60px rgba(0,0,0,.22);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
 }
 
-.popular {
-    position: absolute;
+.icon{
+    font-size:29px;
+    margin-bottom:28px;
+}
 
-    top: 18px;
-    right: 18px;
+.card h3{
+    margin:0 0 9px;
+    font-size:18px;
+}
 
-    padding: 7px 12px;
+.card p{
+    margin:0;
+    color:rgba(255,255,255,.57);
+    font-size:14px;
+    line-height:1.5;
+}
 
-    font-size: 11px;
+/* ================= PRICING ================= */
 
-    font-weight: 800;
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:38px;
+}
 
-    border-radius: 999px;
-
+.price-card{
+    position:relative;
+    padding:30px;
+    min-height:330px;
+    border-radius:32px;
     background:
-        linear-gradient(
-            90deg,
-            #ff3cac,
-            #ff8a00
-        );
-}
-
-.plan h3 {
-    font-size: 25px;
-
-    margin-bottom: 16px;
-}
-
-.price {
-    font-size: 48px;
-
-    font-weight: 900;
-
-    margin-bottom: 24px;
-}
-
-.price small {
-    font-size: 15px;
-
-    color: var(--muted);
-
-    font-weight: 400;
-}
-
-.features {
-    list-style: none;
-
-    color: #c2c2d2;
-
-    line-height: 2.1;
-
-    margin-bottom: 28px;
-}
-
-.features li::before {
-    content: "✦";
-
-    color: #ff5caf;
-
-    margin-right: 9px;
-}
-
-.buy {
-    width: 100%;
-
-    border: 0;
-
-    padding: 16px;
-
-    border-radius: 15px;
-
-    color: white;
-
-    font-size: 17px;
-
-    font-weight: 800;
-
-    cursor: pointer;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff3cac,
-            #ff7b00
-        );
-
+        linear-gradient(145deg,
+        rgba(255,255,255,.12),
+        rgba(139,31,187,.08));
+    border:1px solid rgba(255,255,255,.14);
     box-shadow:
-        0 8px 30px
-        rgba(255,60,172,0.2);
-
-    transition: 0.25s;
+        inset 0 1px rgba(255,255,255,.15),
+        0 20px 70px rgba(0,0,0,.3);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    transition:.25s ease;
 }
 
-.buy:hover {
-    transform: scale(1.025);
+.price-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(220,100,255,.4);
+}
 
+.price-card.featured{
+    background:
+        linear-gradient(145deg,
+        rgba(205,55,255,.20),
+        rgba(76,20,115,.15));
     box-shadow:
-        0 10px 40px
-        rgba(255,60,172,0.4);
+        inset 0 1px rgba(255,255,255,.2),
+        0 20px 80px rgba(161,31,226,.22);
 }
 
-.buy:active {
-    transform: scale(0.97);
+.popular{
+    position:absolute;
+    top:17px;
+    right:17px;
+    padding:7px 11px;
+    border-radius:999px;
+    background:rgba(226,80,255,.17);
+    border:1px solid rgba(237,120,255,.3);
+    color:#ffb8f3;
+    font-size:10px;
+    font-weight:850;
 }
 
-.buy:disabled {
-    opacity: 0.6;
-    cursor: wait;
+.price-name{
+    font-size:17px;
+    color:rgba(255,255,255,.72);
 }
 
-/* CONFIG */
+.price{
+    margin-top:10px;
+    font-size:45px;
+    font-weight:900;
+    letter-spacing:-2px;
+}
 
-.config {
-    max-width: 850px;
+.price small{
+    font-size:14px;
+    color:rgba(255,255,255,.48);
+    letter-spacing:0;
+}
 
-    margin: 20px auto 100px;
+.price-desc{
+    color:rgba(255,255,255,.55);
+    min-height:52px;
+    line-height:1.5;
+    margin:14px 0 22px;
+    font-size:13px;
+}
 
-    padding: 30px;
+.buy{
+    width:100%;
+}
 
-    border-radius: 25px;
+/* ================= STEPS ================= */
 
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:38px;
+}
+
+.step{
+    padding:25px;
+    border-radius:26px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.10);
+}
+
+.number{
+    font-size:13px;
+    color:#e27aff;
+    font-weight:900;
+}
+
+.step h3{
+    margin:26px 0 9px;
+}
+
+.step p{
+    margin:0;
+    color:rgba(255,255,255,.56);
+    line-height:1.5;
+    font-size:14px;
+}
+
+/* ================= FAQ ================= */
+
+.faq{
+    margin-top:35px;
+    display:grid;
+    gap:10px;
+}
+
+details{
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.045);
+    border-radius:22px;
+    padding:20px 22px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:750;
+}
+
+details p{
+    color:rgba(255,255,255,.58);
+    line-height:1.6;
+    margin:15px 0 0;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:35px 20px;
+    text-align:center;
+    color:rgba(255,255,255,.4);
+    font-size:13px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    align-items:flex-end;
+    justify-content:center;
+    background:rgba(0,0,0,.58);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-card{
+    width:min(520px,100%);
+    padding:15px 22px calc(22px + env(safe-area-inset-bottom));
+    border-radius:32px 32px 0 0;
     background:
-        rgba(255,255,255,0.04);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.09);
-
-    backdrop-filter: blur(18px);
+        linear-gradient(145deg,#32113f,#100514);
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 -20px 80px rgba(0,0,0,.55);
+    animation:up .25s ease;
 }
 
-.config h2 {
-    margin-bottom: 10px;
+@keyframes up{
+    from{transform:translateY(100%)}
+    to{transform:translateY(0)}
 }
 
-.config p {
-    color: var(--muted);
-
-    margin-bottom: 20px;
+.handle{
+    width:42px;
+    height:5px;
+    border-radius:99px;
+    margin:0 auto 22px;
+    background:rgba(255,255,255,.24);
 }
 
-.key-box {
-    display: flex;
-
-    gap: 10px;
-
-    background: #07070f;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-    padding: 8px;
-
-    border-radius: 14px;
+.modal h2{
+    margin:0 0 8px;
+    font-size:26px;
 }
 
-.key {
-    flex: 1;
-
-    overflow: hidden;
-
-    white-space: nowrap;
-
-    text-overflow: ellipsis;
-
-    padding: 13px;
-
-    color: #aaa;
-
-    font-family: monospace;
+.modal-price{
+    color:#ff7add;
+    font-weight:850;
+    font-size:18px;
+    margin-bottom:18px;
 }
 
-.copy {
-    border: 0;
-
-    border-radius: 10px;
-
-    padding: 0 18px;
-
-    background: #24243a;
-
-    color: white;
-
-    cursor: pointer;
+.modal p{
+    color:rgba(255,255,255,.58);
+    line-height:1.55;
+    font-size:14px;
 }
 
-.copy:hover {
-    background: #353550;
+.full{
+    width:100%;
+    margin-top:15px;
 }
 
-/* PAYMENT MODAL */
-
-.payment-overlay {
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 500;
-
-    background:
-        rgba(5,5,10,0.82);
-
-    backdrop-filter: blur(14px);
-
-    padding: 25px 15px;
-
-    overflow-y: auto;
+.close{
+    background:rgba(255,255,255,.06);
+    box-shadow:none;
 }
 
-.payment-overlay.active {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
+.config{
+    margin-top:18px;
+    padding:16px;
+    border-radius:20px;
+    background:rgba(0,0,0,.3);
+    border:1px solid rgba(255,255,255,.08);
+    color:#e9d6ff;
+    font-family:monospace;
+    font-size:12px;
+    line-height:1.55;
+    max-height:220px;
+    overflow:auto;
+    word-break:break-all;
 }
 
-.payment-card {
-    width: min(520px, 100%);
-
-    background:
-        rgba(20,20,35,0.96);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.1);
-
-    border-radius: 28px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,0.7);
+.success{
+    width:72px;
+    height:72px;
+    display:grid;
+    place-items:center;
+    margin:0 auto 17px;
+    border-radius:50%;
+    background:rgba(72,229,157,.13);
+    border:1px solid rgba(72,229,157,.3);
+    color:#67efa9;
+    font-size:34px;
 }
 
-.payment-head {
-    padding: 22px 24px;
+/* ================= MOBILE ================= */
 
-    display: flex;
+@media(max-width:700px){
 
-    justify-content: space-between;
-
-    align-items: center;
-
-    background:
-        rgba(255,255,255,0.04);
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.07);
-}
-
-.payment-brand {
-    font-size: 24px;
-
-    font-weight: 900;
-}
-
-.payment-brand span {
-    background:
-        linear-gradient(
-            90deg,
-            #ff3cac,
-            #ff8a00
-        );
-
-    -webkit-background-clip: text;
-
-    color: transparent;
-}
-
-.close {
-    border: 0;
-
-    background:
-        rgba(255,255,255,0.08);
-
-    color: #fff;
-
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
-
-    font-size: 22px;
-
-    cursor: pointer;
-}
-
-.payment-body {
-    padding: 28px;
-}
-
-.payment-title {
-    font-size: 29px;
-
-    font-weight: 900;
-
-    margin-bottom: 8px;
-}
-
-.payment-subtitle {
-    color: var(--muted);
-
-    line-height: 1.5;
-
-    margin-bottom: 24px;
-}
-
-.selected-plan {
-    padding: 18px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,0.05);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-    margin-bottom: 18px;
-}
-
-.selected-plan-label {
-    color: #888;
-
-    font-size: 13px;
-
-    margin-bottom: 5px;
-}
-
-.selected-plan-value {
-    font-size: 24px;
-
-    font-weight: 900;
-}
-
-.payment-button {
-    width: 100%;
-
-    border: 0;
-
-    padding: 17px;
-
-    border-radius: 15px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff3cac,
-            #ff7b00
-        );
-
-    color: #fff;
-
-    font-size: 17px;
-
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition: 0.25s;
-}
-
-.payment-button:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 35px
-        rgba(255,60,172,0.3);
-}
-
-.payment-info {
-    margin-top: 17px;
-
-    padding: 15px;
-
-    border-radius: 14px;
-
-    background:
-        rgba(255,255,255,0.03);
-
-    color: #888;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    text-align: center;
-}
-
-/* SUCCESS */
-
-.success-overlay {
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 600;
-
-    background:
-        rgba(5,5,10,0.9);
-
-    backdrop-filter: blur(15px);
-
-    padding: 20px;
-
-    align-items: center;
-
-    justify-content: center;
-}
-
-.success-overlay.active {
-    display: flex;
-}
-
-.success-card {
-    width: min(600px, 100%);
-
-    background:
-        rgba(20,20,35,0.97);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.1);
-
-    border-radius: 28px;
-
-    padding: 35px;
-
-    text-align: center;
-
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,0.7);
-}
-
-.success-icon {
-    font-size: 60px;
-
-    margin-bottom: 15px;
-}
-
-.success-card h2 {
-    font-size: 30px;
-
-    margin-bottom: 10px;
-}
-
-.success-card p {
-    color: var(--muted);
-
-    line-height: 1.6;
-
-    margin-bottom: 25px;
-}
-
-.success-key {
-    text-align: left;
-
-    background: #07070f;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-    border-radius: 15px;
-
-    padding: 15px;
-
-    margin-bottom: 15px;
-
-    font-family: monospace;
-
-    word-break: break-all;
-
-    color: #ddd;
-}
-
-.success-copy {
-    width: 100%;
-
-    border: 0;
-
-    padding: 15px;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff3cac,
-            #ff8a00
-        );
-
-    color: white;
-
-    font-weight: 800;
-
-    cursor: pointer;
-}
-
-/* FOOTER */
-
-footer {
-    text-align: center;
-
-    padding: 35px 20px;
-
-    color: #66667a;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,0.05);
-}
-
-/* PARTICLES */
-
-.particle {
-    position: fixed;
-
-    width: 4px;
-    height: 4px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    opacity: 0.25;
-
-    pointer-events: none;
-
-    animation:
-        particleFloat
-        linear
-        infinite;
-
-    z-index: -1;
-}
-
-@keyframes particleFloat {
-    from {
-        transform:
-            translateY(110vh);
+    .hero{
+        min-height:730px;
+        background-position:center top;
     }
 
-    to {
-        transform:
-            translateY(-10vh);
+    .hero-content{
+        width:90%;
+        padding-top:20px;
+    }
+
+    .logo{
+        font-size:25px;
+    }
+
+    .status{
+        font-size:11px;
+        padding:8px 11px;
+    }
+
+    .hero-copy{
+        padding-top:285px;
+    }
+
+    .badge{
+        font-size:11px;
+        padding:8px 12px;
+    }
+
+    h1{
+        font-size:48px;
+        letter-spacing:-3px;
+        margin-top:17px;
+    }
+
+    .hero-text{
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .hero-actions{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    .glass-btn{
+        width:100%;
+    }
+
+    .section{
+        padding:68px 0;
+    }
+
+    .section-title{
+        font-size:38px;
+        letter-spacing:-2px;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
+    }
+
+    .card{
+        min-height:180px;
+        padding:18px;
+        border-radius:22px;
+    }
+
+    .icon{
+        margin-bottom:20px;
+    }
+
+    .card h3{
+        font-size:15px;
+    }
+
+    .card p{
+        font-size:12px;
+    }
+
+    .pricing{
+        grid-template-columns:1fr;
+    }
+
+    .price-card{
+        min-height:0;
+        padding:24px;
+    }
+
+    .steps{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .step{
+        padding:18px;
+    }
+
+    .step h3{
+        font-size:15px;
+        margin-top:20px;
+    }
+
+    .step p{
+        font-size:12px;
     }
 }
 
-/* MOBILE */
+/* ================= SMALL PHONES ================= */
 
-@media (max-width: 850px) {
+@media(max-width:380px){
 
-    .plans {
-        grid-template-columns: 1fr;
+    .hero-copy{
+        padding-top:250px;
     }
 
-    .hero {
-        min-height: 580px;
-
-        padding-top: 70px;
+    h1{
+        font-size:42px;
     }
 
-    h1 {
-        letter-spacing: -3px;
+    .cards{
+        grid-template-columns:1fr;
     }
 
-    .status {
-        font-size: 12px;
-
-        padding: 8px 12px;
-    }
-
-    header {
-        padding: 18px 5%;
-    }
-}
-
-@media (max-width: 520px) {
-
-    .payment-body {
-        padding: 20px;
-    }
-
-    .payment-title {
-        font-size: 25px;
-    }
-
-    .success-card {
-        padding: 25px 18px;
+    .steps{
+        grid-template-columns:1fr;
     }
 }
 </style>
@@ -1043,489 +632,548 @@ footer {
 
 <body>
 
-<header>
-
-    <div class="logo">
-        TIKO<span>VPN</span>
-    </div>
-
-    <div class="status">
-        <span class="status-dot"></span>
-        Сервис работает
-    </div>
-
-</header>
-
+<div class="page">
 
 <section class="hero">
 
-    <div class="hero-content">
+<div class="hero-content">
 
-        <div class="badge">
-            ⚡ Быстро • Приватно • Просто
-        </div>
+<nav class="nav">
 
-        <h1>
-            Твой интернет.<br>
+<a class="logo" href="#">
+    TIKO<span>VPN</span>
+</a>
 
-            <span class="gradient-text">
-                Твои правила.
-            </span>
-        </h1>
+<div class="status">
+    <span class="status-dot"></span>
+    Сервис работает
+</div>
 
-        <div class="neon-line"></div>
+</nav>
 
-        <p>
-            Быстрый VPN для телефона и компьютера.
-            Подключай устройство за несколько секунд
-            и пользуйся интернетом без лишних ограничений.
-        </p>
+<div class="hero-copy">
 
-    </div>
+<div class="badge">
+    БЫСТРО • ПРИВАТНО • ПРОСТО
+</div>
 
+<h1>
+    Интернет без
+    <span class="gradient">границ.</span>
+</h1>
+
+<p class="hero-text">
+    TIKO VPN — быстрое и защищённое соединение
+    для телефона и компьютера. Подключайся за
+    несколько секунд и пользуйся интернетом
+    спокойно.
+</p>
+
+<div class="hero-actions">
+
+<button class="glass-btn" onclick="scrollToPricing()">
+    Выбрать тариф
+</button>
+
+<button class="glass-btn secondary" onclick="scrollToInfo()">
+    Узнать о VPN
+</button>
+
+</div>
+
+</div>
+</div>
 </section>
 
 
-<section class="pricing">
+<!-- О VPN -->
 
-    <h2 class="section-title">
-        Выбери свой тариф
-    </h2>
+<section class="section" id="info">
 
-    <p class="section-subtitle">
-        Простые тарифы без лишних условий
-    </p>
+<div class="section-label">
+    TIKO VPN
+</div>
 
+<h2 class="section-title">
+    Что такое <span class="gradient">VPN?</span>
+</h2>
 
-    <div class="plans">
+<p class="section-text">
+    VPN создаёт защищённое соединение между твоим
+    устройством и VPN-сервером. TIKO VPN помогает
+    сделать подключение удобнее, стабильнее и
+    приватнее при использовании интернета.
+</p>
 
-        <div class="plan">
+<div class="cards">
 
-            <h3>
-                1 месяц
-            </h3>
-
-            <div class="price">
-                100 ₽
-                <small>/ месяц</small>
-            </div>
-
-            <ul class="features">
-
-                <li>1 устройство</li>
-                <li>Высокая скорость</li>
-                <li>Поддержка</li>
-                <li>Быстрое подключение</li>
-
-            </ul>
-
-            <button
-                class="buy"
-                onclick="openPayment('1 месяц', 100, this)"
-            >
-                Купить
-            </button>
-
-        </div>
-
-
-        <div class="plan featured">
-
-            <div class="popular">
-                ПОПУЛЯРНЫЙ
-            </div>
-
-            <h3>
-                3 месяца
-            </h3>
-
-            <div class="price">
-                299 ₽
-                <small>/ 3 месяца</small>
-            </div>
-
-            <ul class="features">
-
-                <li>1 устройство</li>
-                <li>Высокая скорость</li>
-                <li>Поддержка</li>
-                <li>Выгоднее помесячного</li>
-
-            </ul>
-
-            <button
-                class="buy"
-                onclick="openPayment('3 месяца', 299, this)"
-            >
-                Купить
-            </button>
-
-        </div>
-
-
-        <div class="plan">
-
-            <h3>
-                12 месяцев
-            </h3>
-
-            <div class="price">
-                1000 ₽
-                <small>/ год</small>
-            </div>
-
-            <ul class="features">
-
-                <li>1 устройство</li>
-                <li>Высокая скорость</li>
-                <li>Поддержка</li>
-                <li>Максимальная выгода</li>
-
-            </ul>
-
-            <button
-                class="buy"
-                onclick="openPayment('12 месяцев', 1000, this)"
-            >
-                Купить
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section class="config">
-
-    <h2>
-        🔐 Ваша конфигурация
-    </h2>
-
+<div class="card">
+    <div class="icon">⚡</div>
+    <h3>Высокая скорость</h3>
     <p>
-        После успешной оплаты персональная
-        конфигурация появится здесь.
+        Оптимизированное соединение
+        для повседневного использования.
     </p>
+</div>
 
-    <div class="key-box">
+<div class="card">
+    <div class="icon">🔒</div>
+    <h3>Защищённое соединение</h3>
+    <p>
+        Данные передаются через
+        зашифрованный VPN-туннель.
+    </p>
+</div>
 
-        <div
-            class="key"
-            id="key"
-        >
-            Конфигурация появится после оплаты
-        </div>
+<div class="card">
+    <div class="icon">🌎</div>
+    <h3>Стабильный доступ</h3>
+    <p>
+        Используй VPN дома, в дороге
+        или через публичные сети Wi-Fi.
+    </p>
+</div>
 
-        <button
-            class="copy"
-            onclick="copyKey()"
-        >
-            Копировать
-        </button>
+<div class="card">
+    <div class="icon">📱</div>
+    <h3>Разные устройства</h3>
+    <p>
+        Подключай телефон, компьютер
+        и другие поддерживаемые устройства.
+    </p>
+</div>
 
-    </div>
+</div>
+</section>
 
+
+<!-- ТАРИФЫ -->
+
+<section class="section" id="pricing">
+
+<div class="section-label">
+    ТАРИФЫ
+</div>
+
+<h2 class="section-title">
+    Выбери свой <span class="gradient">доступ</span>
+</h2>
+
+<p class="section-text">
+    Выбери подходящий срок подписки.
+    После оплаты заказ будет обработан автоматически.
+</p>
+
+<div class="pricing">
+
+<div class="price-card">
+
+<div class="price-name">
+    1 месяц
+</div>
+
+<div class="price">
+    70 ₽
+</div>
+
+<div class="price-desc">
+    VPN-доступ на 1 месяц.
+</div>
+
+<button
+    class="glass-btn buy"
+    onclick="openPayment('1 месяц',70)"
+>
+    Купить
+</button>
+
+</div>
+
+
+<div class="price-card featured">
+
+<div class="popular">
+    ПОПУЛЯРНЫЙ
+</div>
+
+<div class="price-name">
+    3 месяца
+</div>
+
+<div class="price">
+    170 ₽
+</div>
+
+<div class="price-desc">
+    VPN-доступ на 3 месяца.
+</div>
+
+<button
+    class="glass-btn buy"
+    onclick="openPayment('3 месяца',170)"
+>
+    Купить
+</button>
+
+</div>
+
+
+<div class="price-card">
+
+<div class="price-name">
+    12 месяцев
+</div>
+
+<div class="price">
+    700 ₽
+</div>
+
+<div class="price-desc">
+    VPN-доступ на 12 месяцев.
+</div>
+
+<button
+    class="glass-btn buy"
+    onclick="openPayment('12 месяцев',700)"
+>
+    Купить
+</button>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- КАК ПОДКЛЮЧИТЬ -->
+
+<section class="section">
+
+<div class="section-label">
+    4 ШАГА
+</div>
+
+<h2 class="section-title">
+    Подключение <span class="gradient">проще простого</span>
+</h2>
+
+<div class="steps">
+
+<div class="step">
+    <div class="number">01</div>
+    <h3>Выбери тариф</h3>
+    <p>
+        Нажми «Купить» и выбери
+        подходящий срок.
+    </p>
+</div>
+
+<div class="step">
+    <div class="number">02</div>
+    <h3>Оплати</h3>
+    <p>
+        Перейди на защищённую
+        страницу оплаты.
+    </p>
+</div>
+
+<div class="step">
+    <div class="number">03</div>
+    <h3>Получи ключ</h3>
+    <p>
+        После подтверждения оплаты
+        откроется твоя конфигурация.
+    </p>
+</div>
+
+<div class="step">
+    <div class="number">04</div>
+    <h3>Подключись</h3>
+    <p>
+        Скопируй конфигурацию
+        и добавь её в VPN-клиент.
+    </p>
+</div>
+
+</div>
+</section>
+
+
+<!-- FAQ -->
+
+<section class="section">
+
+<div class="section-label">
+    FAQ
+</div>
+
+<h2 class="section-title">
+    Частые <span class="gradient">вопросы</span>
+</h2>
+
+<div class="faq">
+
+<details>
+<summary>Что я получу после оплаты?</summary>
+<p>
+    После подтверждения оплаты система
+    выдаст VPN-конфигурацию для подключения.
+</p>
+</details>
+
+<details>
+<summary>Как подключить VPN?</summary>
+<p>
+    После покупки скопируй полученную
+    конфигурацию и добавь её в совместимое
+    VPN-приложение.
+</p>
+</details>
+
+<details>
+<summary>Можно использовать на телефоне?</summary>
+<p>
+    Да. Сайт адаптирован под iPhone и Android,
+    а конфигурацию можно использовать
+    в поддерживаемом VPN-клиенте.
+</p>
+</details>
+
+<details>
+<summary>Когда я получу ключ?</summary>
+<p>
+    После подтверждения платежа ключ
+    отображается на странице заказа.
+</p>
+</details>
+
+</div>
 </section>
 
 
 <footer>
-
-    © 2026 TikoVPN — быстрый VPN
-
+    © TIKO VPN
 </footer>
-
-
-<!-- PAYMENT -->
-
-<div
-    class="payment-overlay"
-    id="paymentOverlay"
->
-
-    <div class="payment-card">
-
-        <div class="payment-head">
-
-            <div class="payment-brand">
-                TIKO<span>VPN</span>
-            </div>
-
-            <button
-                class="close"
-                onclick="closePayment()"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="payment-body">
-
-            <div class="payment-title">
-                Оплата
-            </div>
-
-            <div class="payment-subtitle">
-                Ты выбрал тариф. После нажатия
-                на кнопку ниже откроется защищённая
-                страница оплаты ЮMoney.
-            </div>
-
-
-            <div class="selected-plan">
-
-                <div class="selected-plan-label">
-                    Выбранный тариф
-                </div>
-
-                <div
-                    class="selected-plan-value"
-                    id="selectedPlan"
-                >
-                    —
-                </div>
-
-            </div>
-
-
-            <div class="selected-plan">
-
-                <div class="selected-plan-label">
-                    К оплате
-                </div>
-
-                <div
-                    class="selected-plan-value"
-                    id="selectedPrice"
-                >
-                    0 ₽
-                </div>
-
-            </div>
-
-
-            <button
-                class="payment-button"
-                id="paymentButton"
-                onclick="startPayment()"
-            >
-                💳 Перейти к оплате
-            </button>
-
-
-            <div class="payment-info">
-                После успешной оплаты заказ будет
-                автоматически обработан сервером.
-            </div>
-
-        </div>
-
-    </div>
 
 </div>
 
 
-<!-- SUCCESS -->
+<!-- ОПЛАТА -->
 
-<div
-    class="success-overlay"
-    id="successOverlay"
+<div class="modal" id="paymentModal">
+
+<div class="modal-card">
+
+<div class="handle"></div>
+
+<h2>
+    Оплата TIKO VPN
+</h2>
+
+<div class="modal-price" id="selectedPrice">
+    70 ₽
+</div>
+
+<p>
+    Ты выбрал тариф. После нажатия кнопки
+    система создаст заказ и перенаправит
+    тебя на страницу оплаты.
+</p>
+
+<button
+    class="glass-btn full"
+    onclick="startPayment()"
+    id="payButton"
 >
+    Оплатить через ЮKassa
+</button>
 
-    <div class="success-card">
+<button
+    class="glass-btn full close"
+    onclick="closePayment()"
+>
+    Отмена
+</button>
 
-        <div class="success-icon">
-            ✅
-        </div>
+</div>
+</div>
 
-        <h2>
-            Оплата получена
-        </h2>
 
-        <p>
-            Твоя VPN-конфигурация готова.
-        </p>
+<!-- УСПЕШНАЯ ОПЛАТА -->
 
-        <div
-            class="success-key"
-            id="successKey"
-        >
-            Загрузка...
-        </div>
+<div class="modal" id="successModal">
 
-        <button
-            class="success-copy"
-            onclick="copySuccessKey()"
-        >
-            Копировать конфигурацию
-        </button>
+<div class="modal-card">
 
-    </div>
+<div class="handle"></div>
 
+<div class="success">
+    ✓
+</div>
+
+<h2>
+    Оплата получена
+</h2>
+
+<p>
+    Твой VPN-ключ готов.
+</p>
+
+<div class="config" id="vpnConfig">
+    Загрузка конфигурации...
+</div>
+
+<button
+    class="glass-btn full"
+    onclick="copyConfig()"
+>
+    Скопировать ключ
+</button>
+
+<button
+    class="glass-btn full close"
+    onclick="closeSuccess()"
+>
+    Закрыть
+</button>
+
+</div>
 </div>
 
 
 <script>
-
-/*
-|--------------------------------------------------------------------------
-| СОСТОЯНИЕ
-|--------------------------------------------------------------------------
-*/
 
 let selectedPlan = null;
 let selectedPrice = null;
 let currentOrderId = null;
 
 
-/*
-|--------------------------------------------------------------------------
-| ВЫБОР ТАРИФА
-|--------------------------------------------------------------------------
-*/
+/* ПЕРЕХОД К ТАРИФАМ */
 
-function openPayment(plan, price) {
+function scrollToPricing(){
+    document
+        .getElementById("pricing")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+/* ПЕРЕХОД К VPN */
+
+function scrollToInfo(){
+    document
+        .getElementById("info")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+/* ОТКРЫТИЕ ОПЛАТЫ */
+
+function openPayment(plan,price){
 
     selectedPlan = plan;
     selectedPrice = price;
-
-    document
-        .getElementById("selectedPlan")
-        .textContent = plan;
 
     document
         .getElementById("selectedPrice")
         .textContent = price + " ₽";
 
     document
-        .getElementById("paymentOverlay")
-        .classList
-        .add("active");
-
-    document.body.style.overflow = "hidden";
+        .getElementById("paymentModal")
+        .classList.add("active");
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| ЗАКРЫТИЕ
-|--------------------------------------------------------------------------
-*/
+/* ЗАКРЫТИЕ */
 
-function closePayment() {
+function closePayment(){
 
     document
-        .getElementById("paymentOverlay")
-        .classList
-        .remove("active");
-
-    document.body.style.overflow = "";
+        .getElementById("paymentModal")
+        .classList.remove("active");
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| СОЗДАНИЕ ЗАКАЗА
-|--------------------------------------------------------------------------
-*/
+function closeSuccess(){
 
-async function startPayment() {
+    document
+        .getElementById("successModal")
+        .classList.remove("active");
+}
 
-    if (!selectedPlan || !selectedPrice) {
-        return;
-    }
+
+/* СОЗДАНИЕ ЗАКАЗА */
+
+async function startPayment(){
 
     const button =
-        document.getElementById("paymentButton");
+        document.getElementById("payButton");
 
     button.disabled = true;
+    button.textContent = "Создаём заказ...";
 
-    button.textContent =
-        "Создаём заказ...";
-
-    try {
+    try{
 
         const response =
-            await fetch(
-                "/api/create-order",
-                {
-                    method: "POST",
+            await fetch("/api/create-order",{
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+                method:"POST",
 
-                    body:
-                        JSON.stringify({
-                            plan:
-                                selectedPlan,
+                headers:{
+                    "Content-Type":"application/json"
+                },
 
-                            price:
-                                selectedPrice
-                        })
-                }
-            );
+                body:JSON.stringify({
+                    plan:selectedPlan,
+                    price:selectedPrice
+                })
 
+            });
 
         const data =
             await response.json();
 
-
-        if (!response.ok) {
-
+        if(!response.ok){
             throw new Error(
                 data.error ||
-                "Не удалось создать заказ"
+                "Ошибка создания заказа"
             );
-
         }
 
+        if(!data.paymentUrl){
+            throw new Error(
+                "Не получена ссылка на оплату"
+            );
+        }
 
         currentOrderId =
             data.orderId;
 
-
-        if (!data.paymentUrl) {
-
-            throw new Error(
-                "Сервер не вернул ссылку на оплату"
-            );
-
-        }
-
-
         window.location.href =
             data.paymentUrl;
 
-
-    } catch (error) {
+    }catch(error){
 
         alert(
-            error.message ||
-            "Произошла ошибка"
+            "Ошибка оплаты:\n\n" +
+            error.message
         );
 
-
         button.disabled = false;
-
         button.textContent =
-            "💳 Перейти к оплате";
+            "Оплатить через ЮKassa";
     }
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| ПРОВЕРКА ЗАКАЗА
-|--------------------------------------------------------------------------
-*/
+/* ПРОВЕРКА ЗАКАЗА */
 
-async function checkOrder(orderId) {
+async function checkPayment(orderId){
 
-    try {
+    try{
 
         const response =
             await fetch(
@@ -1533,42 +1181,43 @@ async function checkOrder(orderId) {
                 encodeURIComponent(orderId)
             );
 
+        const data =
+            await response.json();
 
-        if (!response.ok) {
+        if(data.status === "paid"){
+
+            document
+                .getElementById("successModal")
+                .classList.add("active");
+
+            loadConfig(orderId);
+
             return;
         }
 
-
-        const order =
-            await response.json();
-
-
-        if (order.paid) {
-
-            await loadVpnConfig(orderId);
-
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Ошибка проверки заказа:",
-            error
+        setTimeout(
+            () => checkPayment(orderId),
+            2500
         );
 
+    }catch(error){
+
+        setTimeout(
+            () => checkPayment(orderId),
+            3000
+        );
     }
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| ПОЛУЧЕНИЕ VPN-КОНФИГУРАЦИИ
-|--------------------------------------------------------------------------
-*/
+/* ПОЛУЧЕНИЕ КЛЮЧА */
 
-async function loadVpnConfig(orderId) {
+async function loadConfig(orderId){
 
-    try {
+    const box =
+        document.getElementById("vpnConfig");
+
+    try{
 
         const response =
             await fetch(
@@ -1577,283 +1226,79 @@ async function loadVpnConfig(orderId) {
                 "/config"
             );
 
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Конфигурация ещё не готова"
-            );
-
-        }
-
-
         const data =
             await response.json();
 
+        if(data.config){
 
-        if (!data.config) {
+            box.textContent =
+                data.config;
 
-            throw new Error(
-                "Конфигурация отсутствует"
-            );
+        }else{
 
+            box.textContent =
+                "Конфигурация ещё создаётся...";
         }
 
+    }catch(error){
 
+        box.textContent =
+            "Не удалось получить конфигурацию.";
+    }
+}
+
+
+/* КОПИРОВАНИЕ */
+
+async function copyConfig(){
+
+    const config =
         document
-            .getElementById("key")
-            .textContent =
-            data.config;
+        .getElementById("vpnConfig")
+        .textContent;
 
+    try{
 
-        document
-            .getElementById("successKey")
-            .textContent =
-            data.config;
+        await navigator.clipboard
+            .writeText(config);
 
+        alert("VPN-ключ скопирован!");
 
-        document
-            .getElementById("successOverlay")
-            .classList
-            .add("active");
-
-
-    } catch (error) {
-
-        console.error(error);
+    }catch(error){
 
         alert(
-            "Оплата подтверждена, " +
-            "но конфигурация ещё готовится."
+            "Не удалось скопировать ключ."
         );
     }
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| КОПИРОВАНИЕ
-|--------------------------------------------------------------------------
-*/
+/* ВОЗВРАТ ПОСЛЕ ОПЛАТЫ */
 
-async function copyKey() {
-
-    const key =
-        document
-            .getElementById("key")
-            .textContent
-            .trim();
-
-
-    if (
-        key ===
-        "Конфигурация появится после оплаты"
-    ) {
-
-        alert(
-            "Сначала необходимо оплатить тариф."
-        );
-
-        return;
-    }
-
-
-    try {
-
-        await navigator
-            .clipboard
-            .writeText(key);
-
-        alert(
-            "Конфигурация скопирована!"
-        );
-
-    } catch {
-
-        alert(
-            "Не удалось скопировать конфигурацию."
-        );
-    }
-}
-
-
-async function copySuccessKey() {
-
-    const key =
-        document
-            .getElementById("successKey")
-            .textContent
-            .trim();
-
-
-    try {
-
-        await navigator
-            .clipboard
-            .writeText(key);
-
-        alert(
-            "Конфигурация скопирована!"
-        );
-
-    } catch {
-
-        alert(
-            "Не удалось скопировать конфигурацию."
-        );
-    }
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| SUCCESS URL
-|--------------------------------------------------------------------------
-|
-| После оплаты backend ЮMoney должен вернуть
-| пользователя на:
-|
-| /payment-success?order=ID
-|
-*/
-
-async function handlePaymentSuccess() {
+function checkReturn(){
 
     const params =
         new URLSearchParams(
             window.location.search
         );
 
-    const orderId =
+    const order =
         params.get("order");
 
-
-    if (!orderId) {
+    if(!order){
         return;
     }
 
+    currentOrderId = order;
 
-    currentOrderId =
-        orderId;
-
-
-    /*
-     * ЮMoney может сначала вернуть пользователя,
-     * а уведомление серверу прийти чуть позже.
-     *
-     * Поэтому проверяем несколько раз.
-     */
-
-    for (
-        let i = 0;
-        i < 10;
-        i++
-    ) {
-
-        await checkOrder(orderId);
-
-        await new Promise(
-            resolve =>
-                setTimeout(resolve, 2000)
-        );
-    }
+    checkPayment(order);
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| КЛИК ПО ФОНУ
-|--------------------------------------------------------------------------
-*/
-
-document
-    .getElementById("paymentOverlay")
-    .addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target === this
-            ) {
-
-                closePayment();
-            }
-        }
-    );
-
-
-/*
-|--------------------------------------------------------------------------
-| ESC
-|--------------------------------------------------------------------------
-*/
 
 document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closePayment();
-        }
-    }
+    "DOMContentLoaded",
+    checkReturn
 );
-
-
-/*
-|--------------------------------------------------------------------------
-| ЧАСТИЦЫ
-|--------------------------------------------------------------------------
-*/
-
-for (
-    let i = 0;
-    i < 25;
-    i++
-) {
-
-    const particle =
-        document.createElement("div");
-
-
-    particle.className =
-        "particle";
-
-
-    particle.style.left =
-        Math.random() * 100 +
-        "vw";
-
-
-    particle.style.animationDuration =
-        (
-            8 +
-            Math.random() * 15
-        ) +
-        "s";
-
-
-    particle.style.animationDelay =
-        (
-            -Math.random() * 15
-        ) +
-        "s";
-
-
-    document.body
-        .appendChild(particle);
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| ЗАПУСК
-|--------------------------------------------------------------------------
-*/
-
-handlePaymentSuccess();
 
 </script>
 
