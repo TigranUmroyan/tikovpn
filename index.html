@@ -2,1307 +2,1035 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#100515">
-<title>TIKO VPN</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VioletX — Demo Exchange</title>
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
-html{scroll-behavior:smooth}
-
-body{
+*{
+    box-sizing:border-box;
     margin:0;
-    background:#09030e;
+    padding:0;
+}
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% -10%,#5b21b6 0%,#21103f 25%,#090510 65%);
     color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;
-}
-
-button{font-family:inherit}
-
-.page{
-    width:100%;
     min-height:100vh;
-    overflow:hidden;
 }
-
-/* ================= HERO ================= */
-
-.hero{
-    position:relative;
-    min-height:760px;
-
-    background-image: url("./tiko-bg.PNG");
-    background-position:center top;
-    background-size:cover;
-    background-repeat:no-repeat;
+button,input,select{
+    font:inherit;
 }
-
-.hero-content{
-    width:min(1180px,92%);
-    margin:auto;
-    padding:28px 0 90px;
-    position:relative;
-    z-index:2;
+button{
+    cursor:pointer;
 }
-
-.nav{
+.header{
+    height:72px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:20px;
+    padding:0 25px;
+    background:rgba(9,5,16,.82);
+    border-bottom:1px solid #302044;
+    backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:10;
 }
-
 .logo{
-    font-weight:950;
-    font-size:29px;
-    letter-spacing:-1.8px;
-    text-decoration:none;
-    color:#fff;
-    text-shadow:0 0 25px rgba(255,80,220,.45);
-}
-
-.logo span{
-    color:#ff69d8;
-}
-
-.status{
     display:flex;
     align-items:center;
-    gap:8px;
-    padding:10px 15px;
-    border-radius:999px;
-    background:rgba(12,8,20,.48);
-    border:1px solid rgba(255,255,255,.15);
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.16),
-        0 10px 35px rgba(0,0,0,.22);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    color:rgba(255,255,255,.86);
-    font-size:13px;
-    font-weight:650;
-}
-
-.status-dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#54e89b;
-    box-shadow:0 0 13px #54e89b;
-}
-
-.hero-copy{
-    max-width:680px;
-    padding-top:180px;
-}
-
-.badge{
-    display:inline-flex;
-    padding:9px 15px;
-    border-radius:999px;
-    background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.15);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    color:#eee;
-    font-size:13px;
-    font-weight:700;
-}
-
-h1{
-    margin:22px 0 18px;
-    font-size:clamp(48px,7vw,86px);
-    line-height:.94;
-    letter-spacing:-5px;
-    max-width:760px;
-}
-
-.gradient{
-    background:linear-gradient(90deg,#fff,#ffb7f1 38%,#bf65ff 75%,#7e42ff);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-}
-
-.hero-text{
-    max-width:590px;
-    color:rgba(255,255,255,.72);
-    font-size:18px;
-    line-height:1.6;
-}
-
-.hero-actions{
-    display:flex;
     gap:12px;
-    margin-top:28px;
-    flex-wrap:wrap;
-}
-
-.glass-btn{
-    border:1px solid rgba(255,255,255,.22);
-    border-radius:22px;
-    min-height:58px;
-    padding:0 24px;
-    color:#fff;
-    background:
-        linear-gradient(135deg,
-        rgba(255,255,255,.20),
-        rgba(184,57,255,.17));
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.25),
-        0 12px 40px rgba(133,24,192,.22);
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
-    cursor:pointer;
-    font-size:15px;
+    font-size:21px;
     font-weight:800;
-    transition:.2s ease;
 }
-
-.glass-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.3),
-        0 16px 45px rgba(178,43,255,.3);
-}
-
-.glass-btn:active{transform:scale(.96)}
-
-.secondary{
-    background:rgba(255,255,255,.07);
-}
-
-/* ================= GENERAL ================= */
-
-.section{
-    width:min(1100px,92%);
-    margin:auto;
-    padding:95px 0;
-}
-
-.section-label{
-    color:#d66cff;
-    font-size:13px;
-    font-weight:850;
-    letter-spacing:1.8px;
-    text-transform:uppercase;
-    margin-bottom:12px;
-}
-
-.section-title{
-    margin:0 0 16px;
-    font-size:clamp(34px,5vw,58px);
-    line-height:1;
-    letter-spacing:-3px;
-}
-
-.section-text{
-    max-width:680px;
-    color:rgba(255,255,255,.62);
-    line-height:1.65;
-    font-size:16px;
-}
-
-/* ================= CARDS ================= */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    margin-top:38px;
-}
-
-.card{
-    min-height:190px;
-    padding:24px;
-    border-radius:28px;
-    background:
-        linear-gradient(145deg,
-        rgba(255,255,255,.10),
-        rgba(255,255,255,.035));
-    border:1px solid rgba(255,255,255,.12);
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.12),
-        0 20px 60px rgba(0,0,0,.22);
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
-}
-
-.icon{
-    font-size:29px;
-    margin-bottom:28px;
-}
-
-.card h3{
-    margin:0 0 9px;
-    font-size:18px;
-}
-
-.card p{
-    margin:0;
-    color:rgba(255,255,255,.57);
-    font-size:14px;
-    line-height:1.5;
-}
-
-/* ================= PRICING ================= */
-
-.pricing{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    margin-top:38px;
-}
-
-.price-card{
-    position:relative;
-    padding:30px;
-    min-height:330px;
-    border-radius:32px;
-    background:
-        linear-gradient(145deg,
-        rgba(255,255,255,.12),
-        rgba(139,31,187,.08));
-    border:1px solid rgba(255,255,255,.14);
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.15),
-        0 20px 70px rgba(0,0,0,.3);
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
-    transition:.25s ease;
-}
-
-.price-card:hover{
-    transform:translateY(-5px);
-    border-color:rgba(220,100,255,.4);
-}
-
-.price-card.featured{
-    background:
-        linear-gradient(145deg,
-        rgba(205,55,255,.20),
-        rgba(76,20,115,.15));
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.2),
-        0 20px 80px rgba(161,31,226,.22);
-}
-
-.popular{
-    position:absolute;
-    top:17px;
-    right:17px;
-    padding:7px 11px;
-    border-radius:999px;
-    background:rgba(226,80,255,.17);
-    border:1px solid rgba(237,120,255,.3);
-    color:#ffb8f3;
-    font-size:10px;
-    font-weight:850;
-}
-
-.price-name{
-    font-size:17px;
-    color:rgba(255,255,255,.72);
-}
-
-.price{
-    margin-top:10px;
-    font-size:45px;
-    font-weight:900;
-    letter-spacing:-2px;
-}
-
-.price small{
-    font-size:14px;
-    color:rgba(255,255,255,.48);
-    letter-spacing:0;
-}
-
-.price-desc{
-    color:rgba(255,255,255,.55);
-    min-height:52px;
-    line-height:1.5;
-    margin:14px 0 22px;
-    font-size:13px;
-}
-
-.buy{
-    width:100%;
-}
-
-/* ================= STEPS ================= */
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    margin-top:38px;
-}
-
-.step{
-    padding:25px;
-    border-radius:26px;
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.10);
-}
-
-.number{
-    font-size:13px;
-    color:#e27aff;
-    font-weight:900;
-}
-
-.step h3{
-    margin:26px 0 9px;
-}
-
-.step p{
-    margin:0;
-    color:rgba(255,255,255,.56);
-    line-height:1.5;
-    font-size:14px;
-}
-
-/* ================= FAQ ================= */
-
-.faq{
-    margin-top:35px;
-    display:grid;
-    gap:10px;
-}
-
-details{
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.045);
-    border-radius:22px;
-    padding:20px 22px;
-}
-
-summary{
-    cursor:pointer;
-    font-weight:750;
-}
-
-details p{
-    color:rgba(255,255,255,.58);
-    line-height:1.6;
-    margin:15px 0 0;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-    border-top:1px solid rgba(255,255,255,.08);
-    padding:35px 20px;
-    text-align:center;
-    color:rgba(255,255,255,.4);
-    font-size:13px;
-}
-
-/* ================= MODAL ================= */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    align-items:flex-end;
-    justify-content:center;
-    background:rgba(0,0,0,.58);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-}
-
-.modal.active{
+.logo-icon{
+    width:38px;
+    height:38px;
+    border-radius:12px;
     display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#7c3aed,#d946ef);
+    box-shadow:0 0 30px #8b5cf655;
 }
-
-.modal-card{
-    width:min(520px,100%);
-    padding:15px 22px calc(22px + env(safe-area-inset-bottom));
-    border-radius:32px 32px 0 0;
-    background:
-        linear-gradient(145deg,#32113f,#100514);
-    border:1px solid rgba(255,255,255,.13);
-    box-shadow:0 -20px 80px rgba(0,0,0,.55);
-    animation:up .25s ease;
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
-
-@keyframes up{
-    from{transform:translateY(100%)}
-    to{transform:translateY(0)}
+.balance{
+    padding:11px 16px;
+    background:#130b20;
+    border:1px solid #302044;
+    border-radius:12px;
 }
-
-.handle{
-    width:42px;
-    height:5px;
-    border-radius:99px;
-    margin:0 auto 22px;
-    background:rgba(255,255,255,.24);
+.balance span{
+    color:#9586a4;
+    font-size:12px;
 }
-
-.modal h2{
-    margin:0 0 8px;
-    font-size:26px;
+.balance strong{
+    margin-left:7px;
 }
-
-.modal-price{
-    color:#ff7add;
-    font-weight:850;
+.deposit{
+    border:0;
+    padding:12px 17px;
+    color:white;
+    font-weight:bold;
+    border-radius:11px;
+    background:linear-gradient(135deg,#7c3aed,#d946ef);
+    box-shadow:0 8px 25px #8b5cf633;
+}
+.layout{
+    display:grid;
+    grid-template-columns:220px minmax(500px,1fr) 310px;
+    min-height:calc(100vh - 72px);
+}
+.sidebar{
+    padding:18px 13px;
+    background:rgba(10,6,17,.65);
+    border-right:1px solid #302044;
+}
+.sidebar-title{
+    color:#756680;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    padding:12px;
+}
+.menu button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#a99cb5;
+    text-align:left;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:4px;
+}
+.menu button:hover,
+.menu .active{
+    color:#fff;
+    background:#211331;
+}
+.asset{
+    padding:12px;
+    display:flex;
+    justify-content:space-between;
+    border-radius:10px;
+    margin-bottom:5px;
+    cursor:pointer;
+}
+.asset:hover,
+.asset.active{
+    background:#1c1029;
+    border:1px solid #4b2670;
+}
+.asset-name{
+    font-weight:bold;
+}
+.asset-percent{
+    color:#35d07f;
+    font-size:11px;
+}
+.main{
+    padding:18px;
+    min-width:0;
+}
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+}
+.pair{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+.pair h1{
+    font-size:22px;
+}
+.current-price{
+    color:#aaa0b6;
+}
+.timeframes{
+    display:flex;
+    gap:6px;
+}
+.timeframes button{
+    border:1px solid #302044;
+    background:#130b20;
+    color:#9d91a9;
+    padding:8px 11px;
+    border-radius:8px;
+}
+.timeframes .selected{
+    background:#28133d;
+    color:#fff;
+    border-color:#7c3aed;
+}
+.chart{
+    height:520px;
+    border-radius:17px;
+    border:1px solid #302044;
+    background:#0d0716;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 25px 70px #0008;
+}
+.grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(#ffffff08 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+    background-size:10% 20%;
+}
+#chartCanvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+}
+.chart-label{
+    position:absolute;
+    left:15px;
+    top:14px;
+    padding:7px 10px;
+    border-radius:8px;
+    background:#0d0716dd;
+    color:#877a94;
+    font-size:11px;
+}
+.trade-panel{
+    padding:18px;
+    background:rgba(10,6,17,.7);
+    border-left:1px solid #302044;
+}
+.trade-box{
+    background:linear-gradient(180deg,#181026,#0f0818);
+    border:1px solid #342047;
+    border-radius:17px;
+    padding:17px;
+    box-shadow:0 20px 60px #0007;
+}
+.trade-box h2{
     font-size:18px;
     margin-bottom:18px;
 }
-
-.modal p{
-    color:rgba(255,255,255,.58);
-    line-height:1.55;
+.label{
+    display:block;
+    color:#8d7e98;
+    font-size:11px;
+    margin:13px 0 7px;
+}
+select,
+input{
+    width:100%;
+    padding:12px;
+    color:white;
+    background:#0b0612;
+    border:1px solid #302044;
+    border-radius:10px;
+    outline:none;
+}
+select:focus,
+input:focus{
+    border-color:#8b5cf6;
+}
+.amount-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    margin-top:7px;
+}
+.amount-buttons button{
+    background:#1a1028;
+    color:#bdb0c9;
+    border:1px solid #302044;
+    padding:9px;
+    border-radius:8px;
+}
+.amount-buttons button:hover{
+    color:#fff;
+    border-color:#8b5cf6;
+}
+.payout{
+    display:flex;
+    justify-content:space-between;
+    padding:12px;
+    margin-top:13px;
+    background:#0b0612;
+    border-radius:10px;
+}
+.payout strong{
+    color:#35d07f;
+}
+.trade-button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:11px;
+    color:white;
+    font-weight:800;
+    margin-top:9px;
+}
+.up{
+    background:linear-gradient(135deg,#10a765,#3bd98b);
+    box-shadow:0 8px 25px #10a76533;
+}
+.down{
+    background:linear-gradient(135deg,#e83f69,#ff6b8a);
+    box-shadow:0 8px 25px #e83f6933;
+}
+.notice{
+    text-align:center;
+    color:#756980;
+    font-size:10px;
+    line-height:1.5;
+    margin-top:13px;
+}
+.bottom{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:14px;
+}
+.card{
+    background:#110a1e;
+    border:1px solid #302044;
+    border-radius:14px;
+    padding:15px;
+}
+.card-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:13px;
+}
+.card-title small{
+    color:#756980;
+}
+.history-row{
+    display:grid;
+    grid-template-columns:1.2fr .8fr .8fr .8fr;
+    gap:7px;
+    padding:9px 0;
+    border-bottom:1px solid #ffffff08;
+    font-size:11px;
+}
+.green{
+    color:#35d07f;
+}
+.red{
+    color:#ff5577;
+}
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+.stat{
+    background:#0d0716;
+    border:1px solid #251936;
+    padding:12px;
+    border-radius:10px;
+}
+.stat small{
+    display:block;
+    color:#786b84;
+    margin-bottom:5px;
+}
+.stat strong{
     font-size:14px;
 }
-
-.full{
-    width:100%;
-    margin-top:15px;
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#21132f;
+    border:1px solid #7845a8;
+    padding:13px 17px;
+    border-radius:12px;
+    display:none;
+    z-index:100;
+    box-shadow:0 15px 50px #0009;
 }
-
-.close{
-    background:rgba(255,255,255,.06);
-    box-shadow:none;
+@media(max-width:1050px){
+    .layout{
+        grid-template-columns:75px 1fr;
+    }
+    .trade-panel{
+        grid-column:1/-1;
+        border-left:0;
+        border-top:1px solid #302044;
+    }
+    .sidebar-title{
+        display:none;
+    }
+    .sidebar{
+        padding:12px 7px;
+    }
+    .menu button{
+        text-align:center;
+        font-size:0;
+    }
+    .menu button:first-letter{
+        font-size:18px;
+    }
 }
-
-.config{
-    margin-top:18px;
-    padding:16px;
-    border-radius:20px;
-    background:rgba(0,0,0,.3);
-    border:1px solid rgba(255,255,255,.08);
-    color:#e9d6ff;
-    font-family:monospace;
-    font-size:12px;
-    line-height:1.55;
-    max-height:220px;
-    overflow:auto;
-    word-break:break-all;
-}
-
-.success{
-    width:72px;
-    height:72px;
-    display:grid;
-    place-items:center;
-    margin:0 auto 17px;
-    border-radius:50%;
-    background:rgba(72,229,157,.13);
-    border:1px solid rgba(72,229,157,.3);
-    color:#67efa9;
-    font-size:34px;
-}
-
-/* ================= MOBILE ================= */
-
 @media(max-width:700px){
-
-    .hero{
-        min-height:730px;
-        background-position:center top;
+    .header{
+        padding:0 12px;
     }
-
-    .hero-content{
-        width:90%;
-        padding-top:20px;
+    .balance{
+        display:none;
     }
-
-    .logo{
-        font-size:25px;
+    .layout{
+        display:block;
     }
-
-    .status{
-        font-size:11px;
-        padding:8px 11px;
+    .sidebar{
+        display:none;
     }
-
-    .hero-copy{
-        padding-top:285px;
+    .main{
+        padding:10px;
     }
-
-    .badge{
-        font-size:11px;
-        padding:8px 12px;
+    .chart{
+        height:390px;
     }
-
-    h1{
-        font-size:48px;
-        letter-spacing:-3px;
-        margin-top:17px;
-    }
-
-    .hero-text{
-        font-size:14px;
-        line-height:1.5;
-    }
-
-    .hero-actions{
-        display:grid;
+    .bottom{
         grid-template-columns:1fr;
     }
-
-    .glass-btn{
-        width:100%;
+    .timeframes{
+        display:none;
     }
-
-    .section{
-        padding:68px 0;
-    }
-
-    .section-title{
-        font-size:38px;
-        letter-spacing:-2px;
-    }
-
-    .cards{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-    }
-
-    .card{
-        min-height:180px;
-        padding:18px;
-        border-radius:22px;
-    }
-
-    .icon{
-        margin-bottom:20px;
-    }
-
-    .card h3{
-        font-size:15px;
-    }
-
-    .card p{
-        font-size:12px;
-    }
-
-    .pricing{
-        grid-template-columns:1fr;
-    }
-
-    .price-card{
-        min-height:0;
-        padding:24px;
-    }
-
-    .steps{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .step{
-        padding:18px;
-    }
-
-    .step h3{
-        font-size:15px;
-        margin-top:20px;
-    }
-
-    .step p{
-        font-size:12px;
-    }
-}
-
-/* ================= SMALL PHONES ================= */
-
-@media(max-width:380px){
-
-    .hero-copy{
-        padding-top:250px;
-    }
-
-    h1{
-        font-size:42px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .steps{
-        grid-template-columns:1fr;
+    .trade-panel{
+        padding:10px;
     }
 }
 </style>
 </head>
-
 <body>
-
-<div class="page">
-
-<section class="hero">
-
-<div class="hero-content">
-
-<nav class="nav">
-
-<a class="logo" href="#">
-    TIKO<span>VPN</span>
-</a>
-
-<div class="status">
-    <span class="status-dot"></span>
-    Сервис работает
+<header class="header">
+    <div class="logo">
+        <div class="logo-icon">↗</div>
+        VioletX
+    </div>
+    <div class="header-right">
+        <div class="balance">
+            <span>Демо-баланс</span>
+            <strong id="balance">$10,000.00</strong>
+        </div>
+        <button class="deposit" onclick="addMoney()">
+            + Пополнить
+        </button>
+    </div>
+</header>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-title">
+            Меню
+        </div>
+        <div class="menu">
+            <button class="active">◈ Торговля</button>
+            <button>▣ Сделки</button>
+            <button>◉ Кошелёк</button>
+            <button>⚙ Настройки</button>
+        </div>
+        <div class="sidebar-title">
+            Активы
+        </div>
+        <div id="assets"></div>
+    </aside>
+    <main class="main">
+        <div class="toolbar">
+            <div class="pair">
+                <h1 id="pairName">
+                    EUR/USD
+                </h1>
+                <span class="current-price" id="price">
+                    1.08420
+                </span>
+            </div>
+            <div class="timeframes">
+                <button>1m</button>
+                <button class="selected">5m</button>
+                <button>15m</button>
+                <button>1h</button>
+            </div>
+        </div>
+        <div class="chart">
+            <div class="grid"></div>
+            <canvas id="chartCanvas"></canvas>
+            <div class="chart-label">
+                VioletX · Demo Market
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="card">
+                <div class="card-title">
+                    <b>Последние сделки</b>
+                    <small id="tradeCount">
+                        0 сделок
+                    </small>
+                </div>
+                <div class="history-row" style="color:#786b84">
+                    <span>Актив</span>
+                    <span>Направление</span>
+                    <span>Сумма</span>
+                    <span>Результат</span>
+                </div>
+                <div id="history"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <b>Статистика</b>
+                    <small>Демо</small>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <small>Сделок</small>
+                        <strong id="statTrades">0</strong>
+                    </div>
+                    <div class="stat">
+                        <small>В плюсе</small>
+                        <strong id="statWins">0</strong>
+                    </div>
+                    <div class="stat">
+                        <small>Объём</small>
+                        <strong id="statVolume">$0</strong>
+                    </div>
+                    <div class="stat">
+                        <small>Результат</small>
+                        <strong id="statProfit">$0</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <aside class="trade-panel">
+        <div class="trade-box">
+            <h2>Новая сделка</h2>
+            <label class="label">
+                Актив
+            </label>
+            <select id="assetSelect"></select>
+            <label class="label">
+                Экспирация
+            </label>
+            <select id="expiry">
+                <option value="30">
+                    30 секунд
+                </option>
+                <option value="60">
+                    1 минута
+                </option>
+                <option value="300" selected>
+                    5 минут
+                </option>
+            </select>
+            <label class="label">
+                Сумма
+            </label>
+            <input
+                id="amount"
+                type="number"
+                value="100"
+                min="1"
+            >
+            <div class="amount-buttons">
+                <button onclick="setAmount(50)">
+                    $50
+                </button>
+                <button onclick="setAmount(100)">
+                    $100
+                </button>
+                <button onclick="setAmount(500)">
+                    $500
+                </button>
+            </div>
+            <div class="payout">
+                <span>Потенциальная выплата</span>
+                <strong id="payout">
+                    +$84.00
+                </strong>
+            </div>
+            <button
+                class="trade-button up"
+                onclick="openTrade('UP')"
+            >
+                ▲ ВВЕРХ
+            </button>
+            <button
+                class="trade-button down"
+                onclick="openTrade('DOWN')"
+            >
+                ▼ ВНИЗ
+            </button>
+            <div class="notice">
+                Демо-режим.
+                Используется только виртуальный баланс.
+                Реальные деньги не принимаются.
+            </div>
+        </div>
+    </aside>
 </div>
-
-</nav>
-
-<div class="hero-copy">
-
-<div class="badge">
-    БЫСТРО • ПРИВАТНО • ПРОСТО
-</div>
-
-<h1>
-    Интернет без
-    <span class="gradient">границ.</span>
-</h1>
-
-<p class="hero-text">
-    TIKO VPN — быстрое и защищённое соединение
-    для телефона и компьютера. Подключайся за
-    несколько секунд и пользуйся интернетом
-    спокойно.
-</p>
-
-<div class="hero-actions">
-
-<button class="glass-btn" onclick="scrollToPricing()">
-    Выбрать тариф
-</button>
-
-<button class="glass-btn secondary" onclick="scrollToInfo()">
-    Узнать о VPN
-</button>
-
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- О VPN -->
-
-<section class="section" id="info">
-
-<div class="section-label">
-    TIKO VPN
-</div>
-
-<h2 class="section-title">
-    Что такое <span class="gradient">VPN?</span>
-</h2>
-
-<p class="section-text">
-    VPN создаёт защищённое соединение между твоим
-    устройством и VPN-сервером. TIKO VPN помогает
-    сделать подключение удобнее, стабильнее и
-    приватнее при использовании интернета.
-</p>
-
-<div class="cards">
-
-<div class="card">
-    <div class="icon">⚡</div>
-    <h3>Высокая скорость</h3>
-    <p>
-        Оптимизированное соединение
-        для повседневного использования.
-    </p>
-</div>
-
-<div class="card">
-    <div class="icon">🔒</div>
-    <h3>Защищённое соединение</h3>
-    <p>
-        Данные передаются через
-        зашифрованный VPN-туннель.
-    </p>
-</div>
-
-<div class="card">
-    <div class="icon">🌎</div>
-    <h3>Стабильный доступ</h3>
-    <p>
-        Используй VPN дома, в дороге
-        или через публичные сети Wi-Fi.
-    </p>
-</div>
-
-<div class="card">
-    <div class="icon">📱</div>
-    <h3>Разные устройства</h3>
-    <p>
-        Подключай телефон, компьютер
-        и другие поддерживаемые устройства.
-    </p>
-</div>
-
-</div>
-</section>
-
-
-<!-- ТАРИФЫ -->
-
-<section class="section" id="pricing">
-
-<div class="section-label">
-    ТАРИФЫ
-</div>
-
-<h2 class="section-title">
-    Выбери свой <span class="gradient">доступ</span>
-</h2>
-
-<p class="section-text">
-    Выбери подходящий срок подписки.
-    После оплаты заказ будет обработан автоматически.
-</p>
-
-<div class="pricing">
-
-<div class="price-card">
-
-<div class="price-name">
-    1 месяц
-</div>
-
-<div class="price">
-    70 ₽
-</div>
-
-<div class="price-desc">
-    VPN-доступ на 1 месяц.
-</div>
-
-<button
-    class="glass-btn buy"
-    onclick="openPayment('1 месяц',70)"
->
-    Купить
-</button>
-
-</div>
-
-
-<div class="price-card featured">
-
-<div class="popular">
-    ПОПУЛЯРНЫЙ
-</div>
-
-<div class="price-name">
-    3 месяца
-</div>
-
-<div class="price">
-    170 ₽
-</div>
-
-<div class="price-desc">
-    VPN-доступ на 3 месяца.
-</div>
-
-<button
-    class="glass-btn buy"
-    onclick="openPayment('3 месяца',170)"
->
-    Купить
-</button>
-
-</div>
-
-
-<div class="price-card">
-
-<div class="price-name">
-    12 месяцев
-</div>
-
-<div class="price">
-    700 ₽
-</div>
-
-<div class="price-desc">
-    VPN-доступ на 12 месяцев.
-</div>
-
-<button
-    class="glass-btn buy"
-    onclick="openPayment('12 месяцев',700)"
->
-    Купить
-</button>
-
-</div>
-
-</div>
-</section>
-
-
-<!-- КАК ПОДКЛЮЧИТЬ -->
-
-<section class="section">
-
-<div class="section-label">
-    4 ШАГА
-</div>
-
-<h2 class="section-title">
-    Подключение <span class="gradient">проще простого</span>
-</h2>
-
-<div class="steps">
-
-<div class="step">
-    <div class="number">01</div>
-    <h3>Выбери тариф</h3>
-    <p>
-        Нажми «Купить» и выбери
-        подходящий срок.
-    </p>
-</div>
-
-<div class="step">
-    <div class="number">02</div>
-    <h3>Оплати</h3>
-    <p>
-        Перейди на защищённую
-        страницу оплаты.
-    </p>
-</div>
-
-<div class="step">
-    <div class="number">03</div>
-    <h3>Получи ключ</h3>
-    <p>
-        После подтверждения оплаты
-        откроется твоя конфигурация.
-    </p>
-</div>
-
-<div class="step">
-    <div class="number">04</div>
-    <h3>Подключись</h3>
-    <p>
-        Скопируй конфигурацию
-        и добавь её в VPN-клиент.
-    </p>
-</div>
-
-</div>
-</section>
-
-
-<!-- FAQ -->
-
-<section class="section">
-
-<div class="section-label">
-    FAQ
-</div>
-
-<h2 class="section-title">
-    Частые <span class="gradient">вопросы</span>
-</h2>
-
-<div class="faq">
-
-<details>
-<summary>Что я получу после оплаты?</summary>
-<p>
-    После подтверждения оплаты система
-    выдаст VPN-конфигурацию для подключения.
-</p>
-</details>
-
-<details>
-<summary>Как подключить VPN?</summary>
-<p>
-    После покупки скопируй полученную
-    конфигурацию и добавь её в совместимое
-    VPN-приложение.
-</p>
-</details>
-
-<details>
-<summary>Можно использовать на телефоне?</summary>
-<p>
-    Да. Сайт адаптирован под iPhone и Android,
-    а конфигурацию можно использовать
-    в поддерживаемом VPN-клиенте.
-</p>
-</details>
-
-<details>
-<summary>Когда я получу ключ?</summary>
-<p>
-    После подтверждения платежа ключ
-    отображается на странице заказа.
-</p>
-</details>
-
-</div>
-</section>
-
-
-<footer>
-    © TIKO VPN
-</footer>
-
-</div>
-
-
-<!-- ОПЛАТА -->
-
-<div class="modal" id="paymentModal">
-
-<div class="modal-card">
-
-<div class="handle"></div>
-
-<h2>
-    Оплата TIKO VPN
-</h2>
-
-<div class="modal-price" id="selectedPrice">
-    70 ₽
-</div>
-
-<p>
-    Ты выбрал тариф. После нажатия кнопки
-    система создаст заказ и перенаправит
-    тебя на страницу оплаты.
-</p>
-
-<button
-    class="glass-btn full"
-    onclick="startPayment()"
-    id="payButton"
->
-    Оплатить через ЮKassa
-</button>
-
-<button
-    class="glass-btn full close"
-    onclick="closePayment()"
->
-    Отмена
-</button>
-
-</div>
-</div>
-
-
-<!-- УСПЕШНАЯ ОПЛАТА -->
-
-<div class="modal" id="successModal">
-
-<div class="modal-card">
-
-<div class="handle"></div>
-
-<div class="success">
-    ✓
-</div>
-
-<h2>
-    Оплата получена
-</h2>
-
-<p>
-    Твой VPN-ключ готов.
-</p>
-
-<div class="config" id="vpnConfig">
-    Загрузка конфигурации...
-</div>
-
-<button
-    class="glass-btn full"
-    onclick="copyConfig()"
->
-    Скопировать ключ
-</button>
-
-<button
-    class="glass-btn full close"
-    onclick="closeSuccess()"
->
-    Закрыть
-</button>
-
-</div>
-</div>
-
-
+<div class="toast" id="toast"></div>
 <script>
-
-let selectedPlan = null;
-let selectedPrice = null;
-let currentOrderId = null;
-
-
-/* ПЕРЕХОД К ТАРИФАМ */
-
-function scrollToPricing(){
-    document
-        .getElementById("pricing")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
+const assets = [
+    {
+        name:"EUR/USD",
+        price:1.08420,
+        step:0.00012
+    },
+    {
+        name:"GBP/USD",
+        price:1.27210,
+        step:0.00015
+    },
+    {
+        name:"BTC/USD",
+        price:67240.50,
+        step:18
+    },
+    {
+        name:"ETH/USD",
+        price:2518.40,
+        step:4
+    },
+    {
+        name:"GOLD",
+        price:2658.30,
+        step:1.8
+    }
+];
+let currentAsset = assets[0];
+let balance = 10000;
+let trades = [];
+let totalVolume = 0;
+let wins = 0;
+let totalProfit = 0;
+let points = [];
+const canvas =
+    document.getElementById("chartCanvas");
+const ctx =
+    canvas.getContext("2d");
+function resizeCanvas(){
+    canvas.width =
+        canvas.clientWidth *
+        window.devicePixelRatio;
+    canvas.height =
+        canvas.clientHeight *
+        window.devicePixelRatio;
+    ctx.setTransform(
+        window.devicePixelRatio,
+        0,
+        0,
+        window.devicePixelRatio,
+        0,
+        0
+    );
+    drawChart();
 }
-
-
-/* ПЕРЕХОД К VPN */
-
-function scrollToInfo(){
-    document
-        .getElementById("info")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-}
-
-
-/* ОТКРЫТИЕ ОПЛАТЫ */
-
-function openPayment(plan,price){
-
-    selectedPlan = plan;
-    selectedPrice = price;
-
-    document
-        .getElementById("selectedPrice")
-        .textContent = price + " ₽";
-
-    document
-        .getElementById("paymentModal")
-        .classList.add("active");
-}
-
-
-/* ЗАКРЫТИЕ */
-
-function closePayment(){
-
-    document
-        .getElementById("paymentModal")
-        .classList.remove("active");
-}
-
-
-function closeSuccess(){
-
-    document
-        .getElementById("successModal")
-        .classList.remove("active");
-}
-
-
-/* СОЗДАНИЕ ЗАКАЗА */
-
-async function startPayment(){
-
-    const button =
-        document.getElementById("payButton");
-
-    button.disabled = true;
-    button.textContent = "Создаём заказ...";
-
-    try{
-
-        const response =
-            await fetch("/api/create-order",{
-
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
-                body:JSON.stringify({
-                    plan:selectedPlan,
-                    price:selectedPrice
-                })
-
-            });
-
-        const data =
-            await response.json();
-
-        if(!response.ok){
-            throw new Error(
-                data.error ||
-                "Ошибка создания заказа"
-            );
-        }
-
-        if(!data.paymentUrl){
-            throw new Error(
-                "Не получена ссылка на оплату"
-            );
-        }
-
-        currentOrderId =
-            data.orderId;
-
-        window.location.href =
-            data.paymentUrl;
-
-    }catch(error){
-
-        alert(
-            "Ошибка оплаты:\n\n" +
-            error.message
-        );
-
-        button.disabled = false;
-        button.textContent =
-            "Оплатить через ЮKassa";
+function seedChart(){
+    points = [];
+    let value =
+        currentAsset.price;
+    for(let i=0;i<100;i++){
+        value +=
+            (Math.random()-0.5)
+            *
+            currentAsset.step
+            *
+            6;
+        points.push(value);
     }
 }
-
-
-/* ПРОВЕРКА ЗАКАЗА */
-
-async function checkPayment(orderId){
-
-    try{
-
-        const response =
-            await fetch(
-                "/api/order/" +
-                encodeURIComponent(orderId)
-            );
-
-        const data =
-            await response.json();
-
-        if(data.status === "paid"){
-
-            document
-                .getElementById("successModal")
-                .classList.add("active");
-
-            loadConfig(orderId);
-
-            return;
-        }
-
-        setTimeout(
-            () => checkPayment(orderId),
-            2500
-        );
-
-    }catch(error){
-
-        setTimeout(
-            () => checkPayment(orderId),
-            3000
-        );
-    }
-}
-
-
-/* ПОЛУЧЕНИЕ КЛЮЧА */
-
-async function loadConfig(orderId){
-
-    const box =
-        document.getElementById("vpnConfig");
-
-    try{
-
-        const response =
-            await fetch(
-                "/api/order/" +
-                encodeURIComponent(orderId) +
-                "/config"
-            );
-
-        const data =
-            await response.json();
-
-        if(data.config){
-
-            box.textContent =
-                data.config;
-
-        }else{
-
-            box.textContent =
-                "Конфигурация ещё создаётся...";
-        }
-
-    }catch(error){
-
-        box.textContent =
-            "Не удалось получить конфигурацию.";
-    }
-}
-
-
-/* КОПИРОВАНИЕ */
-
-async function copyConfig(){
-
-    const config =
-        document
-        .getElementById("vpnConfig")
-        .textContent;
-
-    try{
-
-        await navigator.clipboard
-            .writeText(config);
-
-        alert("VPN-ключ скопирован!");
-
-    }catch(error){
-
-        alert(
-            "Не удалось скопировать ключ."
-        );
-    }
-}
-
-
-/* ВОЗВРАТ ПОСЛЕ ОПЛАТЫ */
-
-function checkReturn(){
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    const order =
-        params.get("order");
-
-    if(!order){
+function drawChart(){
+    const width =
+        canvas.clientWidth;
+    const height =
+        canvas.clientHeight;
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+    if(points.length < 2){
         return;
     }
-
-    currentOrderId = order;
-
-    checkPayment(order);
+    let min =
+        Math.min(...points);
+    let max =
+        Math.max(...points);
+    const padding =
+        (max-min)*0.15 || 1;
+    min -= padding;
+    max += padding;
+    /*
+       Основная линия графика
+    */
+    ctx.beginPath();
+    points.forEach((value,index)=>{
+        const x =
+            15 +
+            index *
+            (width-30) /
+            (points.length-1);
+        const y =
+            height-25 -
+            ((value-min)/(max-min))
+            *
+            (height-50);
+        if(index === 0){
+            ctx.moveTo(x,y);
+        }else{
+            ctx.lineTo(x,y);
+        }
+    });
+    ctx.strokeStyle =
+        "#a855f7";
+    ctx.lineWidth = 2;
+    ctx.shadowColor =
+        "#8b5cf6";
+    ctx.shadowBlur = 12;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    /*
+       Заливка под графиком
+    */
+    ctx.lineTo(width-15,height-25);
+    ctx.lineTo(15,height-25);
+    ctx.closePath();
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            0,
+            height
+        );
+    gradient.addColorStop(
+        0,
+        "rgba(168,85,247,.20)"
+    );
+    gradient.addColorStop(
+        1,
+        "rgba(168,85,247,0)"
+    );
+    ctx.fillStyle =
+        gradient;
+    ctx.fill();
 }
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    checkReturn
+function formatPrice(){
+    if(
+        currentAsset.name === "BTC/USD" ||
+        currentAsset.name === "ETH/USD" ||
+        currentAsset.name === "GOLD"
+    ){
+        return "$" +
+            currentAsset.price.toFixed(2);
+    }
+    return currentAsset.price.toFixed(5);
+}
+function updateMarket(){
+    currentAsset.price +=
+        (Math.random()-0.49)
+        *
+        currentAsset.step
+        *
+        2;
+    points.push(
+        currentAsset.price
+    );
+    if(points.length > 100){
+        points.shift();
+    }
+    document.getElementById("price")
+        .textContent =
+        formatPrice();
+    drawChart();
+}
+function renderAssets(){
+    const container =
+        document.getElementById("assets");
+    container.innerHTML =
+        assets.map((asset,index)=>{
+            const percent =
+                (
+                    Math.random()*1.8
+                    +0.1
+                ).toFixed(2);
+            return `
+                <div
+                    class="asset ${
+                        asset === currentAsset
+                        ? "active"
+                        : ""
+                    }"
+                    onclick="selectAsset(${index})"
+                >
+                    <span class="asset-name">
+                        ${asset.name}
+                    </span>
+                    <span class="asset-percent">
+                        +${percent}%
+                    </span>
+                </div>
+            `;
+        }).join("");
+    const select =
+        document.getElementById(
+            "assetSelect"
+        );
+    select.innerHTML =
+        assets.map((asset,index)=>`
+            <option value="${index}">
+                ${asset.name}
+            </option>
+        `).join("");
+    select.value =
+        assets.indexOf(currentAsset);
+}
+function selectAsset(index){
+    currentAsset =
+        assets[index];
+    document.getElementById(
+        "pairName"
+    ).textContent =
+        currentAsset.name;
+    seedChart();
+    renderAssets();
+    drawChart();
+}
+document.getElementById(
+    "assetSelect"
+).addEventListener(
+    "change",
+    function(){
+        selectAsset(
+            Number(this.value)
+        );
+    }
 );
-
+function setAmount(value){
+    document.getElementById(
+        "amount"
+    ).value = value;
+    updatePayout();
+}
+function updatePayout(){
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        ) || 0;
+    document.getElementById(
+        "payout"
+    ).textContent =
+        "+$" +
+        (amount*0.84)
+        .toFixed(2);
+}
+document.getElementById(
+    "amount"
+).addEventListener(
+    "input",
+    updatePayout
+);
+function showToast(message){
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+    toast.textContent =
+        message;
+    toast.style.display =
+        "block";
+    setTimeout(()=>{
+        toast.style.display =
+            "none";
+    },2600);
+}
+function openTrade(direction){
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        );
+    const expiry =
+        Number(
+            document.getElementById(
+                "expiry"
+            ).value
+        );
+    if(!amount || amount < 1){
+        showToast(
+            "Введите сумму сделки"
+        );
+        return;
+    }
+    if(amount > balance){
+        showToast(
+            "Недостаточно демо-баланса"
+        );
+        return;
+    }
+    balance -= amount;
+    totalVolume += amount;
+    updateInterface();
+    showToast(
+        "Сделка открыта: " +
+        (
+            direction === "UP"
+            ? "ВВЕРХ"
+            : "ВНИЗ"
+        )
+    );
+    setTimeout(()=>{
+        /*
+          Для демонстрации результат
+          определяется случайно.
+        */
+        const win =
+            Math.random() > 0.48;
+        if(win){
+            const profit =
+                amount * 0.84;
+            balance +=
+                amount + profit;
+            totalProfit +=
+                profit;
+            wins++;
+        }else{
+            totalProfit -=
+                amount;
+        }
+        trades.unshift({
+            asset:
+                currentAsset.name,
+            direction,
+            amount,
+            win
+        });
+        updateInterface();
+        if(win){
+            showToast(
+                "Сделка завершена: +$" +
+                (amount*0.84).toFixed(2)
+            );
+        }else{
+            showToast(
+                "Сделка завершена: -$" +
+                amount.toFixed(2)
+            );
+        }
+    },expiry*1000);
+}
+function updateInterface(){
+    document.getElementById(
+        "balance"
+    ).textContent =
+        "$" +
+        balance.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+    document.getElementById(
+        "tradeCount"
+    ).textContent =
+        trades.length +
+        " сделок";
+    document.getElementById(
+        "statTrades"
+    ).textContent =
+        trades.length;
+    document.getElementById(
+        "statWins"
+    ).textContent =
+        wins;
+    document.getElementById(
+        "statVolume"
+    ).textContent =
+        "$" +
+        totalVolume.toLocaleString();
+    document.getElementById(
+        "statProfit"
+    ).textContent =
+        (
+            totalProfit >= 0
+            ? "+"
+            : ""
+        ) +
+        "$" +
+        totalProfit.toFixed(2);
+    const history =
+        document.getElementById(
+            "history"
+        );
+    history.innerHTML =
+        trades
+        .slice(0,8)
+        .map(trade=>`
+            <div class="history-row">
+                <span>
+                    ${trade.asset}
+                </span>
+                <span class="${
+                    trade.direction === "UP"
+                    ? "green"
+                    : "red"
+                }">
+                    ${
+                        trade.direction === "UP"
+                        ? "▲ Вверх"
+                        : "▼ Вниз"
+                    }
+                </span>
+                <span>
+                    $${trade.amount}
+                </span>
+                <span class="${
+                    trade.win
+                    ? "green"
+                    : "red"
+                }">
+                    ${
+                        trade.win
+                        ? "+$" +
+                          (trade.amount*0.84)
+                          .toFixed(2)
+                        : "-$" +
+                          trade.amount
+                    }
+                </span>
+            </div>
+        `)
+        .join("");
+}
+function addMoney(){
+    balance += 1000;
+    updateInterface();
+    showToast(
+        "+$1,000 виртуального баланса"
+    );
+}
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+seedChart();
+renderAssets();
+resizeCanvas();
+updateInterface();
+setInterval(
+    updateMarket,
+    900
+);
 </script>
-
 </body>
 </html>
