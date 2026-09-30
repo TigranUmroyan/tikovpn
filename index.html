@@ -3,95 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VioletX — Demo Exchange</title>
+<title>VioletX — Trading Platform</title>
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
+:root{
+    --bg:#08040f;
+    --panel:#10081a;
+    --panel2:#140b20;
+    --line:#2b193e;
+    --purple:#8b5cf6;
+    --purple2:#a855f7;
+    --pink:#d946ef;
+    --green:#20c978;
+    --red:#ff4f72;
+    --text:#f8f5ff;
+    --muted:#887a95;
+}
 body{
-    font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(circle at 50% -10%,#5b21b6 0%,#21103f 25%,#090510 65%);
-    color:#fff;
+        radial-gradient(
+            circle at 50% -20%,
+            #55208d 0%,
+            #1d0d32 25%,
+            #08040f 65%
+        );
+    color:var(--text);
+    font-family:Inter,Arial,sans-serif;
     min-height:100vh;
 }
-button,input,select{
-    font:inherit;
-}
-button{
-    cursor:pointer;
-}
+/* HEADER */
 .header{
-    height:72px;
+    height:70px;
+    padding:0 22px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:0 25px;
-    background:rgba(9,5,16,.82);
-    border-bottom:1px solid #302044;
-    backdrop-filter:blur(15px);
+    align-items:center;
+    background:rgba(8,4,15,.88);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(18px);
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:100;
 }
 .logo{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:11px;
     font-size:21px;
     font-weight:800;
 }
 .logo-icon{
     width:38px;
     height:38px;
-    border-radius:12px;
     display:flex;
-    align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg,#7c3aed,#d946ef);
-    box-shadow:0 0 30px #8b5cf655;
+    align-items:center;
+    border-radius:12px;
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #d946ef
+        );
+    box-shadow:
+        0 0 30px #8b5cf655;
 }
 .header-right{
     display:flex;
+    gap:10px;
     align-items:center;
-    gap:12px;
 }
 .balance{
-    padding:11px 16px;
-    background:#130b20;
-    border:1px solid #302044;
-    border-radius:12px;
+    background:#120a1d;
+    border:1px solid var(--line);
+    border-radius:11px;
+    padding:10px 15px;
 }
-.balance span{
-    color:#9586a4;
-    font-size:12px;
+.balance small{
+    color:var(--muted);
+    font-size:10px;
+    display:block;
 }
 .balance strong{
-    margin-left:7px;
+    font-size:14px;
 }
 .deposit{
     border:0;
-    padding:12px 17px;
+    border-radius:10px;
+    padding:11px 16px;
     color:white;
-    font-weight:bold;
-    border-radius:11px;
-    background:linear-gradient(135deg,#7c3aed,#d946ef);
-    box-shadow:0 8px 25px #8b5cf633;
+    font-weight:700;
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #d946ef
+        );
+    box-shadow:
+        0 8px 25px #8b5cf633;
 }
+/* LAYOUT */
 .layout{
     display:grid;
-    grid-template-columns:220px minmax(500px,1fr) 310px;
-    min-height:calc(100vh - 72px);
+    grid-template-columns:220px minmax(500px,1fr) 320px;
+    min-height:
+        calc(100vh - 70px);
 }
+/* SIDEBAR */
 .sidebar{
-    padding:18px 13px;
-    background:rgba(10,6,17,.65);
-    border-right:1px solid #302044;
+    padding:17px 12px;
+    background:
+        rgba(9,5,15,.65);
+    border-right:1px solid var(--line);
 }
-.sidebar-title{
-    color:#756680;
+.section-label{
+    color:#6f607b;
     font-size:10px;
     letter-spacing:1.5px;
     text-transform:uppercase;
@@ -101,228 +131,173 @@ button{
     width:100%;
     border:0;
     background:transparent;
-    color:#a99cb5;
+    color:#a99caf;
     text-align:left;
     padding:12px;
-    border-radius:10px;
+    border-radius:9px;
     margin-bottom:4px;
 }
 .menu button:hover,
-.menu .active{
-    color:#fff;
-    background:#211331;
+.menu button.active{
+    color:white;
+    background:#21112f;
 }
 .asset{
-    padding:12px;
     display:flex;
     justify-content:space-between;
+    padding:12px;
     border-radius:10px;
     margin-bottom:5px;
     cursor:pointer;
+    border:1px solid transparent;
 }
 .asset:hover,
 .asset.active{
     background:#1c1029;
-    border:1px solid #4b2670;
+    border-color:#472567;
 }
 .asset-name{
-    font-weight:bold;
+    font-weight:700;
+    font-size:13px;
 }
 .asset-percent{
-    color:#35d07f;
-    font-size:11px;
+    color:var(--green);
+    font-size:10px;
 }
+/* MAIN */
 .main{
-    padding:18px;
+    padding:17px;
     min-width:0;
 }
 .toolbar{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:14px;
+    margin-bottom:13px;
 }
 .pair{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:12px;
 }
 .pair h1{
-    font-size:22px;
+    font-size:21px;
 }
-.current-price{
-    color:#aaa0b6;
+.live-price{
+    color:#aaa0b4;
+    font-size:14px;
 }
 .timeframes{
     display:flex;
-    gap:6px;
+    gap:5px;
 }
 .timeframes button{
-    border:1px solid #302044;
-    background:#130b20;
-    color:#9d91a9;
-    padding:8px 11px;
-    border-radius:8px;
+    border:1px solid var(--line);
+    color:#8f829a;
+    background:#12091c;
+    border-radius:7px;
+    padding:7px 10px;
 }
-.timeframes .selected{
-    background:#28133d;
-    color:#fff;
+.timeframes button.active{
+    color:white;
+    background:#28143d;
     border-color:#7c3aed;
 }
+/* CHART */
 .chart{
-    height:520px;
-    border-radius:17px;
-    border:1px solid #302044;
-    background:#0d0716;
-    position:relative;
+    height:535px;
+    background:#0b0612;
+    border:1px solid var(--line);
+    border-radius:16px;
     overflow:hidden;
-    box-shadow:0 25px 70px #0008;
+    position:relative;
+    box-shadow:
+        0 25px 70px #0009;
 }
 .grid{
     position:absolute;
     inset:0;
     background-image:
-        linear-gradient(#ffffff08 1px,transparent 1px),
-        linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-    background-size:10% 20%;
+        linear-gradient(#ffffff07 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff07 1px,transparent 1px);
+    background-size:
+        10% 20%;
 }
-#chartCanvas{
+#chart{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
 }
-.chart-label{
+.chart-top{
     position:absolute;
-    left:15px;
-    top:14px;
+    left:14px;
+    top:12px;
     padding:7px 10px;
-    border-radius:8px;
-    background:#0d0716dd;
-    color:#877a94;
-    font-size:11px;
-}
-.trade-panel{
-    padding:18px;
-    background:rgba(10,6,17,.7);
-    border-left:1px solid #302044;
-}
-.trade-box{
-    background:linear-gradient(180deg,#181026,#0f0818);
-    border:1px solid #342047;
-    border-radius:17px;
-    padding:17px;
-    box-shadow:0 20px 60px #0007;
-}
-.trade-box h2{
-    font-size:18px;
-    margin-bottom:18px;
-}
-.label{
-    display:block;
-    color:#8d7e98;
-    font-size:11px;
-    margin:13px 0 7px;
-}
-select,
-input{
-    width:100%;
-    padding:12px;
-    color:white;
-    background:#0b0612;
-    border:1px solid #302044;
-    border-radius:10px;
-    outline:none;
-}
-select:focus,
-input:focus{
-    border-color:#8b5cf6;
-}
-.amount-buttons{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
-    margin-top:7px;
-}
-.amount-buttons button{
-    background:#1a1028;
-    color:#bdb0c9;
-    border:1px solid #302044;
-    padding:9px;
-    border-radius:8px;
-}
-.amount-buttons button:hover{
-    color:#fff;
-    border-color:#8b5cf6;
-}
-.payout{
-    display:flex;
-    justify-content:space-between;
-    padding:12px;
-    margin-top:13px;
-    background:#0b0612;
-    border-radius:10px;
-}
-.payout strong{
-    color:#35d07f;
-}
-.trade-button{
-    width:100%;
-    padding:14px;
-    border:0;
-    border-radius:11px;
-    color:white;
-    font-weight:800;
-    margin-top:9px;
-}
-.up{
-    background:linear-gradient(135deg,#10a765,#3bd98b);
-    box-shadow:0 8px 25px #10a76533;
-}
-.down{
-    background:linear-gradient(135deg,#e83f69,#ff6b8a);
-    box-shadow:0 8px 25px #e83f6933;
-}
-.notice{
-    text-align:center;
-    color:#756980;
+    border-radius:7px;
+    background:#0b0612dd;
+    color:#857790;
     font-size:10px;
-    line-height:1.5;
-    margin-top:13px;
 }
+.chart-status{
+    position:absolute;
+    right:14px;
+    top:12px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#7d7089;
+    font-size:10px;
+    background:#0b0612dd;
+    padding:7px 10px;
+    border-radius:7px;
+}
+.live-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#27d17f;
+    box-shadow:
+        0 0 10px #27d17f;
+}
+/* BOTTOM */
 .bottom{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:14px;
-    margin-top:14px;
+    gap:13px;
+    margin-top:13px;
 }
 .card{
-    background:#110a1e;
-    border:1px solid #302044;
-    border-radius:14px;
-    padding:15px;
+    background:#10081a;
+    border:1px solid var(--line);
+    border-radius:13px;
+    padding:14px;
 }
-.card-title{
+.card-head{
     display:flex;
     justify-content:space-between;
-    margin-bottom:13px;
+    margin-bottom:12px;
 }
-.card-title small{
-    color:#756980;
+.card-head small{
+    color:#6f627b;
 }
 .history-row{
     display:grid;
-    grid-template-columns:1.2fr .8fr .8fr .8fr;
-    gap:7px;
-    padding:9px 0;
-    border-bottom:1px solid #ffffff08;
-    font-size:11px;
+    grid-template-columns:
+        1.1fr
+        1fr
+        .7fr
+        .8fr;
+    gap:5px;
+    padding:8px 0;
+    border-bottom:1px solid #ffffff07;
+    font-size:10px;
 }
 .green{
-    color:#35d07f;
+    color:var(--green);
 }
 .red{
-    color:#ff5577;
+    color:var(--red);
 }
 .stats{
     display:grid;
@@ -330,45 +305,199 @@ input:focus{
     gap:8px;
 }
 .stat{
-    background:#0d0716;
-    border:1px solid #251936;
-    padding:12px;
-    border-radius:10px;
+    background:#0b0612;
+    border:1px solid #241633;
+    padding:11px;
+    border-radius:9px;
 }
 .stat small{
+    color:#74667f;
     display:block;
-    color:#786b84;
     margin-bottom:5px;
 }
 .stat strong{
     font-size:14px;
 }
+/* TRADE PANEL */
+.trade-panel{
+    padding:17px;
+    background:
+        rgba(8,4,14,.7);
+    border-left:1px solid var(--line);
+}
+.trade-box{
+    background:
+        linear-gradient(
+            180deg,
+            #180e26,
+            #0f0718
+        );
+    border:1px solid #342047;
+    border-radius:16px;
+    padding:16px;
+    box-shadow:
+        0 20px 60px #0008;
+}
+.trade-title{
+    font-size:18px;
+    margin-bottom:15px;
+}
+.label{
+    display:block;
+    color:#897b94;
+    font-size:10px;
+    margin:
+        12px 0
+        6px;
+}
+select,
+input{
+    width:100%;
+    color:white;
+    background:#0a0511;
+    border:1px solid #302044;
+    border-radius:9px;
+    padding:11px;
+    outline:none;
+}
+select:focus,
+input:focus{
+    border-color:#8b5cf6;
+}
+.amounts{
+    display:grid;
+    grid-template-columns:
+        1fr 1fr 1fr;
+    gap:6px;
+    margin-top:7px;
+}
+.amounts button{
+    padding:8px;
+    border-radius:8px;
+    border:1px solid #302044;
+    background:#1a1027;
+    color:#a99caf;
+}
+.amounts button:hover{
+    color:white;
+    border-color:#8b5cf6;
+}
+.payout{
+    display:flex;
+    justify-content:space-between;
+    margin-top:11px;
+    padding:11px;
+    background:#0a0511;
+    border-radius:9px;
+}
+.payout strong{
+    color:var(--green);
+}
+.trade-btn{
+    width:100%;
+    border:0;
+    border-radius:10px;
+    padding:13px;
+    color:white;
+    font-weight:800;
+    margin-top:8px;
+}
+.up{
+    background:
+        linear-gradient(
+            135deg,
+            #0da664,
+            #32d68a
+        );
+    box-shadow:
+        0 8px 25px #0da66433;
+}
+.down{
+    background:
+        linear-gradient(
+            135deg,
+            #e83e69,
+            #ff6c8b
+        );
+    box-shadow:
+        0 8px 25px #e83e6933;
+}
+.notice{
+    text-align:center;
+    color:#6f627a;
+    font-size:9px;
+    line-height:1.5;
+    margin-top:11px;
+}
+/* OPEN TRADES */
+.open-trades{
+    margin-top:13px;
+}
+.open-trades-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:9px;
+    font-size:12px;
+}
+.open-trade{
+    background:#10081a;
+    border:1px solid #2b193e;
+    border-radius:9px;
+    padding:10px;
+    margin-bottom:7px;
+    font-size:10px;
+}
+.open-trade-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+}
+.open-trade-line{
+    height:3px;
+    border-radius:3px;
+    background:#2a1b38;
+    overflow:hidden;
+}
+.open-trade-progress{
+    height:100%;
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #d946ef
+        );
+}
+/* TOAST */
 .toast{
     position:fixed;
     right:20px;
     bottom:20px;
-    background:#21132f;
-    border:1px solid #7845a8;
-    padding:13px 17px;
-    border-radius:12px;
+    background:#21122f;
+    border:1px solid #7541a6;
+    border-radius:11px;
+    padding:13px 16px;
+    box-shadow:
+        0 15px 50px #0009;
     display:none;
-    z-index:100;
-    box-shadow:0 15px 50px #0009;
+    z-index:999;
 }
+/* MOBILE */
 @media(max-width:1050px){
     .layout{
-        grid-template-columns:75px 1fr;
+        grid-template-columns:
+            70px
+            1fr;
     }
     .trade-panel{
         grid-column:1/-1;
         border-left:0;
-        border-top:1px solid #302044;
+        border-top:1px solid var(--line);
     }
-    .sidebar-title{
+    .section-label{
         display:none;
     }
     .sidebar{
-        padding:12px 7px;
+        padding:10px 6px;
     }
     .menu button{
         text-align:center;
@@ -380,7 +509,7 @@ input:focus{
 }
 @media(max-width:700px){
     .header{
-        padding:0 12px;
+        padding:0 10px;
     }
     .balance{
         display:none;
@@ -392,10 +521,10 @@ input:focus{
         display:none;
     }
     .main{
-        padding:10px;
+        padding:9px;
     }
     .chart{
-        height:390px;
+        height:400px;
     }
     .bottom{
         grid-template-columns:1fr;
@@ -404,178 +533,276 @@ input:focus{
         display:none;
     }
     .trade-panel{
-        padding:10px;
+        padding:9px;
     }
 }
 </style>
 </head>
 <body>
+<!-- HEADER -->
 <header class="header">
     <div class="logo">
-        <div class="logo-icon">↗</div>
+        <div class="logo-icon">
+            ↗
+        </div>
         VioletX
     </div>
     <div class="header-right">
         <div class="balance">
-            <span>Демо-баланс</span>
-            <strong id="balance">$10,000.00</strong>
+            <small>
+                Демо-баланс
+            </small>
+            <strong id="balance">
+                $10,000.00
+            </strong>
         </div>
-        <button class="deposit" onclick="addMoney()">
+        <button
+            class="deposit"
+            onclick="addBalance()"
+        >
             + Пополнить
         </button>
     </div>
 </header>
 <div class="layout">
-    <aside class="sidebar">
-        <div class="sidebar-title">
-            Меню
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="section-label">
+        Меню
+    </div>
+    <div class="menu">
+        <button class="active">
+            ◈ Торговля
+        </button>
+        <button>
+            ▣ Сделки
+        </button>
+        <button>
+            ◉ Кошелёк
+        </button>
+        <button>
+            ⚙ Настройки
+        </button>
+    </div>
+    <div class="section-label">
+        Активы
+    </div>
+    <div id="assetList"></div>
+</aside>
+<!-- MAIN -->
+<main class="main">
+    <div class="toolbar">
+        <div class="pair">
+            <h1 id="pair">
+                EUR/USD
+            </h1>
+            <span
+                class="live-price"
+                id="price"
+            >
+                1.08420
+            </span>
         </div>
-        <div class="menu">
-            <button class="active">◈ Торговля</button>
-            <button>▣ Сделки</button>
-            <button>◉ Кошелёк</button>
-            <button>⚙ Настройки</button>
+        <div class="timeframes">
+            <button>
+                1m
+            </button>
+            <button class="active">
+                5m
+            </button>
+            <button>
+                15m
+            </button>
+            <button>
+                1h
+            </button>
         </div>
-        <div class="sidebar-title">
-            Активы
+    </div>
+    <!-- CHART -->
+    <div class="chart">
+        <div class="grid"></div>
+        <canvas id="chart"></canvas>
+        <div class="chart-top">
+            VioletX · Demo Market
         </div>
-        <div id="assets"></div>
-    </aside>
-    <main class="main">
-        <div class="toolbar">
-            <div class="pair">
-                <h1 id="pairName">
-                    EUR/USD
-                </h1>
-                <span class="current-price" id="price">
-                    1.08420
+        <div class="chart-status">
+            <span class="live-dot"></span>
+            LIVE
+        </div>
+    </div>
+    <!-- BOTTOM -->
+    <div class="bottom">
+        <div class="card">
+            <div class="card-head">
+                <b>
+                    История сделок
+                </b>
+                <small id="tradeCount">
+                    0 сделок
+                </small>
+            </div>
+            <div
+                class="history-row"
+                style="color:#75687f"
+            >
+                <span>
+                    Актив
+                </span>
+                <span>
+                    Направление
+                </span>
+                <span>
+                    Сумма
+                </span>
+                <span>
+                    Результат
                 </span>
             </div>
-            <div class="timeframes">
-                <button>1m</button>
-                <button class="selected">5m</button>
-                <button>15m</button>
-                <button>1h</button>
-            </div>
+            <div id="history"></div>
         </div>
-        <div class="chart">
-            <div class="grid"></div>
-            <canvas id="chartCanvas"></canvas>
-            <div class="chart-label">
-                VioletX · Demo Market
+        <div class="card">
+            <div class="card-head">
+                <b>
+                    Статистика
+                </b>
+                <small>
+                    Демо
+                </small>
             </div>
-        </div>
-        <div class="bottom">
-            <div class="card">
-                <div class="card-title">
-                    <b>Последние сделки</b>
-                    <small id="tradeCount">
-                        0 сделок
+            <div class="stats">
+                <div class="stat">
+                    <small>
+                        Сделок
                     </small>
+                    <strong id="statTrades">
+                        0
+                    </strong>
                 </div>
-                <div class="history-row" style="color:#786b84">
-                    <span>Актив</span>
-                    <span>Направление</span>
-                    <span>Сумма</span>
-                    <span>Результат</span>
+                <div class="stat">
+                    <small>
+                        В плюсе
+                    </small>
+                    <strong id="statWins">
+                        0
+                    </strong>
                 </div>
-                <div id="history"></div>
-            </div>
-            <div class="card">
-                <div class="card-title">
-                    <b>Статистика</b>
-                    <small>Демо</small>
+                <div class="stat">
+                    <small>
+                        Объём
+                    </small>
+                    <strong id="statVolume">
+                        $0
+                    </strong>
                 </div>
-                <div class="stats">
-                    <div class="stat">
-                        <small>Сделок</small>
-                        <strong id="statTrades">0</strong>
-                    </div>
-                    <div class="stat">
-                        <small>В плюсе</small>
-                        <strong id="statWins">0</strong>
-                    </div>
-                    <div class="stat">
-                        <small>Объём</small>
-                        <strong id="statVolume">$0</strong>
-                    </div>
-                    <div class="stat">
-                        <small>Результат</small>
-                        <strong id="statProfit">$0</strong>
-                    </div>
+                <div class="stat">
+                    <small>
+                        Результат
+                    </small>
+                    <strong id="statProfit">
+                        $0
+                    </strong>
                 </div>
             </div>
         </div>
-    </main>
-    <aside class="trade-panel">
-        <div class="trade-box">
-            <h2>Новая сделка</h2>
-            <label class="label">
-                Актив
-            </label>
-            <select id="assetSelect"></select>
-            <label class="label">
-                Экспирация
-            </label>
-            <select id="expiry">
-                <option value="30">
-                    30 секунд
-                </option>
-                <option value="60">
-                    1 минута
-                </option>
-                <option value="300" selected>
-                    5 минут
-                </option>
-            </select>
-            <label class="label">
-                Сумма
-            </label>
-            <input
-                id="amount"
-                type="number"
-                value="100"
-                min="1"
-            >
-            <div class="amount-buttons">
-                <button onclick="setAmount(50)">
-                    $50
-                </button>
-                <button onclick="setAmount(100)">
-                    $100
-                </button>
-                <button onclick="setAmount(500)">
-                    $500
-                </button>
-            </div>
-            <div class="payout">
-                <span>Потенциальная выплата</span>
-                <strong id="payout">
-                    +$84.00
-                </strong>
-            </div>
-            <button
-                class="trade-button up"
-                onclick="openTrade('UP')"
-            >
-                ▲ ВВЕРХ
-            </button>
-            <button
-                class="trade-button down"
-                onclick="openTrade('DOWN')"
-            >
-                ▼ ВНИЗ
-            </button>
-            <div class="notice">
-                Демо-режим.
-                Используется только виртуальный баланс.
-                Реальные деньги не принимаются.
-            </div>
+    </div>
+</main>
+<!-- TRADE PANEL -->
+<aside class="trade-panel">
+    <div class="trade-box">
+        <div class="trade-title">
+            Новая сделка
         </div>
-    </aside>
+        <label class="label">
+            Актив
+        </label>
+        <select id="assetSelect"></select>
+        <label class="label">
+            Экспирация
+        </label>
+        <select id="expiry">
+            <option value="15">
+                15 секунд
+            </option>
+            <option value="30">
+                30 секунд
+            </option>
+            <option value="60">
+                1 минута
+            </option>
+            <option value="300" selected>
+                5 минут
+            </option>
+        </select>
+        <label class="label">
+            Сумма
+        </label>
+        <input
+            id="amount"
+            type="number"
+            value="100"
+            min="1"
+        >
+        <div class="amounts">
+            <button onclick="setAmount(50)">
+                $50
+            </button>
+            <button onclick="setAmount(100)">
+                $100
+            </button>
+            <button onclick="setAmount(500)">
+                $500
+            </button>
+        </div>
+        <div class="payout">
+            <span>
+                Выплата
+            </span>
+            <strong id="payout">
+                +$84.00
+            </strong>
+        </div>
+        <button
+            class="trade-btn up"
+            onclick="openTrade('UP')"
+        >
+            ▲ ВВЕРХ
+        </button>
+        <button
+            class="trade-btn down"
+            onclick="openTrade('DOWN')"
+        >
+            ▼ ВНИЗ
+        </button>
+        <div class="notice">
+            Демо-режим.
+            Баланс виртуальный.
+            Реальные деньги не используются.
+        </div>
+        <!-- OPEN TRADES -->
+        <div class="open-trades">
+            <div class="open-trades-title">
+                <b>
+                    Открытые сделки
+                </b>
+                <span id="openCount">
+                    0
+                </span>
+            </div>
+            <div id="openTrades"></div>
+        </div>
+    </div>
+</aside>
 </div>
-<div class="toast" id="toast"></div>
+<div
+    class="toast"
+    id="toast"
+></div>
 <script>
+/*
+====================================================
+VioletX DEMO TRADING ENGINE
+====================================================
+*/
 const assets = [
     {
         name:"EUR/USD",
@@ -589,62 +816,168 @@ const assets = [
     },
     {
         name:"BTC/USD",
-        price:67240.50,
+        price:67240,
         step:18
     },
     {
         name:"ETH/USD",
-        price:2518.40,
+        price:2518,
         step:4
     },
     {
         name:"GOLD",
-        price:2658.30,
+        price:2658,
         step:1.8
     }
 ];
 let currentAsset = assets[0];
 let balance = 10000;
 let trades = [];
+let openTrades = [];
 let totalVolume = 0;
 let wins = 0;
 let totalProfit = 0;
-let points = [];
+let candles = [];
+let candleInterval = 5000;
+let lastCandleTime = Date.now();
+let candleCounter = 0;
+/*
+====================================================
+CANVAS
+====================================================
+*/
 const canvas =
-    document.getElementById("chartCanvas");
+    document.getElementById("chart");
 const ctx =
     canvas.getContext("2d");
 function resizeCanvas(){
     canvas.width =
         canvas.clientWidth *
-        window.devicePixelRatio;
+        devicePixelRatio;
     canvas.height =
         canvas.clientHeight *
-        window.devicePixelRatio;
+        devicePixelRatio;
     ctx.setTransform(
-        window.devicePixelRatio,
+        devicePixelRatio,
         0,
         0,
-        window.devicePixelRatio,
+        devicePixelRatio,
         0,
         0
     );
     drawChart();
 }
-function seedChart(){
-    points = [];
-    let value =
+/*
+====================================================
+CREATE CANDLE
+====================================================
+*/
+function createCandle(previous){
+    let open =
+        previous
+        ? previous.close
+        : currentAsset.price;
+    let movement =
+        (
+            Math.random() - 0.5
+        )
+        *
+        currentAsset.step
+        *
+        8;
+    let close =
+        open + movement;
+    let high =
+        Math.max(open,close)
+        +
+        Math.random()
+        *
+        currentAsset.step
+        *
+        3;
+    let low =
+        Math.min(open,close)
+        -
+        Math.random()
+        *
+        currentAsset.step
+        *
+        3;
+    return {
+        open,
+        close,
+        high,
+        low,
+        time:
+            Date.now()
+    };
+}
+/*
+====================================================
+INITIAL CANDLES
+====================================================
+*/
+function seedCandles(){
+    candles = [];
+    let fake =
         currentAsset.price;
-    for(let i=0;i<100;i++){
-        value +=
-            (Math.random()-0.5)
+    for(
+        let i=0;
+        i<55;
+        i++
+    ){
+        let candle =
+            createCandle(
+                candles.length
+                ? candles[candles.length-1]
+                : null
+            );
+        candle.open =
+            fake;
+        candle.close =
+            candle.open
+            +
+            (
+                Math.random()-0.5
+            )
             *
             currentAsset.step
             *
-            6;
-        points.push(value);
+            8;
+        candle.high =
+            Math.max(
+                candle.open,
+                candle.close
+            )
+            +
+            Math.random()
+            *
+            currentAsset.step
+            *
+            3;
+        candle.low =
+            Math.min(
+                candle.open,
+                candle.close
+            )
+            -
+            Math.random()
+            *
+            currentAsset.step
+            *
+            3;
+        fake =
+            candle.close;
+        candles.push(candle);
     }
+    currentAsset.price =
+        candles[candles.length-1].close;
 }
+/*
+====================================================
+DRAW JAPANESE CANDLES
+====================================================
+*/
 function drawChart(){
     const width =
         canvas.clientWidth;
@@ -656,166 +989,408 @@ function drawChart(){
         width,
         height
     );
-    if(points.length < 2){
+    if(!candles.length){
         return;
     }
+    /*
+    Price range
+    */
     let min =
-        Math.min(...points);
+        Math.min(
+            ...candles.map(c=>c.low)
+        );
     let max =
-        Math.max(...points);
+        Math.max(
+            ...candles.map(c=>c.high)
+        );
+    /*
+    Include open trade prices
+    */
+    openTrades.forEach(trade=>{
+        min =
+            Math.min(
+                min,
+                trade.entry
+            );
+        max =
+            Math.max(
+                max,
+                trade.entry
+            );
+    });
     const padding =
-        (max-min)*0.15 || 1;
+        (max-min)
+        *0.10;
     min -= padding;
     max += padding;
     /*
-       Основная линия графика
+    Candle size
     */
-    ctx.beginPath();
-    points.forEach((value,index)=>{
-        const x =
-            15 +
-            index *
-            (width-30) /
-            (points.length-1);
-        const y =
-            height-25 -
-            ((value-min)/(max-min))
-            *
-            (height-50);
-        if(index === 0){
-            ctx.moveTo(x,y);
-        }else{
-            ctx.lineTo(x,y);
-        }
-    });
-    ctx.strokeStyle =
-        "#a855f7";
-    ctx.lineWidth = 2;
-    ctx.shadowColor =
-        "#8b5cf6";
-    ctx.shadowBlur = 12;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-    /*
-       Заливка под графиком
-    */
-    ctx.lineTo(width-15,height-25);
-    ctx.lineTo(15,height-25);
-    ctx.closePath();
-    const gradient =
-        ctx.createLinearGradient(
-            0,
-            0,
-            0,
-            height
+    const visible =
+        45;
+    const data =
+        candles.slice(-visible);
+    const spacing =
+        width /
+        (data.length+2);
+    const candleWidth =
+        Math.max(
+            5,
+            spacing*0.58
         );
-    gradient.addColorStop(
-        0,
-        "rgba(168,85,247,.20)"
+    /*
+    Price -> Y
+    */
+    function y(price){
+        return (
+            height-25
+        )
+        -
+        (
+            (price-min)
+            /
+            (max-min)
+        )
+        *
+        (height-50);
+    }
+    /*
+    Price labels
+    */
+    ctx.font =
+        "10px Arial";
+    ctx.textAlign =
+        "right";
+    for(
+        let i=0;
+        i<6;
+        i++
+    ){
+        const price =
+            min
+            +
+            (max-min)
+            *
+            i/5;
+        const yy =
+            y(price);
+        ctx.fillStyle =
+            "#655870";
+        ctx.fillText(
+            formatChartPrice(price),
+            width-7,
+            yy-3
+        );
+    }
+    /*
+    CANDLES
+    */
+    data.forEach(
+        (candle,index)=>{
+            const x =
+                spacing
+                *
+                (index+1);
+            const openY =
+                y(candle.open);
+            const closeY =
+                y(candle.close);
+            const highY =
+                y(candle.high);
+            const lowY =
+                y(candle.low);
+            const bullish =
+                candle.close >=
+                candle.open;
+            const bodyTop =
+                Math.min(
+                    openY,
+                    closeY
+                );
+            const bodyHeight =
+                Math.max(
+                    2,
+                    Math.abs(
+                        openY-closeY
+                    )
+                );
+            /*
+            Wick
+            */
+            ctx.beginPath();
+            ctx.moveTo(
+                x,
+                highY
+            );
+            ctx.lineTo(
+                x,
+                lowY
+            );
+            ctx.strokeStyle =
+                bullish
+                ? "#2bd582"
+                : "#ff5577";
+            ctx.lineWidth=1;
+            ctx.stroke();
+            /*
+            Body
+            */
+            ctx.fillStyle =
+                bullish
+                ? "#20c978"
+                : "#ff4f72";
+            ctx.fillRect(
+                x-candleWidth/2,
+                bodyTop,
+                candleWidth,
+                bodyHeight
+            );
+        }
     );
-    gradient.addColorStop(
-        1,
-        "rgba(168,85,247,0)"
+    /*
+    OPEN BET LINES
+    */
+    openTrades.forEach(
+        trade=>{
+            const yy =
+                y(trade.entry);
+            /*
+            line
+            */
+            ctx.beginPath();
+            ctx.setLineDash(
+                [6,5]
+            );
+            ctx.moveTo(
+                0,
+                yy
+            );
+            ctx.lineTo(
+                width,
+                yy
+            );
+            ctx.strokeStyle =
+                trade.direction === "UP"
+                ? "#27d98a"
+                : "#ff5577";
+            ctx.lineWidth=1;
+            ctx.stroke();
+            ctx.setLineDash([]);
+            /*
+            marker
+            */
+            const markerX =
+                18;
+            ctx.beginPath();
+            ctx.arc(
+                markerX,
+                yy,
+                7,
+                0,
+                Math.PI*2
+            );
+            ctx.fillStyle =
+                trade.direction === "UP"
+                ? "#20c978"
+                : "#ff4f72";
+            ctx.fill();
+            ctx.fillStyle =
+                "#fff";
+            ctx.font =
+                "bold 8px Arial";
+            ctx.textAlign =
+                "center";
+            ctx.fillText(
+                trade.direction === "UP"
+                ? "▲"
+                : "▼",
+                markerX,
+                yy+3
+            );
+            /*
+            entry price
+            */
+            ctx.textAlign =
+                "left";
+            ctx.font =
+                "10px Arial";
+            ctx.fillStyle =
+                trade.direction === "UP"
+                ? "#37db91"
+                : "#ff6c87";
+            ctx.fillText(
+                "  $" +
+                formatChartPrice(
+                    trade.entry
+                ),
+                30,
+                yy-4
+            );
+        }
     );
-    ctx.fillStyle =
-        gradient;
-    ctx.fill();
 }
-function formatPrice(){
+/*
+====================================================
+FORMAT PRICE
+====================================================
+*/
+function formatChartPrice(price){
     if(
-        currentAsset.name === "BTC/USD" ||
-        currentAsset.name === "ETH/USD" ||
+        currentAsset.name === "BTC/USD"
+        ||
+        currentAsset.name === "ETH/USD"
+        ||
         currentAsset.name === "GOLD"
     ){
-        return "$" +
-            currentAsset.price.toFixed(2);
+        return price.toFixed(2);
     }
-    return currentAsset.price.toFixed(5);
+    return price.toFixed(5);
 }
-function updateMarket(){
-    currentAsset.price +=
-        (Math.random()-0.49)
+function formatCurrentPrice(){
+    if(
+        currentAsset.name === "BTC/USD"
+        ||
+        currentAsset.name === "ETH/USD"
+        ||
+        currentAsset.name === "GOLD"
+    ){
+        return "$"
+            +
+            currentAsset.price
+            .toFixed(2);
+    }
+    return currentAsset.price
+        .toFixed(5);
+}
+/*
+====================================================
+MARKET LOOP
+====================================================
+*/
+function marketTick(){
+    const last =
+        candles[candles.length-1];
+    /*
+    Move current candle
+    */
+    let movement =
+        (
+            Math.random()-0.48
+        )
         *
         currentAsset.step
         *
-        2;
-    points.push(
-        currentAsset.price
-    );
-    if(points.length > 100){
-        points.shift();
+        1.8;
+    last.close +=
+        movement;
+    last.high =
+        Math.max(
+            last.high,
+            last.close
+        );
+    last.low =
+        Math.min(
+            last.low,
+            last.close
+        );
+    currentAsset.price =
+        last.close;
+    /*
+    New candle
+    */
+    if(
+        Date.now()
+        -
+        lastCandleTime
+        >=
+        candleInterval
+    ){
+        candles.push(
+            createCandle(last)
+        );
+        if(candles.length>100){
+            candles.shift();
+        }
+        lastCandleTime =
+            Date.now();
     }
-    document.getElementById("price")
-        .textContent =
-        formatPrice();
+    document.getElementById(
+        "price"
+    ).textContent =
+        formatCurrentPrice();
     drawChart();
 }
+/*
+====================================================
+ASSETS
+====================================================
+*/
 function renderAssets(){
-    const container =
-        document.getElementById("assets");
-    container.innerHTML =
-        assets.map((asset,index)=>{
-            const percent =
-                (
-                    Math.random()*1.8
-                    +0.1
-                ).toFixed(2);
-            return `
-                <div
-                    class="asset ${
-                        asset === currentAsset
-                        ? "active"
-                        : ""
-                    }"
-                    onclick="selectAsset(${index})"
-                >
-                    <span class="asset-name">
-                        ${asset.name}
-                    </span>
-                    <span class="asset-percent">
-                        +${percent}%
-                    </span>
-                </div>
-            `;
-        }).join("");
+    const list =
+        document.getElementById(
+            "assetList"
+        );
+    list.innerHTML =
+        assets.map(
+            (asset,index)=>`
+            <div
+                class="asset ${
+                    asset===currentAsset
+                    ? "active"
+                    : ""
+                }"
+                onclick="selectAsset(${index})"
+            >
+                <span class="asset-name">
+                    ${asset.name}
+                </span>
+                <span class="asset-percent">
+                    +${(
+                        Math.random()*2+.1
+                    ).toFixed(2)}%
+                </span>
+            </div>
+        `
+        ).join("");
     const select =
         document.getElementById(
             "assetSelect"
         );
     select.innerHTML =
-        assets.map((asset,index)=>`
+        assets.map(
+            (asset,index)=>`
             <option value="${index}">
                 ${asset.name}
             </option>
-        `).join("");
+        `
+        ).join("");
     select.value =
-        assets.indexOf(currentAsset);
+        assets.indexOf(
+            currentAsset
+        );
 }
 function selectAsset(index){
     currentAsset =
         assets[index];
     document.getElementById(
-        "pairName"
+        "pair"
     ).textContent =
         currentAsset.name;
-    seedChart();
+    openTrades = [];
+    seedCandles();
     renderAssets();
     drawChart();
 }
-document.getElementById(
-    "assetSelect"
-).addEventListener(
-    "change",
-    function(){
-        selectAsset(
-            Number(this.value)
-        );
-    }
-);
+/*
+====================================================
+AMOUNT
+====================================================
+*/
 function setAmount(value){
     document.getElementById(
         "amount"
-    ).value = value;
+    ).value =
+        value;
     updatePayout();
 }
 function updatePayout(){
@@ -828,9 +1403,11 @@ function updatePayout(){
     document.getElementById(
         "payout"
     ).textContent =
-        "+$" +
-        (amount*0.84)
-        .toFixed(2);
+        "+$"
+        +
+        (
+            amount*.84
+        ).toFixed(2);
 }
 document.getElementById(
     "amount"
@@ -838,20 +1415,11 @@ document.getElementById(
     "input",
     updatePayout
 );
-function showToast(message){
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-    toast.textContent =
-        message;
-    toast.style.display =
-        "block";
-    setTimeout(()=>{
-        toast.style.display =
-            "none";
-    },2600);
-}
+/*
+====================================================
+OPEN TRADE
+====================================================
+*/
 function openTrade(direction){
     const amount =
         Number(
@@ -865,74 +1433,313 @@ function openTrade(direction){
                 "expiry"
             ).value
         );
-    if(!amount || amount < 1){
-        showToast(
-            "Введите сумму сделки"
+    if(
+        !amount
+        ||
+        amount<=0
+    ){
+        toast(
+            "Введите сумму"
         );
         return;
     }
-    if(amount > balance){
-        showToast(
+    if(amount>balance){
+        toast(
             "Недостаточно демо-баланса"
         );
         return;
     }
-    balance -= amount;
-    totalVolume += amount;
-    updateInterface();
-    showToast(
-        "Сделка открыта: " +
-        (
-            direction === "UP"
-            ? "ВВЕРХ"
-            : "ВНИЗ"
-        )
+    /*
+    SAVE ENTRY PRICE
+    */
+    const trade = {
+        id:
+            Date.now()
+            +
+            Math.random(),
+        asset:
+            currentAsset.name,
+        direction,
+        amount,
+        entry:
+            currentAsset.price,
+        started:
+            Date.now(),
+        duration:
+            expiry*1000
+    };
+    balance -=
+        amount;
+    totalVolume +=
+        amount;
+    openTrades.push(
+        trade
     );
-    setTimeout(()=>{
-        /*
-          Для демонстрации результат
-          определяется случайно.
-        */
-        const win =
-            Math.random() > 0.48;
-        if(win){
-            const profit =
-                amount * 0.84;
-            balance +=
-                amount + profit;
-            totalProfit +=
-                profit;
-            wins++;
-        }else{
-            totalProfit -=
-                amount;
-        }
-        trades.unshift({
-            asset:
-                currentAsset.name,
-            direction,
-            amount,
-            win
-        });
-        updateInterface();
-        if(win){
-            showToast(
-                "Сделка завершена: +$" +
-                (amount*0.84).toFixed(2)
-            );
-        }else{
-            showToast(
-                "Сделка завершена: -$" +
-                amount.toFixed(2)
-            );
-        }
-    },expiry*1000);
+    updateInterface();
+    toast(
+        direction === "UP"
+        ? "▲ Ставка ВВЕРХ открыта"
+        : "▼ Ставка ВНИЗ открыта"
+    );
+    drawChart();
 }
+/*
+====================================================
+PROCESS OPEN TRADES
+====================================================
+*/
+function processTrades(){
+    const now =
+        Date.now();
+    openTrades =
+        openTrades.filter(
+            trade=>{
+                const elapsed =
+                    now -
+                    trade.started;
+                if(
+                    elapsed >=
+                    trade.duration
+                ){
+                    finishTrade(
+                        trade
+                    );
+                    return false;
+                }
+                return true;
+            }
+        );
+    renderOpenTrades();
+    drawChart();
+}
+/*
+====================================================
+FINISH TRADE
+====================================================
+*/
+function finishTrade(trade){
+    const exit =
+        currentAsset.name ===
+        trade.asset
+        ? currentAsset.price
+        : trade.entry;
+    let win;
+    if(
+        trade.direction === "UP"
+    ){
+        win =
+            exit >
+            trade.entry;
+    }else{
+        win =
+            exit <
+            trade.entry;
+    }
+    /*
+    Для демонстрации:
+    если цена практически не изменилась,
+    результат определяется случайно.
+    */
+    if(
+        Math.abs(
+            exit-trade.entry
+        )
+        <
+        currentAsset.step*.25
+    ){
+        win =
+            Math.random()>.5;
+    }
+    trade.exit =
+        exit;
+    trade.win =
+        win;
+    if(win){
+        const profit =
+            trade.amount*.84;
+        balance +=
+            trade.amount
+            +
+            profit;
+        totalProfit +=
+            profit;
+        wins++;
+    }else{
+        totalProfit -=
+            trade.amount;
+    }
+    trades.unshift(
+        trade
+    );
+    if(
+        trades.length>30
+    ){
+        trades.pop();
+    }
+    updateInterface();
+    toast(
+        win
+        ? "Сделка в плюс: +$"
+          +
+          (
+              trade.amount*.84
+          ).toFixed(2)
+        : "Сделка в минус: -$"
+          +
+          trade.amount.toFixed(2)
+    );
+}
+/*
+====================================================
+OPEN TRADES UI
+====================================================
+*/
+function renderOpenTrades(){
+    const container =
+        document.getElementById(
+            "openTrades"
+        );
+    document.getElementById(
+        "openCount"
+    ).textContent =
+        openTrades.length;
+    if(
+        openTrades.length===0
+    ){
+        container.innerHTML =
+            `
+            <div
+                style="
+                    color:#6f627b;
+                    font-size:10px;
+                    text-align:center;
+                    padding:12px;
+                "
+            >
+                Нет открытых сделок
+            </div>
+            `;
+        return;
+    }
+    const now =
+        Date.now();
+    container.innerHTML =
+        openTrades.map(
+            trade=>{
+                const elapsed =
+                    now -
+                    trade.started;
+                const progress =
+                    Math.min(
+                        100,
+                        elapsed /
+                        trade.duration
+                        *
+                        100
+                    );
+                const remaining =
+                    Math.max(
+                        0,
+                        trade.duration -
+                        elapsed
+                    );
+                return `
+                <div
+                    class="open-trade"
+                >
+                    <div
+                        class="open-trade-top"
+                    >
+                        <span
+                            class="${
+                                trade.direction==="UP"
+                                ? "green"
+                                : "red"
+                            }"
+                        >
+                            ${
+                                trade.direction==="UP"
+                                ? "▲ ВВЕРХ"
+                                : "▼ ВНИЗ"
+                            }
+                        </span>
+                        <span>
+                            ${
+                                formatTimer(
+                                    remaining
+                                )
+                            }
+                        </span>
+                    </div>
+                    <div
+                        style="
+                            color:#80728d;
+                            margin-bottom:6px;
+                        "
+                    >
+                        ${trade.asset}
+                        ·
+                        $${trade.amount}
+                        · Вход:
+                        ${formatChartPrice(
+                            trade.entry
+                        )}
+                    </div>
+                    <div
+                        class="open-trade-line"
+                    >
+                        <div
+                            class="open-trade-progress"
+                            style="
+                                width:${progress}%;
+                            "
+                        ></div>
+                    </div>
+                </div>
+                `;
+            }
+        ).join("");
+}
+function formatTimer(ms){
+    const seconds =
+        Math.ceil(
+            ms/1000
+        );
+    if(seconds>=60){
+        const m =
+            Math.floor(
+                seconds/60
+            );
+        const s =
+            seconds%60;
+        return (
+            m
+            +
+            ":"
+            +
+            String(s).padStart(
+                2,
+                "0"
+            )
+        );
+    }
+    return (
+        seconds
+        +
+        "s"
+    );
+}
+/*
+====================================================
+INTERFACE
+====================================================
+*/
 function updateInterface(){
     document.getElementById(
         "balance"
     ).textContent =
-        "$" +
+        "$"
+        +
         balance.toLocaleString(
             "en-US",
             {
@@ -943,7 +1750,8 @@ function updateInterface(){
     document.getElementById(
         "tradeCount"
     ).textContent =
-        trades.length +
+        trades.length
+        +
         " сделок";
     document.getElementById(
         "statTrades"
@@ -956,37 +1764,41 @@ function updateInterface(){
     document.getElementById(
         "statVolume"
     ).textContent =
-        "$" +
+        "$"
+        +
         totalVolume.toLocaleString();
     document.getElementById(
         "statProfit"
     ).textContent =
         (
-            totalProfit >= 0
+            totalProfit>=0
             ? "+"
             : ""
-        ) +
-        "$" +
+        )
+        +
+        "$"
+        +
         totalProfit.toFixed(2);
-    const history =
-        document.getElementById(
-            "history"
-        );
-    history.innerHTML =
+    document.getElementById(
+        "history"
+    ).innerHTML =
         trades
         .slice(0,8)
-        .map(trade=>`
+        .map(
+            trade=>`
             <div class="history-row">
                 <span>
                     ${trade.asset}
                 </span>
-                <span class="${
-                    trade.direction === "UP"
-                    ? "green"
-                    : "red"
-                }">
+                <span
+                    class="${
+                        trade.direction==="UP"
+                        ? "green"
+                        : "red"
+                    }"
+                >
                     ${
-                        trade.direction === "UP"
+                        trade.direction==="UP"
                         ? "▲ Вверх"
                         : "▼ Вниз"
                     }
@@ -994,42 +1806,100 @@ function updateInterface(){
                 <span>
                     $${trade.amount}
                 </span>
-                <span class="${
-                    trade.win
-                    ? "green"
-                    : "red"
-                }">
+                <span
+                    class="${
+                        trade.win
+                        ? "green"
+                        : "red"
+                    }"
+                >
                     ${
                         trade.win
-                        ? "+$" +
-                          (trade.amount*0.84)
-                          .toFixed(2)
-                        : "-$" +
+                        ? "+$"
+                          +
+                          (
+                              trade.amount*.84
+                          ).toFixed(2)
+                        : "-$"
+                          +
                           trade.amount
                     }
                 </span>
             </div>
-        `)
+        `
+        )
         .join("");
+    renderOpenTrades();
 }
-function addMoney(){
-    balance += 1000;
+/*
+====================================================
+BALANCE
+====================================================
+*/
+function addBalance(){
+    balance +=
+        1000;
     updateInterface();
-    showToast(
+    toast(
         "+$1,000 виртуального баланса"
     );
 }
+/*
+====================================================
+TOAST
+====================================================
+*/
+function toast(message){
+    const element =
+        document.getElementById(
+            "toast"
+        );
+    element.textContent =
+        message;
+    element.style.display =
+        "block";
+    setTimeout(
+        ()=>{
+            element.style.display =
+                "none";
+        },
+        2500
+    );
+}
+/*
+====================================================
+START
+====================================================
+*/
+document.getElementById(
+    "assetSelect"
+).addEventListener(
+    "change",
+    function(){
+        selectAsset(
+            Number(this.value)
+        );
+    }
+);
 window.addEventListener(
     "resize",
     resizeCanvas
 );
-seedChart();
+seedCandles();
 renderAssets();
 resizeCanvas();
 updateInterface();
+/*
+Рынок обновляется каждые 700 мс.
+Свеча формируется каждые 5 секунд.
+*/
 setInterval(
-    updateMarket,
-    900
+    marketTick,
+    700
+);
+setInterval(
+    processTrades,
+    250
 );
 </script>
 </body>
