@@ -5,696 +5,157 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>SA-MP MOBILE WEB</title>
-
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;overflow:hidden;background:#17202c;color:white;font-family:Arial,sans-serif;touch-action:none}
-#game{position:fixed;inset:0;width:100%;height:100%}
-#hud{position:fixed;inset:0;pointer-events:none}
-.top{display:flex;justify-content:space-between;padding:12px;gap:10px}
-.panel{background:#101827dd;padding:10px 13px;border-radius:10px;font-size:12px}
-.brand{color:#f2bd57;font-weight:bold;font-size:15px}
-.muted{color:#91a0b9;font-size:9px;margin-top:4px}
-#connection{color:#f2bd57}
-#players{margin-top:5px}
-#chatbox{position:absolute;left:12px;bottom:150px;width:min(280px,65%);background:#101827bb;border-radius:10px;padding:8px;pointer-events:auto}
-#messages{font-size:11px;min-height:20px;max-height:100px;overflow:hidden}
-#chatrow{display:flex;gap:5px;margin-top:7px}
-#chatinput{min-width:0;flex:1;background:#263449;border:0;border-radius:6px;padding:8px;color:white;outline:none;touch-action:auto}
-button{border:0;border-radius:8px;padding:10px;font-weight:bold;cursor:pointer;touch-action:manipulation}
-#send{background:#f2bd57;color:#241908}
-#notice{position:absolute;left:50%;top:75px;transform:translateX(-50%);background:#101827d9;padding:8px 12px;border-radius:18px;font-size:11px;white-space:nowrap}
-#controls{position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:space-between;align-items:end;padding:15px;pointer-events:auto}
-#stick{width:115px;height:115px;border-radius:50%;background:#ffffff22;border:2px solid #ffffff44;display:flex;justify-content:center;align-items:center;touch-action:none}
-#knob{width:43px;height:43px;border-radius:50%;background:#f2bd57;box-shadow:0 3px 12px #0007}
-.buttons{display:flex;gap:8px;align-items:end}
-.buttons button{background:#18263bdf;color:white;min-width:58px;min-height:48px;font-size:10px}
-.buttons .primary{background:#f2bd57;color:#241908}
-#login{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px;background:#080e18ee;overflow-y:auto;touch-action:pan-y}
-#login.hidden{display:none}
-.box{width:100%;max-width:390px;background:#172438;border:1px solid #34445b;border-radius:16px;padding:23px;box-shadow:0 15px 50px #0009}
-h1{color:#f2bd57;font-size:23px;margin:0 0 12px}
-.box p{color:#aebbd0;font-size:12px;line-height:1.5}
-.box label{display:block;font-size:12px;margin:14px 0 6px;color:#d7e0ed}
-.box input{width:100%;padding:12px;background:#0c1727;border:1px solid #34445b;border-radius:8px;color:white;outline:none;font-size:14px;touch-action:auto}
-#join{width:100%;margin-top:18px;background:#f2bd57;color:#241908;padding:14px;font-size:14px}
-#join:disabled{opacity:.6}
-.small{font-size:11px!important;color:#91a0b9!important}
-#loginError{color:#ff8585;font-size:12px;margin-top:10px;min-height:16px}
+*{box-sizing:border-box}
+body{
+ margin:0;background:#10141b;color:#fff;
+ font-family:Arial,sans-serif;padding:20px;
+}
+.container{max-width:600px;margin:auto}
+header{text-align:center;margin:20px 0 30px}
+h1{font-size:27px;color:#f5b82e;margin:0}
+header p{color:#9ba6b5;font-size:13px}
+.panel{
+ background:#1b222d;border:1px solid #303b4b;
+ border-radius:14px;padding:18px;margin-bottom:16px;
+}
+label{display:block;color:#aeb8c7;font-size:13px;margin:12px 0 6px}
+input{
+ width:100%;padding:14px;border-radius:9px;
+ border:1px solid #3b4656;background:#111720;
+ color:white;font-size:16px;outline:none;
+}
+input:focus{border-color:#f5b82e}
+button{
+ width:100%;padding:15px;border:0;border-radius:9px;
+ background:#f5b82e;color:#171717;font-weight:bold;
+ font-size:16px;margin-top:16px;
+}
+button:active{opacity:.8}
+.status{display:flex;align-items:center;gap:9px}
+.dot{width:10px;height:10px;border-radius:50%;background:#777}
+.dot.online{background:#39d98a}
+.dot.offline{background:#ff5555}
+#message{color:#aeb8c7;font-size:13px;margin-top:12px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#111720;border-radius:9px;padding:13px}
+.stat small{color:#9ba6b5}
+.stat strong{display:block;margin-top:7px;font-size:19px;overflow-wrap:anywhere}
+#players{padding-left:20px;color:#dce3ed}
+footer{text-align:center;color:#657184;font-size:12px;margin:25px 0}
 </style>
 </head>
-
 <body>
+<div class="container">
+<header>
+<h1>SA-MP MOBILE WEB</h1>
+<p>МОНИТОРИНГ SAN ANDREAS MULTIPLAYER</p>
+</header>
 
-<canvas id="game"></canvas>
+<section class="panel">
+<h3>Подключение к серверу</h3>
 
-<div id="hud">
+<label>Твой ник</label>
+<input id="nick" maxlength="24" placeholder="Введите ник" value="Player">
 
- <div class="top">
-  <div class="panel">
-   <div class="brand">SA-MP MOBILE WEB</div>
-   <div class="muted">BROWSER MULTIPLAYER PROTOTYPE</div>
-  </div>
+<label>IP или домен сервера</label>
+<input id="host" placeholder="Например: 127.0.0.1">
 
-  <div class="panel">
-   <div id="connection">● Не подключён</div>
-   <div id="players">Игроков: 1</div>
-  </div>
- </div>
+<label>Порт сервера</label>
+<input id="port" type="number" min="1" max="65535" value="7777">
 
- <div id="chatbox">
-  <div id="messages"></div>
-  <div id="chatrow">
-   <input id="chatinput" placeholder="Сообщение..." maxlength="100">
-   <button id="send">OK</button>
-  </div>
- </div>
+<button id="connect">ПРОВЕРИТЬ СЕРВЕР</button>
+<div id="message">Ожидание проверки сервера</div>
+</section>
 
- <div id="notice">WASD / джойстик • Авто • Огонь • Прыжок</div>
-
- <div id="controls">
-  <div id="stick"><div id="knob"></div></div>
-
-  <div class="buttons">
-   <button id="car">АВТО</button>
-   <button id="fire">ОГОНЬ</button>
-   <button id="jump" class="primary">ПРЫЖОК</button>
-  </div>
- </div>
-
+<section class="panel">
+<div class="status">
+<span class="dot" id="dot"></span>
+<strong id="status">Не подключено</strong>
 </div>
+</section>
 
-<div id="login">
- <div class="box">
+<section class="panel">
+<h3>Информация о сервере</h3>
+<div class="info">
+<div class="stat"><small>Игроки</small><strong id="playersCount">—</strong></div>
+<div class="stat"><small>Пинг</small><strong id="ping">—</strong></div>
+<div class="stat"><small>Название</small><strong id="hostname">—</strong></div>
+<div class="stat"><small>Режим</small><strong id="mode">—</strong></div>
+</div>
+</section>
 
-  <h1>SA-MP MOBILE WEB</h1>
+<section class="panel">
+<h3>Игроки онлайн</h3>
+<ul id="players"><li>Список пока пуст</li></ul>
+</section>
 
-  <p>Собственный браузерный онлайн-прототип. Игроки, машины, стрельба и чат работают через WebSocket-сервер. Это отдельная игра, не клиент Arizona RP или SA-MP.</p>
-
-  <label>Твой ник</label>
-  <input id="nick" maxlength="18" value="Player">
-
-  <label>Адрес игрового сервера</label>
-  <input id="server" value="ws://localhost:8080" placeholder="wss://твой-сервер">
-
-  <button id="join">ВОЙТИ В ИГРУ</button>
-
-  <div id="loginError"></div>
-
-  <p class="small">Для игры с другими людьми сервер должен быть запущен и доступен в интернете с WSS/HTTPS. Для локального теста используй ws://localhost:8080 на компьютере.</p>
-
- </div>
+<footer>SA-MP MOBILE WEB · Browser Server Monitor</footer>
 </div>
 
 <script>
-(()=>{
-'use strict';
+const $ = id => document.getElementById(id);
 
-const $=id=>document.getElementById(id);
-const canvas=$('game');
-const ctx=canvas.getContext('2d');
+$('connect').addEventListener('click', checkServer);
 
-let W=innerWidth,H=innerHeight,D=1;
+async function checkServer(){
+ const host = $('host').value.trim();
+ const port = Number($('port').value);
+ const nick = $('nick').value.trim();
 
-function resize(){
- W=innerWidth;
- H=innerHeight;
- D=Math.min(devicePixelRatio||1,2);
- canvas.width=W*D;
- canvas.height=H*D;
- ctx.setTransform(D,0,0,D,0,0);
-}
-
-addEventListener('resize',resize);
-resize();
-
-const world={w:2400,h:1900};
-
-const me={
- id:null,
- nick:'Player',
- x:1200,
- y:950,
- angle:0,
- hp:100,
- car:false,
- z:0,
- vz:0
-};
-
-let peers={};
-let bullets=[];
-let ws=null;
-let connected=false;
-let connecting=false;
-let joy={x:0,y:0};
-let keys={};
-let lastSend=0;
-
-const cars=[];
-
-for(let i=0;i<18;i++){
- cars.push({
-  id:i,
-  x:180+(i*127)%2050,
-  y:[740,960,330,1510][i%4]+(i%3)*20,
-  a:i%2?0:Math.PI/2
- });
-}
-
-const blocks=[];
-
-for(let r=0;r<5;r++){
- for(let c=0;c<6;c++){
-  let x=270+c*310;
-  let y=270+r*300;
-
-  if(Math.abs(x-1200)<220&&Math.abs(y-950)<220)continue;
-
-  blocks.push({
-   x,y,
-   w:180+(c%2)*35,
-   h:160+(r%2)*35,
-   color:['#77879a','#8d765e','#718477','#79758c'][(r+c)%4]
-  });
- }
-}
-
-function addMsg(s){
- const el=document.createElement('div');
- el.textContent=s;
- $('messages').append(el);
-
- while($('messages').children.length>5){
-  $('messages').firstChild.remove();
- }
-}
-
-function send(obj){
- if(ws&&ws.readyState===WebSocket.OPEN){
-  try{
-   ws.send(JSON.stringify(obj));
-  }catch(e){
-   addMsg('Ошибка отправки данных');
-  }
- }
-}
-
-function updatePlayers(){
- $('players').textContent='Игроков: '+(Object.keys(peers).length+1);
-}
-
-function join(){
-
- if(connecting||connected)return;
-
- const nick=$('nick').value.trim()||'Player';
- const url=$('server').value.trim();
- const error=$('loginError');
- const button=$('join');
-
- error.textContent='';
-
- if(!url){
-  error.textContent='Укажи адрес сервера';
-  return;
+ if(!nick || !host || !Number.isInteger(port) || port < 1 || port > 65535){
+   $('message').textContent = 'Проверь ник, адрес и порт сервера.';
+   return;
  }
 
- if(!/^wss?:\/\//i.test(url)){
-  error.textContent='Адрес должен начинаться с ws:// или wss://';
-  return;
- }
-
- me.nick=nick;
-
- connecting=true;
- button.disabled=true;
- button.textContent='ПОДКЛЮЧЕНИЕ...';
-
- // Окно скрывается сразу после нажатия
- $('login').classList.add('hidden');
+ $('connect').disabled = true;
+ $('connect').textContent = 'ПРОВЕРКА...';
+ $('status').textContent = 'Проверяем сервер';
+ $('dot').className = 'dot';
+ $('message').textContent = 'Отправляем запрос серверу...';
 
  try{
-  ws=new WebSocket(url);
- }catch(e){
-  connecting=false;
-  button.disabled=false;
-  button.textContent='ВОЙТИ В ИГРУ';
-  $('login').classList.remove('hidden');
-  error.textContent='Неверный адрес сервера';
-  return;
- }
+   const url = `/api/server?host=${encodeURIComponent(host)}&port=${port}`;
+   const response = await fetch(url);
+   const data = await response.json();
 
- ws.onopen=()=>{
-  connecting=false;
-  connected=true;
+   if(!response.ok) throw new Error(data.error || 'Сервер недоступен');
 
-  button.disabled=false;
-  button.textContent='ВОЙТИ В ИГРУ';
+   $('status').textContent = 'Сервер отвечает';
+   $('dot').className = 'dot online';
+   $('playersCount').textContent = `${data.players} / ${data.maxPlayers}`;
+   $('ping').textContent = `${data.ping} ms`;
+   $('hostname').textContent = data.hostname || 'Без названия';
+   $('mode').textContent = data.mode || 'Неизвестно';
+   $('message').textContent = 'Получен ответ от настоящего SA-MP-сервера.';
 
-  $('connection').textContent='● Подключено';
+   const list = $('players');
+   list.innerHTML = '';
 
-  send({
-   type:'join',
-   nick:me.nick,
-   x:me.x,
-   y:me.y
-  });
+   if(data.playerList && data.playerList.length){
+     data.playerList.forEach(player => {
+       const li = document.createElement('li');
+       li.textContent = `${player.name} — ID ${player.id}, ${player.score} очков`;
+       list.appendChild(li);
+     });
+   }else{
+     list.innerHTML = '<li>Нет данных об игроках</li>';
+   }
 
-  addMsg('Подключено к игровому серверу');
- };
-
- ws.onmessage=e=>{
-  let m;
-
-  try{
-   m=JSON.parse(e.data);
-  }catch(e){
-   return;
-  }
-
-  if(m.type==='welcome'){
-   me.id=m.id;
-   peers=m.players||{};
-   updatePlayers();
-  }
-
-  if(m.type==='state'){
-   peers=m.players||{};
-   bullets=m.bullets||[];
-   updatePlayers();
-  }
-
-  if(m.type==='chat'){
-   addMsg((m.nick||'Игрок')+': '+(m.text||''));
-  }
-
-  if(m.type==='notice'){
-   addMsg(m.text||'');
-  }
- };
-
- ws.onerror=()=>{
-  $('connection').textContent='● Ошибка сервера';
-  addMsg('Не удалось подключиться к серверу');
- };
-
- ws.onclose=()=>{
-  connected=false;
-  connecting=false;
-
-  $('connection').textContent='● Нет соединения';
-  addMsg('Соединение закрыто');
-
-  $('login').classList.remove('hidden');
-  button.disabled=false;
-  button.textContent='ВОЙТИ В ИГРУ';
-  error.textContent='Нет соединения. Проверь адрес сервера.';
- };
-}
-
-$('join').addEventListener('click',join);
-
-$('server').addEventListener('keydown',e=>{
- if(e.key==='Enter')join();
-});
-
-$('nick').addEventListener('keydown',e=>{
- if(e.key==='Enter')join();
-});
-
-function chat(){
- const input=$('chatinput');
- const t=input.value.trim();
-
- if(!t)return;
-
- if(connected){
-  send({type:'chat',text:t});
- }else{
-  addMsg(me.nick+': '+t+' (локально)');
- }
-
- input.value='';
-}
-
-$('send').onclick=chat;
-
-$('chatinput').addEventListener('keydown',e=>{
- if(e.key==='Enter')chat();
-});
-
-function jump(){
- if(me.z===0){
-  me.vz=235;
+ }catch(error){
+   $('status').textContent = 'Нет ответа от сервера';
+   $('dot').className = 'dot offline';
+   $('message').textContent = error.message;
+   $('playersCount').textContent = '—';
+   $('ping').textContent = '—';
+   $('hostname').textContent = '—';
+   $('mode').textContent = '—';
+   $('players').innerHTML = '<li>Список недоступен</li>';
+ }finally{
+   $('connect').disabled = false;
+   $('connect').textContent = 'ПРОВЕРИТЬ СЕРВЕР';
  }
 }
-
-$('jump').onpointerdown=jump;
-
-$('fire').onpointerdown=()=>{
- const b={
-  x:me.x,
-  y:me.y,
-  dx:Math.cos(me.angle)*430,
-  dy:Math.sin(me.angle)*430,
-  life:1.2
- };
-
- send({type:'shoot',bullet:b});
- bullets.push({...b});
-};
-
-$('car').onpointerdown=()=>{
- me.car=!me.car;
-
- addMsg(
-  me.car
-  ?'Ты сел в машину (режим прототипа)'
-  :'Ты вышел из машины'
- );
-
- send({type:'car',car:me.car});
-};
-
-addEventListener('keydown',e=>{
- if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)){
-  e.preventDefault();
- }
-
- if(e.target.tagName==='INPUT')return;
-
- keys[e.key.toLowerCase()]=true;
-
- if(e.key===' ')jump();
-});
-
-addEventListener('keyup',e=>{
- keys[e.key.toLowerCase()]=false;
-});
-
-const stick=$('stick');
-const knob=$('knob');
-
-let active=false;
-
-function setJoy(e){
- const r=stick.getBoundingClientRect();
-
- let dx=e.clientX-r.left-r.width/2;
- let dy=e.clientY-r.top-r.height/2;
-
- const max=42;
- const l=Math.hypot(dx,dy);
-
- if(l>max){
-  dx=dx/l*max;
-  dy=dy/l*max;
- }
-
- joy.x=dx/max;
- joy.y=dy/max;
-
- knob.style.transform=`translate(${dx}px,${dy}px)`;
-}
-
-function resetJoy(){
- active=false;
- joy.x=0;
- joy.y=0;
- knob.style.transform='translate(0,0)';
-}
-
-stick.onpointerdown=e=>{
- active=true;
- stick.setPointerCapture(e.pointerId);
- setJoy(e);
-};
-
-stick.onpointermove=e=>{
- if(active)setJoy(e);
-};
-
-stick.onpointerup=resetJoy;
-stick.onpointercancel=resetJoy;
-
-function iso(x,y){
- return{
-  x:(x-y)*.72,
-  y:(x+y)*.38
- };
-}
-
-function polygon(points,color){
- ctx.beginPath();
-
- points.forEach((p,i)=>{
-  const q=iso(p[0],p[1]);
-
-  if(i)ctx.lineTo(q.x,q.y);
-  else ctx.moveTo(q.x,q.y);
- });
-
- ctx.closePath();
- ctx.fillStyle=color;
- ctx.fill();
-}
-
-function draw(){
-
- ctx.clearRect(0,0,W,H);
-
- const cam=iso(me.x,me.y);
- const scale=Math.min(W/850,H/620)*1.22;
-
- ctx.save();
-
- ctx.translate(
-  W/2-cam.x*scale,
-  H/2-cam.y*scale
- );
-
- ctx.scale(scale,scale);
-
- ctx.fillStyle='#68865f';
- ctx.fillRect(-700,-700,world.w+1400,world.h+1400);
-
- for(let x=0;x<world.w;x+=110){
-  for(let y=0;y<world.h;y+=110){
-   const p=iso(x,y);
-
-   ctx.fillStyle=((x+y)/110)%2
-    ?'#66845e'
-    :'#6d8963';
-
-   ctx.fillRect(p.x,p.y,78,40);
-  }
- }
-
- const roads=[
-  {x:0,y:760,w:2400,h:180},
-  {x:1090,y:0,w:180,h:1900},
-  {x:250,y:260,w:1900,h:105},
-  {x:250,y:1510,w:1900,h:105},
-  {x:250,y:260,w:105,h:1355},
-  {x:2045,y:260,w:105,h:1355}
- ];
-
- roads.forEach(r=>{
-  polygon([
-   [r.x,r.y],
-   [r.x+r.w,r.y],
-   [r.x+r.w,r.y+r.h],
-   [r.x,r.y+r.h]
-  ],'#424c57');
- });
-
- blocks.slice().sort((a,b)=>a.y-b.y).forEach(b=>{
-
-  const p=iso(b.x,b.y);
-  const dep=34;
-
-  ctx.fillStyle='#0004';
-  ctx.fillRect(p.x+4,p.y+dep+5,b.w*.7,b.h*.35);
-
-  polygon([
-   [b.x,b.y],
-   [b.x+b.w,b.y],
-   [b.x+b.w,b.y+b.h],
-   [b.x,b.y+b.h]
-  ],b.color);
-
-  const a=iso(b.x,b.y);
-  const c=iso(b.x+b.w,b.y);
-  const d=iso(b.x+b.w,b.y+b.h);
-  const f=iso(b.x,b.y+b.h);
-
-  ctx.fillStyle='#ffffff22';
-  ctx.beginPath();
-  ctx.moveTo(a.x,a.y-dep);
-  ctx.lineTo(c.x,c.y-dep);
-  ctx.lineTo(d.x,d.y-dep);
-  ctx.lineTo(f.x,f.y-dep);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.strokeStyle='#ffffff28';
-  ctx.stroke();
- });
-
- cars.forEach(c=>{
-  const p=iso(c.x,c.y);
-
-  ctx.save();
-  ctx.translate(p.x,p.y);
-  ctx.rotate(c.a);
-
-  ctx.fillStyle='#1119';
-  ctx.fillRect(-22,-9,46,25);
-
-  ctx.fillStyle=[
-   '#c85b4b',
-   '#d5ad49',
-   '#4f8fb7',
-   '#cbd2d9'
-  ][c.id%4];
-
-  ctx.fillRect(-22,-12,44,22);
-
-  ctx.fillStyle='#243b50';
-  ctx.fillRect(-10,-10,20,17);
-
-  ctx.restore();
- });
-
- function avatar(p,nick,color){
-
-  const q=iso(p.x,p.y);
-
-  ctx.fillStyle='#0005';
-  ctx.beginPath();
-  ctx.ellipse(q.x,q.y+8,13,7,0,0,Math.PI*2);
-  ctx.fill();
-
-  ctx.fillStyle=color;
-  ctx.fillRect(q.x-7,q.y-4-(p.z||0),14,18);
-
-  ctx.fillStyle='#e3b997';
-  ctx.beginPath();
-  ctx.arc(q.x,q.y-11-(p.z||0),7,0,Math.PI*2);
-  ctx.fill();
-
-  ctx.fillStyle='#fff';
-  ctx.font='12px Arial';
-  ctx.textAlign='center';
-
-  ctx.fillText(
-   nick,
-   q.x,
-   q.y-24-(p.z||0)
-  );
- }
-
- Object.values(peers).forEach(p=>{
-  if(p&&Number.isFinite(p.x)&&Number.isFinite(p.y)){
-   avatar(p,p.nick||'Player','#5ca6cf');
-  }
- });
-
- avatar(me,me.nick,'#f0b84b');
-
- bullets.forEach(b=>{
-  const p=iso(b.x,b.y);
-
-  ctx.fillStyle='#ffe27c';
-  ctx.beginPath();
-  ctx.arc(p.x,p.y,3,0,Math.PI*2);
-  ctx.fill();
- });
-
- ctx.restore();
-}
-
-let prev=performance.now();
-
-function tick(now){
-
- const dt=Math.min((now-prev)/1000,.04);
- prev=now;
-
- let x=joy.x;
- let y=joy.y;
-
- if(keys.a||keys.arrowleft)x--;
- if(keys.d||keys.arrowright)x++;
- if(keys.w||keys.arrowup)y--;
- if(keys.s||keys.arrowdown)y++;
-
- const l=Math.hypot(x,y);
-
- if(l>1){
-  x/=l;
-  y/=l;
- }
-
- if(l>.05){
-
-  me.angle=Math.atan2(y,x);
-
-  const speed=me.car?285:165;
-
-  me.x=Math.max(
-   20,
-   Math.min(world.w-20,me.x+x*speed*dt)
-  );
-
-  me.y=Math.max(
-   20,
-   Math.min(world.h-20,me.y+y*speed*dt)
-  );
- }
-
- if(me.z>0||me.vz>0){
-
-  me.z+=me.vz*dt;
-  me.vz-=600*dt;
-
-  if(me.z<0){
-   me.z=0;
-   me.vz=0;
-  }
- }
-
- bullets.forEach(b=>{
-  b.x+=b.dx*dt;
-  b.y+=b.dy*dt;
-  b.life-=dt;
- });
-
- bullets=bullets.filter(b=>b.life>0);
-
- if(connected&&now-lastSend>50){
-
-  send({
-   type:'move',
-   x:me.x,
-   y:me.y,
-   angle:me.angle,
-   car:me.car
-  });
-
-  lastSend=now;
- }
-
- draw();
-
- requestAnimationFrame(tick);
-}
-
-requestAnimationFrame(tick);
-
-})();
 </script>
-
 </body>
 </html>
