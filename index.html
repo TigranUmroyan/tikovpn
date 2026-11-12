@@ -121,6 +121,14 @@ function tick(now){let dt=Math.min((now-prev)/1000,.04);prev=now;
  draw();requestAnimationFrame(tick)}
 requestAnimationFrame(tick);
 })();
+ document.querySelectorAll('button').forEach(button => {
+  if (button.textContent.includes('Войти в игру')) {
+    button.addEventListener('click', () => {
+      const dialog = button.closest('dialog');
+      if (dialog) dialog.close();
+    });
+  }
+});
 </script>
 </body>
 </html>
