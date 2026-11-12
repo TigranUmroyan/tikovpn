@@ -1,9 +1,0 @@
-{
-  "name": "samp-mobile-web-prototype",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Independent browser multiplayer prototype; not a SA-MP client",
-  "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "dependencies": { "ws": "^8.18.0" }
-}
